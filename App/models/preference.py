@@ -89,6 +89,7 @@ class PreferenceModel(object):
                     'public_key': ''
                 }
             }
+            
         if 'analytics' in kwargs:
             pref['analytics']['key'] = kwargs['analytics']
 

@@ -61,8 +61,8 @@ class CodesHandler(RequestHandler):
         """
         PreferenceModel().save_codes(
             analytics=self.get_argument('analytics'),
-            recaptcha_private=self.get_argument('recapatcha_private'),
-            recaptcha_private=self.get_argument('recapatcha_public'),
+            recaptcha_private=self.get_argument('recaptcha_private'),
+            recaptcha_public=self.get_argument('recaptcha_public'),
             facebook_id=self.get_argument('facebook_app_id'),
             facebook_key=self.get_argument('facebook_secret_key'),
             google_id=self.get_argument('google_app_id'),
