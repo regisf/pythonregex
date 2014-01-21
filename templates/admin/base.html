@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Python Regex : Admin : {% block title %}{% end %}</title>
+        <link href="/assets/css/uikit.gradient.min.css" rel="stylesheet">
+        <link href="/assets/css/admin.css" rel="stylesheet">
+    </head>
+    <body>
+            <nav class="uk-navbar invert">
+                <div class="uk-container uk-container-center">
+                    <a href="/admin/" class="uk-navbar-brand"><i class="uk-icon-home"></i> Python Regex - Admin</a>
+                    <ul class="uk-navbar-nav">
+                        <li><a href="/admin/users/">Users</a></li>
+                        <li><a href="/admin/emails/">Emails</a></li>
+                        <li><a href="/admin/pages/">Pages</a></li>
+                        <li><a href="/admin/codes/">Codes</a></li>
+                    </ul>
+                    <div class="uk-navbar-flip">
+                        <ul class="uk-navbar-nav">
+                            <li><a href="/admin/logout/" data-uk-modal><i class="uk-icon-user"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        <div>
+        {% block nav %} {% end %}
+        </div>
+        <div class="uk-container uk-container-center">
+        <h2>{% block page_title %}{% end %}</h2>
+        <ul class="uk-breadcrumb">
+            <li><a href="/admin/">Home</a></li>
+            {% block breadcrumb %}{% end %}
+        </ul>
+        {% block content %}
+        {% end %}
+        </div>
+        <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+        <script src="/assets/js/libs/uikit.min.js"></script>
+        <script type="application/javascript" src="/assets/js/admin.js"></script>
+        {% block javascript %}
+        {% end %}
+    </body>
+</html>

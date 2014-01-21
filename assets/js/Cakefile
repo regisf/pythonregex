@@ -1,0 +1,18 @@
+# The cakefile is here to build the client side application
+# use:
+#   cake build
+# to generate the app.js file
+
+{exec} = require 'child_process'
+Rehab = require 'rehab'
+
+task 'build', 'Build pythonregex application using Rehab', sbuild = ->
+  console.log "Building project from coffee/*.coffee to app.js"
+
+  files = new Rehab().process './coffee'
+
+  to_single_file = "--join app.js"
+  from_files = "--compile #{files.join ' '}"
+
+  exec "coffee #{to_single_file} #{from_files}", (err, stdout, stderr) ->
+    throw err if err

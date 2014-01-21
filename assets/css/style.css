@@ -1,0 +1,53 @@
+body {
+    background: url(../img/bg_oliva.png);
+}
+texarea { resize: vertical;}
+#sharethis { margin-top: 10px; text-align: right; }
+.uk-navbar.invert{
+    /*background-color: #000;*/
+}
+.uk-navbar.invert a {
+    /*color: #fff;*/
+}
+.uk-navbar-nav > li > a[href="#"] { cursor: pointer; }
+
+.border-right {
+    border-right: 1px dotted #888;
+    padding-right: 10px;
+}
+.social { padding: 5px;}
+.social:hover {
+    background-color: #eee;
+}
+.social > a { text-decoration: none; color: #444; display: inline-block; width: 100%; height: 100%;}
+.message  { margin-bottom: 10px; padding-bottom: 20px; border-bottom: 1px dotted #888; }
+
+#register label { display:block; font-weight: bold;}
+.vspacer-50 { display: block; height: 50px; width: 100%;}
+.vspacer-100 { display: block; height: 100px; width: 100%;}
+@media (min-width: 319px) {
+    #register input { width: 100%; }
+}
+@media (min-width: 799px) {
+    #register input { width: 50%; }
+    #register form { margin-left: 5%;}
+}
+
+.spinner {
+    background: url(../img/spinner.gif) no-repeat left center;
+    display: inline-block;
+    width: 36px;
+    height:36px;
+    vertical-align: middle;
+}
+.hidden { display: none; }
+#main, #footer { background: white; }
+#main { padding-bottom: 20px; padding-top: 20px; }
+#footer { border-top: 1px dotted #888; padding-top: 20px; }
+#options .uk-button,#contact .uk-button { margin-left: 10px; }
+#contact label { display: block; font-weight: bold;}
+#contact input { width: 100%; }
+[data-option] { display: none; }
+#messagedialog h2 { color: red; }
+
+.uk-thumbnail-very-small { max-width: 32px; }

@@ -1,0 +1,36 @@
+{% extends '../base.html' %}
+
+{% block title %}Users{% end %}
+
+{% block breadcrumb %}
+<li class="uk-active">Users</li>
+{% end %}
+
+{% block page_title %}All users{% end %}
+
+{% block content %}
+<div class="uk-clearfix">
+    <a href="/admin/users/add/" class="uk-align-right uk-button"><i class="uk-icon-plus"></i> Add new user</a>
+</div>
+
+<table class="uk-table">
+    <thead>
+        <tr>
+            <th>User name</th>
+            <th>Email</th>
+            <th>Registration date</th>
+            <th>Is admin</th>
+        </tr>
+    </thead>
+    <tbody>
+{% for user in users %}
+        <tr>
+            <td><a href="/admin/users/edit/{{ user['username'] }}/">{{ user['username'] }}</a></td>
+            <td>{{ user.get('email') }}</td>
+            <td>{{ modules.simple_date(user['creation_date'], "On %d %b %Y at %Hh %Mm") }}</td>
+            <td>{% if user['is_admin'] %}Yes{% else %}No{% end %}</td>
+        </tr>
+{% end %}
+    </tbody>
+</table>
+{% end %}

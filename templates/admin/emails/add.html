@@ -1,0 +1,41 @@
+{% extends '../base.html' %}
+
+{% block title %}Add email{% end %}
+
+{% block javascript %}
+<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+<script>
+    tinymce.init({selector:'textarea'});
+</script>
+{% end %}
+
+{% block content %}
+<h2>Add a email content</h2>
+<form action="/admin/emails/add/" method="post" class="uk-form" id="addmail">
+    <div class="uk-form-row{% if errors.get('title') %} uk-alert uk-alert-danger{% end %}">
+        <label>Title</label>
+        <input type="text" name="title" value="{{ title }}"/>
+        {% if errors.get('title') %}{{ errors['title'] }}{% end %}
+    </div>
+    <div class="uk-form-row{% if errors.get('shortcut') %} uk-alert uk-alert-danger{% end %}">
+        <label>Shortcut</label>
+        <input type="text" name="shortcut" value="{{ shortcut }}"/>
+        {% if errors.get('shortcut') %}{{ errors['shortcut'] }}{% end %}
+    </div>
+
+    <div class="uk-form-row{% if errors.get('content') %} uk-alert uk-alert-danger{% end %}">
+        <label>Content</label>
+        <textarea name="content" rows="10">{{ content }}</textarea>
+        {% if errors.get('content') %}{{ errors['content'] }}{% end %}
+    </div>
+    <div class="vspacer-50"></div>
+    <div class="uk-clearfix">
+        <button type="submit" class="uk-button uk-button-primary uk-float-right">
+            <i class="uk-icon-check"></i> Save
+        </button>
+        <a class="uk-button uk-button-danger uk-float-right uk-modal-close" href="/admin/emails/">
+            <i class="uk-icon-remove"></i> Cancel
+        </a>
+    </div>
+</form>
+{% end %}

@@ -1,0 +1,71 @@
+<div id="connect" class="uk-modal">
+    <section class="uk-modal-dialog">
+        <article>
+            <h1>Login</h1>
+            <div class="uk-alert">
+                To store more than one regular expression, you must register.
+            </div>
+
+            <div class="message">
+                You have the choice. You may either you use your social network account or
+                register by email.
+                <br/>
+                <em>We will never use your social account for anything.</em>
+            </div>
+        </article>
+
+        <section class="uk-grid">
+            <article class="uk-width-1-2 border-right">
+                <h2>Signin</h2>
+                <form action="/auth/connect/" method="post" class="uk-form">
+                    <div class="uk-form-row">
+                        <label>Your email:</label>
+                        <input type="email" name="email" class="uk-width-1-1" placeholder="Your mail address here">
+                    </div>
+                    <div class="uk-form-row">
+                        <label>Your password:</label>
+                        <input type="password" name="password" class="uk-width-1-1" placeholder="Type your password here">
+                    </div>
+                    <div class="uk-form-row">
+                        <label>&nbsp;</label>
+                        <div class="uk-button-group">
+                            <button type="submit" class="uk-button" style="vertical-align: middle">
+                                <i class="uk-icon-key"></i> Login
+                            </button>
+                            <a href="/auth/register/" class="uk-button uk-button-primary">
+                                <i class="uk-icon-envelope"></i>
+                                Create an account
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </article>
+
+            <article class="uk-width-1-2">
+                <h2>1-Click Signin</h2>
+                <div class="margin200">
+                    <a href="/auth/google/">
+                        <img src="/assets/img/gplus.png" alt="Google Account icon" data-uk-tooltip title="Signin with your Google account" >
+                    </a>
+                    <a href="/auth/twitter/">
+                        <img src="/assets/img/twitter.png" alt="Twitter icon" data-uk-tooltip title="Signin with your Twitter account" >
+                    </a>
+                    <a href="/auth/facebook/">
+                        <img src="/assets/img/facebook.png" alt="Twitter icon" data-uk-tooltip title="Signin with your Facebook account" >
+                    </a>
+                    <a href="/auth/linkedin/">
+                        <img src="/assets/img/Linkedin.png" alt="linkedin icon" data-uk-tooltip title="Signin with your Linkedin account" >
+                    </a>
+                    <a href="/auth/github/">
+                        <img src="/assets/img/GitHub.png" alt="GitHub icon"  data-uk-tooltip title="Signin with your GitHub account">
+                        </a>
+                </div>
+            </article>
+        </section>
+
+        <footer class="uk-clearfix">
+            <button class="uk-button uk-button-danger uk-float-right uk-modal-close">
+                <i class="uk-icon-remove"></i> Close</button>
+        </footer>
+    </section>
+</div>

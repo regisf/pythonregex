@@ -1,0 +1,53 @@
+{% extends 'root.tpl.html' %}
+
+{% block title %}Register{% end %}
+
+{% block content %}
+<div class="uk-alert">
+    <h2 class="uk-text-large">Create an account</h2>
+</div>
+<div id="register">
+    {% if errors %}
+        <div class="uk-alert uk-alert-danger">
+            <h4 class="uk-text-large">There's several errors</h4>
+        </div>
+    {% end %}
+    <form action="/auth/register/" method="post" id="registerForm" class="uk-form" name="registerForm">
+            <div class="uk-form-row">
+            <label>Your email address: </label>
+            <input type="email" name="email" class="uk-form-large {% if 'email' in fields %} uk-form-danger{% end %}" placeholder="Type your email address here" value="{{ email }}">
+            {% if 'email' in fields %}
+                <span class="uk-text-danger">{{ messages['email'] }}</span>
+            {% end %}
+        </div>
+        <div class="uk-form-row">
+            <label>Your password:</label>
+            <input type="password" name="password"  class="uk-form-large {% if 'password' in fields %} uk-form-danger{% end %}" placeholder="Type your password here">
+            {% if 'password' in fields %}
+                <span class="uk-text-danger">{{ messages['password'] }}</span>
+            {% end %}
+        </div>
+        <div class="uk-form-row">
+            <label>Your password confirmation:</label>
+            <input type="password" name="confirm"  class="uk-form-large {% if 'confirm' in fields %} uk-form-danger{% end %}" placeholder="Type your password confirmation here">
+            {% if 'confirm' in fields %}
+                <span class="uk-text-danger">{{ messages['confirm'] }}</span>
+            {% end %}
+        </div>
+        <div class="uk-form-row">
+            <label>Anti-Robot system:</label>
+<!--            <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k={{ public_key }}"></script>
+            <noscript>
+               <iframe src="http://www.google.com/recaptcha/api/noscript?k={{ public_key }}" height="300" width="500" frameborder="0"></iframe><br>
+               <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
+               <input type="hidden" name="recaptcha_response_field" value="manual_challenge">
+            </noscript>
+-->        </div>
+        <div class="uk-form-row">
+            <label>&nbsp;</label>
+            <button type="submit" class="uk-button uk-button-primary" id="registerButton">Register</button>
+        </div>
+    </form>
+</div>
+<div class="vspacer-100"></div>
+{% end %}

@@ -1,0 +1,5 @@
+.uk-clearfix .uk-button { margin-left: 10px; }
+#pref label, #addmail label { display:block; font-weight: bold;}
+#pref input, #addmail input, #addmail textarea { width: 100%; }
+.vspacer-50 { display: block; height: 50px; width: 100%;}
+#users { list-style: none; }

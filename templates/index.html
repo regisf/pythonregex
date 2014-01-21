@@ -1,0 +1,79 @@
+{% extends 'root.tpl.html' %}
+
+{% block title %}Python-Regex{% end %}
+
+{% block style %}
+textarea { width: 100%; }
+textarea#src_regex { height: 200px;}
+{% end %}
+
+{% block content %}
+<div class="uk-form uk-grid">
+    <fieldset class="uk-width-medium-1-2">
+        <legend>Your Regex</legend>
+        <div class="uk-form-row">
+            <textarea id="src_regex" placeholder="Type here your regex" style="width: 100%;"></textarea>
+        </div>
+
+        <div class="uk-form-row">
+            <input type="radio" value="search" name="regex" id="search" checked="checked"/><label for="search"> re.search</label>
+            <input type="radio" value="match" name="regex" id="match"/><label for="match"> re.match</label>
+            <input type="radio" value="findall" name="regex" id="findall"/><label for="findall"> re.findall</label>
+            <input type="radio" value="sub" name="regex" id="sub"/><label for="sub"> re.sub</label>
+            <input type="radio" value="subn" name="regex" id="subn"/><label for="subn"> re.subn</label>
+            <input type="radio" value="split" name="regex" id="split"/><label for="split"> re.split</label>
+        </div>
+        <fieldset id="splitoptions" data-option>
+            <legend>Maximum of splits: </legend>
+            <input type="number" name="maxsplit" />
+        </fieldset>
+
+        <fieldset id="suboptions" data-option>
+            <legend>Replacement string: </legend>
+            <input type="text" name="replacement" />
+        </fieldset>
+
+        <fieldset id="subnoptions" data-option>
+            <legend>Subn options</legend>
+                <p>
+                    <label>Number of replacement: </label>
+                    <input type="number" name="maxreplacement" />
+                </p>
+                <p>
+                    <label>Replacement string: </label>
+                    <input type="text" name="subnreplacement" />
+                </p>
+        </fieldset>
+    </fieldset>
+
+    <fieldset class="uk-width-medium-1-2" id="source-text">
+        <legend>Source Text</legend>
+        <div class="uk-form-row">
+            <textarea id="sourcetext" placeholder="Enter here your text" style="width: 100%;" ></textarea>
+        </div>
+
+<!--        <div class="uk-form-row">
+            Or send your text file : <input type="file" id="src_submitfile" />
+            <button type="submit" class="uk-button uk-button-danger" >Send</button>
+        </div>-->
+
+        <div class="uk-form-row uk-clearfix">
+            <button id="src_evaluate" class="uk-button uk-button-primary uk-float-right">Evaluate ! </button>
+        </div>
+
+        <div class="">
+            <fieldset>
+                <legend>Result</legend>
+                <div>
+                    <input type="checkbox" id="displaycommand" checked="checked"/>
+                    <label for="displaycommand">Display the command line</label>
+                </div>
+                <div id="dest_result">Not yet evaluated</div>
+            </fieldset>
+        </div>
+
+    </fieldset>
+
+</div>
+
+{% end %}

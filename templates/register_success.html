@@ -1,0 +1,18 @@
+{% extends 'root.tpl.html' %}
+
+{% block title %}Register by Mail success{% end %}
+
+{% block content %}
+<h2>Registration complete</h2>
+<div>
+    A email have been sent to <span class="uk-text-bold uk-text-success">{{ email_receiver }}</span>. Please checkout your emails and click on the link
+    inside.
+</div>
+<div class="uk-alert uk-alert-warning">
+    <h4>Caution</h4>
+    The email may be considered as a spam.
+</div>
+<div class="uk-text-right">
+<a href="/" class="uk-button">Return to main page</a>
+</div>
+{% end %}

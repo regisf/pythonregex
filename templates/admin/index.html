@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Home
+{% end %}
+
+{% block nav %}
+
+{% end %}
+
+{% block content %}
+<div class="uk-grid uk-grid-preserve" style="margin-top: 20px">
+    <div class="uk-width-large-1-3">
+        <div class="uk-panel uk-panel-box">
+            <h3>Last 10 users</h3>
+            {% if last_users %}
+            <ul id="users">
+            {% for user in last_users %}
+                <li><a href="/admin/users/edit/{{ user['username'] }}/">{{ user['username'] }}</a> Created :{{ modules.simple_date(user['creation_date'], "%A %d %b %Y") }}</li>
+            {% end %}
+            </ul>
+            {% end %}
+        </div>
+    </div>
+    <div class="uk-width-large-1-3">
+        <div class="uk-panel uk-panel-box">Number of connections</div>
+    </div>
+    <div class="uk-width-large-1-3">
+        <div class="uk-panel uk-panel-box">Last 10 users</div>
+    </div>
+</div>
+
+<div class="uk-grid uk-grid-preserve" style="margin-top: 20px">
+    <div class="uk-width-large-1-3">
+        <div class="uk-panel uk-panel-box">
+            <h3>Regex stored</h3>
+            Currently : {{ regex_stored }} stored in the database
+        </div>
+    </div>
+    <div class="uk-width-large-1-3">
+        <div class="uk-panel uk-panel-box">Number of connections</div>
+    </div>
+    <div class="uk-width-large-1-3">
+        <div class="uk-panel uk-panel-box">Last 10 users</div>
+    </div>
+</div>
+{% end %}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Python Regex : Admin : {% block title %}{% end %}</title>
+        <link href="/assets/css/uikit.gradient.min.css" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="uk-container uk-container-center" id="main">
+            <form class="uk-form uk-container-center uk-width-3-10" action="/admin/login/" method="post">
+                <fieldset class="uk-container-center">
+                    <legend>Login</legend>
+                    {% if error is not None %}
+                    <div class="uk-alert uk-alert-danger">
+                        <a href="" class="uk-alert-close uk-close"></a>
+                        {{ error }}
+                    </div>
+                    {% end %}
+                    <div class="uk-form-row">
+                        <input type="text" name="username" value="" placeholder="Your user name" class="uk-width-100" />
+                    </div>
+                    <div class="uk-form-row">
+                        <input type="password" name="password" value="" placeholder="Your password"  class="uk-width-100" />
+                    </div>
+                </fieldset>
+                <div class="uk-form-row">
+                    <input type="submit" value="Connection" class="uk-button uk-button-expand uk-button-primary"/>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

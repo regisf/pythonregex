@@ -1,0 +1,69 @@
+<div id="options" class="uk-modal">
+    <section class="uk-modal-dialog">
+        <a class="uk-modal-close uk-close"></a>
+
+        <div class="uk-modal-content">
+            <h2>Global options</h2>
+
+            <div class="uk-form-row">
+                <input type="checkbox" id="opt_change" />
+                <label for="opt_change">Evaluate one each change
+                    <em>(no need to click on evaluate button)</em>
+                </label>
+            </div>
+
+            <div class="uk-form-row">
+                <input type="checkbox" id="opt_typing" >
+                <label for="opt_typing">Evaluate while typing <em>(WebSocket needed - may be slow)</em></label>
+            </div>
+
+            <div class="uk-form-row">
+                <input type="checkbox" id="opt_short"/>
+                <label for="opt_short">Evaluate with short tag <em>re.I instead re.IGNORECASE</em></label>
+            </div>
+
+            <hr>
+
+            <div id="regex_flags">
+                <h2>Regex options</h2>
+                <div>
+                    <input type="checkbox" id="re_debug" data-name="debug" checked="checked"/>
+                    <label for="re_debug">Debug mode (re.DEBUG)</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="re_ignore" data-name="ignore"/>
+                    <label for="re_ignore">Ignore case (re.IGNORECASE)</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="re_multiline" data-name="multiline"/>
+                    <label for="re_multiline">Multiline (re.MULTILINE)</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="re_dotall" data-name="dotall"/>
+                    <label for="re_dotall">Dot is all characters (re.DOTALL)</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="re_unicode" data-name="unicode"/>
+                    <label for="re_unicode">Unicode (re.UNICODE)</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="re_verbose" data-name="verbose"/>
+                    <label for="re_verbose">Be verbose (re.VERBOSE)</label>
+                </div>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <footer class="uk-clearfix">
+            <button class="uk-button uk-button-primary uk-float-right uk-modal-close" data-ok>
+                <i class="uk-icon-ok"></i> OK
+            </button>
+
+            <button class="uk-button uk-button-danger uk-float-right uk-modal-close" data-cancel>
+                <i class="uk-icon-remove"></i> Cancel
+            </button>
+        </footer>
+    </section>
+</div>
