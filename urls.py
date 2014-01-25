@@ -19,7 +19,7 @@ import settings
 from App.Home.homehandler import HomeHandler
 from App.Home.ajaxhandler import AjaxHandler
 from App.Home.websockethandler import WebSocketHandler
-from App.Home.registerhandler import RegisterHandler, CheckEmailHandler
+from App.Home.registerhandler import RegisterHandler
 
 from App.Admin.urls import URLS as AdminURLS
 
