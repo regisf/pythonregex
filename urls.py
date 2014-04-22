@@ -28,14 +28,14 @@ from App.Home.homehandler import HomeHandler
 from App.Home.ajaxhandler import AjaxHandler
 from App.Home.websockethandler import WebSocketHandler
 from App.Home.registerhandler import RegisterHandler
-
+from App.Home.contacthandler import ContactHandler
 from App.Admin.urls import URLS as AdminURLS
 
 URLS = [
     (r'^/assets/(.*)', tornado.web.StaticFileHandler, {'path': settings.STATIC_FILES}),
 
     (r'^/$', HomeHandler),
-
+    (r'^/contact$', ContactHandler),
     (r'^/auth/register/$', RegisterHandler),
 
     (r'^/wsa/$', AjaxHandler),

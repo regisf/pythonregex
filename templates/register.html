@@ -36,13 +36,10 @@
         </div>
         <div class="uk-form-row">
             <label>Anti-Robot system:</label>
-<!--            <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k={{ public_key }}"></script>
-            <noscript>
-               <iframe src="http://www.google.com/recaptcha/api/noscript?k={{ public_key }}" height="300" width="500" frameborder="0"></iframe><br>
-               <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
-               <input type="hidden" name="recaptcha_response_field" value="manual_challenge">
-            </noscript>
--->        </div>
+            <p><em>{{ question.string }}</em></p>
+            <input type="hidden" name="question" value="{{ question.answer }}">
+            <input type="text" name="question" placeholder="Type your anwser">
+        </div>
         <div class="uk-form-row">
             <label>&nbsp;</label>
             <button type="submit" class="uk-button uk-button-primary" id="registerButton">Register</button>

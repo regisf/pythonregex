@@ -28,10 +28,7 @@ from App.models.user import UserModel
 from App.models.email import EmailModel
 from App.models.preference import PreferenceModel
 from App.utils.email import send_mail
-from App.utils.recaptcha import Recaptcha
-
-# mettre le recaptcha dans la db
-USE_RECAPTCHA = False
+from App.utils.question import Question
 
 
 class RegisterHandler(tornado.web.RequestHandler):
@@ -41,9 +38,9 @@ class RegisterHandler(tornado.web.RequestHandler):
             page='register',
             errors=False,
             email='',
-            public_key=settings.RECAPTCHA_PUBLIC_KEY,
             fields=[],
-            messages={}
+            messages={},
+            question=Question()
         )
 
     def post(self):
@@ -51,10 +48,6 @@ class RegisterHandler(tornado.web.RequestHandler):
         password = self.get_argument('password')
         confirm = self.get_argument('confirm')
         error = []
-
-        if USE_RECAPTCHA:
-            challenge_field = self.get_argument('recaptcha_challenge_field')
-            response_field = self.get_argument('recaptcha_response_field')
 
         if not email:
             error.append({'message': 'Email is required and must be valid', 'field':'email'})
@@ -66,20 +59,6 @@ class RegisterHandler(tornado.web.RequestHandler):
 
         elif confirm != password:
             error.append({'message': 'The password and its confirmation are different', 'field': 'confirm'})
-
-        # Should be async
-        if USE_RECAPTCHA:
-            data = urllib.parse.urlencode({
-               'privatekey': settings.RECAPTCHA_PRIVATE_KEY,
-               'remoteip': self.request.remote_ip,
-               'challenge': challenge_field,
-               'response': response_field
-            }).encode('utf-8')
-
-            req = urllib.request.Request(settings.RECAPTCHA_URL, data)
-            res = urllib.request.urlopen(req)
-            if res.read().decode().split('\n')[0] == 'false':
-               error.append({'message': 'Wrong captcha.', 'field': 'captcha'})
 
         if not error:
             mail_model = EmailModel()
@@ -104,9 +83,9 @@ class RegisterHandler(tornado.web.RequestHandler):
                 page='register',
                 errors=error,
                 email=email,
-                public_key=settings.RECAPTCHA_PUBLIC_KEY if USE_RECAPTCHA else '',
                 fields=[err['field'] for err in error],
-                messages=messages
+                messages=messages,
+                question=Question()
             )
 
 

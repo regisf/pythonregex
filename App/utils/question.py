@@ -16,36 +16,47 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
 """
-Email utils
+The question. Ask a random question against robot
 """
 
-import smtplib
+__author__ = 'Regis FLORET'
 
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-from email.utils import parseaddr
+import random
 
+digits = {
+    0: 'Zero',
+    1: 'One',
+    2: 'Two',
+    3: 'Three',
+    4: 'Four',
+    5: 'Five',
+    6: 'Six',
+    7: 'Seven',
+    8: 'Height',
+    9: 'Nine',
+}
 
-def send_mail(sender, dest, subject, body, host_pref={'server': 'localhost'}):
+class Question:
     """
-    Send an email with HTML content
     """
-    msg = MIMEMultipart()
-    msg['Subject'] = subject
-    msg['From'] = sender
-    msg['To'] = dest
+    def __init__(self):
+        self.first = random.randint(0, 9)
+        self.second = random.randint(0, 9)
 
-    html_part = MIMEText(body, 'html')
-    msg.attach(html_part)
+    @property
+    def answer(self):
+        """
+        Get the answer, usually set in a hidden input:
+        eg: <input type="hidden" value="{{ question.answer }}" name="answer" />
+        """
+        return self.first + self.second
 
-    s = smtplib.SMTP(host_pref['server'])
-    s.send_message(msg)
-    s.quit()
+    @property
+    def string(self):
+        """
+        Get the question
+        """
+        return "What is the sum between {first} and {second}".format(first=self.first, second=self.second)
 
-
-def is_email(email):
-    """ Test if an email is valid
-    """
-    name, address = parseaddr(email)
-    return True if address else False

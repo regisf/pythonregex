@@ -17,18 +17,14 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import re
+from tornado.web import RequestHandler
 
-import tornado.web
-from App.utils.question import Question
 
-class HomeHandler(tornado.web.RequestHandler):
-    def get(self):
-        msie = re.findall(r'MSIE\s(\d+)', self.request.headers.get('user-agent'))
-        if len(msie) > 0:
-            if int(msie[0]) < 9:
-                self.render('ie.html', page="Die IE lte 8 ! Die !")
-                return
-
-        # Debug purpose only
-        self.render('index.html', page='index', question=Question())
+class ContactHandler(RequestHandler):
+    """
+    Send an email via the contact form
+    """
+    def post(self):
+        """
+        Manage post
+        """

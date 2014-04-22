@@ -28,6 +28,7 @@ import settings
 import filters
 from urls import URLS
 
+
 def runApp():
     """
     Run the application.
@@ -37,7 +38,8 @@ def runApp():
         debug=settings.DEBUG,
         template_path=settings.ROOT_TEMPLATE_PATH,
         cookie_secret=settings.SECRET_KEY,
-        ui_modules={'simple_date': filters.SimpleDate}
+        ui_modules={'simple_date': filters.SimpleDate},
+        login_url="/auth/login/",
         #xsrf_cookies=True,
     )
 

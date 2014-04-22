@@ -11,13 +11,13 @@
                 </div>
                 <div class="uk-form-row">
                     <label>Your name</label>
-                    <input type="text" name="name" placeholder="Type your mail address here">
+                    <input type="text" name="name" placeholder="Type your name here">
                 </div>
                 <div class="uk-form-row">
                     <label>Question</label>
                     <p>Just to proove you are a human</p>
-                    <p><em>{# question.string() #}</em></p>
-                    <input type="hidden" name="questionid" value="{# question.id() #}">
+                    <p><em>{{ question.string }}</em></p>
+                    <input type="hidden" name="question" value="{{ question.answer }}">
                     <input type="text" name="question" placeholder="Type your anwser">
                 </div>
                 <div class="uk-form-row">
@@ -35,7 +35,6 @@
             <button class="uk-button uk-button-danger uk-modal-close uk-float-right">
                 <i class="uk-icon-remove"></i> Cancel
             </button>
-
         </div>
     </div>
     <div id="pending"></div>

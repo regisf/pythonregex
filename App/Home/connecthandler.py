@@ -17,18 +17,27 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import re
+from tornado.web import RequestHandler
 
-import tornado.web
-from App.utils.question import Question
+from App.utils.email import is_email
+from App.models.user import UserModel
 
-class HomeHandler(tornado.web.RequestHandler):
-    def get(self):
-        msie = re.findall(r'MSIE\s(\d+)', self.request.headers.get('user-agent'))
-        if len(msie) > 0:
-            if int(msie[0]) < 9:
-                self.render('ie.html', page="Die IE lte 8 ! Die !")
-                return
 
-        # Debug purpose only
-        self.render('index.html', page='index', question=Question())
+class ConnectHandler(RequestHandler):
+    def post(self):
+        """ A user connection
+        """
+        email = self.get_argument("email")
+        password = self.get_argument('password')
+
+        if not (email and password):
+            return
+
+        if not is_email(email):
+            return
+
+        model = UserModel()
+
+        if not model.user_exists(email, password):
+            return
+

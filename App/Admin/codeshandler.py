@@ -16,7 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-from tornado.web import RequestHandler
+from tornado.web import RequestHandler, authenticated
+
 from App.models.preference import PreferenceModel
 
 
@@ -24,6 +25,7 @@ class CodesHandler(RequestHandler):
     """
     Handle all codes for analytics or captcha, twitter,
     """
+    @authenticated
     def get(self):
         pref = PreferenceModel().get_codes()
         if not pref:
@@ -66,6 +68,7 @@ class CodesHandler(RequestHandler):
             recaptcha=pref['recaptcha']
         )
 
+    @authenticated
     def post(self):
         """
         Save the codes
