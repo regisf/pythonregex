@@ -50,9 +50,9 @@ class RegisterHandler(tornado.web.RequestHandler):
         error = []
 
         if not email:
-            error.append({'message': 'Email is required and must be valid', 'field':'email'})
+            error.append({'message': 'Email is required and must be valid', 'field': 'email'})
         elif UserModel().is_email_exists(email):
-            error.append({'message': "Email exists, may be it's yours.", 'field':'email'})
+            error.append({'message': "Email exists, may be it's yours.", 'field': 'email'})
 
         if not password:
             error.append({'message': 'A password is required', 'field': 'password'})
