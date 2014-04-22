@@ -18,12 +18,10 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import json
-import urllib
 
 import tornado.web
 import tornado.gen
 
-import settings
 from App.models.user import UserModel
 from App.models.email import EmailModel
 from App.models.preference import PreferenceModel
