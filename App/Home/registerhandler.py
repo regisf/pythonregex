@@ -26,7 +26,6 @@ from App.models.user import UserModel
 from App.models.email import EmailModel
 from App.models.preference import PreferenceModel
 from App.utils.email import send_mail
-from App.utils.question import Question
 
 
 class RegisterHandler(tornado.web.RequestHandler):
@@ -38,7 +37,7 @@ class RegisterHandler(tornado.web.RequestHandler):
             email='',
             fields=[],
             messages={},
-            question=Question()
+            question=self.application.settings.get("question")
         )
 
     def post(self):
@@ -83,7 +82,7 @@ class RegisterHandler(tornado.web.RequestHandler):
                 email=email,
                 fields=[err['field'] for err in error],
                 messages=messages,
-                question=Question()
+                question=self.application.settings.get("question")
             )
 
 

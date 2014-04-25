@@ -16,6 +16,7 @@ class cApplication
                     new cMessageDialog "Error", data.error
                 else
                     $("#dest_result").html "<pre><code>#{data.content}</code></pre>"
+        @contactDialog = new ContactMessage()
 
     getModel: -> @model
 

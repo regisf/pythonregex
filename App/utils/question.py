@@ -38,12 +38,23 @@ digits = {
     9: 'Nine',
 }
 
+
 class Question:
     """
     """
     def __init__(self):
-        self.first = random.randint(0, 9)
-        self.second = random.randint(0, 9)
+        """ Ctor
+        """
+        self._first = 0
+        self._second = 0
+
+    def prepare(self):
+        """
+        Get new numbers. THis might be called each time you want to display the question
+        """
+        self._first = random.randint(0, 9)
+        self._second = random.randint(0, 9)
+        return ''
 
     @property
     def answer(self):
@@ -51,12 +62,27 @@ class Question:
         Get the answer, usually set in a hidden input:
         eg: <input type="hidden" value="{{ question.answer }}" name="answer" />
         """
-        return self.first + self.second
+        return self._first + self._second
+
+    @property
+    def first(self):
+        """
+        Return the first number as a text number
+        """
+        return digits[self._first]
+
+    @property
+    def second(self):
+        """
+        Return the second number as a text number
+        """
+        return digits[self._second]
 
     @property
     def string(self):
         """
         Get the question
         """
-        return "What is the sum between {first} and {second}".format(first=self.first, second=self.second)
+        return "What is the result of the sum between {} and {}".format(digits[self._first],
+                                                                        digits[self._second])
 

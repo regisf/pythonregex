@@ -20,7 +20,6 @@
 import re
 
 import tornado.web
-from App.utils.question import Question
 
 class HomeHandler(tornado.web.RequestHandler):
     def get(self):
@@ -31,4 +30,4 @@ class HomeHandler(tornado.web.RequestHandler):
                 return
 
         # Debug purpose only
-        self.render('index.html', page='index', question=Question())
+        self.render('index.html', page='index', question=self.application.settings.get("question"))

@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
 from tornadoext.requesthandler import RequestHandler
 
 from App.models.user import UserModel
@@ -43,7 +44,7 @@ class LoginHandler(RequestHandler):
         )
 
         if not user:
-            self.render('admin/login.html',error="Unknow user or wrong password")
+            self.render('admin/login.html', error="Unknow user or wrong password")
         else:
             self.login(user)
             self.redirect('/admin/')
