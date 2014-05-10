@@ -50,7 +50,6 @@ class cApplication
 
             @model.sendRegex regex, content, method, options, sub, count
 
-
 # The application starter
 $ ->
     # Ensure the footer is on the buttom of the screen

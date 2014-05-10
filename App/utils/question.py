@@ -83,6 +83,8 @@ class Question:
         """
         Get the question
         """
-        return "What is the result of the sum between {} and {}".format(digits[self._first],
-                                                                        digits[self._second])
+        return "What is the result of the sum between {} and {} ({} + {})".format(digits[self._first],
+                                                                                  digits[self._second],
+                                                                                  self._first,
+                                                                                  self._second)
 

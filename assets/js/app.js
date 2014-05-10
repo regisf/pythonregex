@@ -125,31 +125,82 @@
       dialog = $("#contact");
       this.emailField = dialog.find("input[name=email]");
       this.nameField = dialog.find("input[name=name]");
-      this.answerField = dialog.find("input[name=anwser]");
-      this.questionField = dialog.find("input[name=question]");
+      this.answerField = dialog.find("input[name=question]");
       this.messageField = dialog.find("textarea[name=message]");
-      dialog.on('uk.modal.show', function() {
-        this.emailField.val("");
-        this.nameField.val("");
-        this.answerField.val("");
-        this.questionField.val("");
-        this.messageField.val("");
-      });
+      dialog.on('uk.modal.show', (function(_this) {
+        return function() {
+          _this.emailField.val("");
+          _this.emailField.removeClass("uk-form-danger");
+          _this.nameField.val("");
+          _this.nameField.removeClass("uk-form-danger");
+          _this.answerField.val("");
+          _this.answerField.removeClass("uk-form-danger");
+          _this.messageField.val("");
+          return _this.messageField.removeClass("uk-form-danger");
+        };
+      })(this));
       dialog.find("[data-send]").on('click', this.validateForm);
     }
 
     ContactMessage.prototype.validateForm = function(e) {
-      var error;
-      error = false;
-      e.preventDefault();
+      var error, formData;
+      error = [];
       if ($.trim(this.emailField.val()).length === 0) {
-        this.emailField.addClass("uk-form-error");
-        error = true;
+        this.emailField.addClass("uk-form-danger");
+        error.push("The email is empty");
+      } else {
+        this.emailField.removeClass("uk-form-danger");
       }
       if ($.trim(this.nameField.val()).length === 0) {
-        this.nameField.addClass("uk-form-error");
-        error = true;
+        this.nameField.addClass("uk-form-danger");
+        error.push("The name is empty");
+      } else {
+        this.nameField.removeClass("uk-form-danger");
       }
+      if ($.trim(this.answerField.val()).length === 0) {
+        this.answerField.addClass("uk-form-danger");
+        error.push("The answer is empty");
+      } else if (this.answerField.val() !== $("#result").val()) {
+        this.answerField.addClass("uk-form-danger");
+        error.push("This isn't the good answer");
+      } else {
+        this.answerField.removeClass("uk-form-danger");
+      }
+      if ($.trim(this.messageField.val()).length === 0) {
+        this.messageField.addClass("uk-form-danger");
+        error.push("The message is empty");
+      } else {
+        this.messageField.removeClass("uk-form-danger");
+      }
+      if (error.length) {
+        e.preventDefault();
+        alert("There is one or more error\n\n" + error.join("\n"));
+        return;
+      }
+      formData = new FormData(document.getElementById("contactform"));
+      $.ajax({
+        url: '/contact',
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: (function(_this) {
+          return function(data) {
+            var okModal, oldModal;
+            if (data === 'ok') {
+              oldModal = new $.UIkit.modal.Modal("#contact");
+              oldModal.hide();
+              okModal = new $.UIkit.modal.Modal("#send-success");
+              return okModal.show();
+            }
+          };
+        })(this),
+        fail: (function(_this) {
+          return function(xhr) {
+            return alert(xhr.responseText);
+          };
+        })(this)
+      });
     };
 
     return ContactMessage;
