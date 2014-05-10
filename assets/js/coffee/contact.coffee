@@ -10,6 +10,15 @@ class ContactMessage
     @questionField = dialog.find "input[name=question]"
     @messageField = dialog.find "textarea[name=message]"
 
+    # Remove fields content
+    dialog.on 'uk.modal.show', () ->
+      @emailField.val ""
+      @nameField.val ""
+      @answerField.val ""
+      @questionField.val ""
+      @messageField.val ""
+      return
+
     dialog.find("[data-send]").on 'click', @validateForm
 
   # Validate the form to check errors
@@ -24,5 +33,5 @@ class ContactMessage
       @nameField.addClass "uk-form-error"
       error = true
 
-
+    return
 
