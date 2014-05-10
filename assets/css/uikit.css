@@ -1,141 +1,27 @@
-/*! UIkit 1.1.0 | http://www.getuikit.com | (c) 2013 YOOtheme | MIT License */
+/*! UIkit 2.6.0 | http://www.getuikit.com | (c) 2014 YOOtheme | MIT License */
 
-/* LESS related */
-/*
- * Component:		Variables
- * Description:		Defines all color and style related values as variables
- *					to allow easy customization for the most common cases.
+/* ========================================================================
+   Component: Normalize
  ========================================================================== */
-/* Global variables
+/* Base
  ========================================================================== */
 /*
- * Text
+ * 1. Sets default font family to sans-serif.
+ * 2. Prevents iOS text size adjust after orientation change, without disabling user zoom.
  */
+html {
+  /* 1 */
+  font-family: sans-serif;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
 /*
- * Backgrounds & Borders
+ * Removes default margin.
  */
-/*
- * Spacings
- */
-/*
- * Controls
- */
-/*
- * Z-index
- */
-/* Breakpoint variables
- ========================================================================== */
-/*
-* Breakpoints
-*/
-/* Components variables
- ========================================================================== */
-/*
- * Base
- */
-/*
- * Grid
- */
-/*
- * Panel
- */
-/*
- * Article
- */
-/*
- * Comment
- */
-/*
- * Nav
- */
-/*
- * Navbar
- */
-/*
- * Subnav
- */
-/*
- * Breadcrumb
- */
-/*
- * Pagination
- */
-/*
- * Tab
- */
-/*
- * List
- */
-/*
- * Description list
- */
-/*
- * Table
- */
-/*
- * Form
- */
-/*
- * Button
- */
-/*
- * Icon
- */
-/*
- * Close
- */
-/*
- * Badge
- */
-/*
- * Alert
- */
-/*
- * Thumbnail
- */
-/*
- * Overlay
- */
-/*
- * Progress
- */
-/*
- * Search
- */
-/*
- * Dropdown
- */
-/*
- * Modal
- */
-/*
- * Off-canvas
- */
-/*
- * Tooltip
- */
-/*
- * Text
- */
-/*
- * Utility
- */
-/* Defaults */
-/*
- * Component:		Normalize
- * Description:		Reduces inconsistencies across all browsers
- *
- * Adapted from http://github.com/necolas/normalize.css (Version 2.1.2)
- *
- * Modifications:	Moved `mark` and `h1` defaults to Base component
- *					Changed `fieldset` defaults to 0
- *					Added cursor for `radio` and `checkbox`
- *					Set form controls box sizing to `border-box`
- *					Modified `disabled` selector
- *					Better font baseline for `code`, `kbd`, `pre` and `samp`
- *					Removed placeholder transparency in Firefox
- *
- ========================================================================== */
+body {
+  margin: 0;
+}
 /* HTML5 display definitions
  ========================================================================== */
 /*
@@ -148,7 +34,6 @@ figcaption,
 figure,
 footer,
 header,
-hgroup,
 main,
 nav,
 section,
@@ -156,12 +41,17 @@ summary {
   display: block;
 }
 /*
- * Corrects `inline-block` display not defined in IE 8/9.
+ * 1. Correct `inline-block` display not defined in IE 8/9.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
  */
 audio,
 canvas,
+progress,
 video {
+  /* 1 */
   display: inline-block;
+  /* 2 */
+  vertical-align: baseline;
 }
 /*
  * Prevents modern browsers from displaying `audio` without controls.
@@ -172,39 +62,20 @@ audio:not([controls]) {
   height: 0;
 }
 /*
- * Addresses styling for `hidden` attribute not present in IE 8/9.
+ * Address `[hidden]` styling not present in IE 8/9.
+ * Hide the `template` element in IE, Safari, and Firefox < 22.
  */
-[hidden] {
+[hidden],
+template {
   display: none;
-}
-/* Base
- ========================================================================== */
-/*
- * 1. Sets default font family to sans-serif.
- * 2. Prevents iOS text size adjust after orientation change, without disabling user zoom.
- */
-html {
-  font-family: sans-serif;
-  /* 1 */
-
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  /* 2 */
-
-}
-/*
- * Removes default margin.
- */
-body {
-  margin: 0;
 }
 /* Links
  ========================================================================== */
 /*
- * Addresses `outline` inconsistency between Chrome and other browsers.
+ * Remove the gray background color from active links in IE 10.
  */
-a:focus {
-  outline: thin dotted;
+a {
+  background: transparent;
 }
 /*
  * Improves readability when focused and also mouse hovered in all browsers.
@@ -213,7 +84,7 @@ a:active,
 a:hover {
   outline: 0;
 }
-/* Typography
+/* Text-level semantics
  ========================================================================== */
 /*
  * Addresses styling not present in IE 8/9, Safari 5, and Chrome.
@@ -233,39 +104,6 @@ strong {
  */
 dfn {
   font-style: italic;
-}
-/*
- * Address differences between Firefox and other browsers.
- */
-hr {
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  height: 0;
-}
-/*
- * Corrects font family set oddly in Safari 5 and Chrome.
- * 1. Consolas has a better baseline in running text compared to `Courier`
- */
-code,
-kbd,
-pre,
-samp {
-  font-family: Consolas, monospace, serif;
-  /* 1 */
-
-  font-size: 1em;
-}
-/*
- * Improves readability of pre-formatted text in all browsers.
- */
-pre {
-  white-space: pre-wrap;
-}
-/*
- * Sets consistent quote types.
- */
-q {
-  quotes: "\201C" "\201D" "\2018" "\2019";
 }
 /*
  * Addresses inconsistent and variable font size in all browsers.
@@ -303,7 +141,7 @@ img {
 svg:not(:root) {
   overflow: hidden;
 }
-/* Figures
+/* Grouping content
  ========================================================================== */
 /*
  * Addresses margin not present in IE 8/9 and Safari 5.
@@ -311,32 +149,38 @@ svg:not(:root) {
 figure {
   margin: 0;
 }
+/*
+ * Address differences between Firefox and other browsers.
+ */
+hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+/*
+ * Contain overflow in all browsers.
+ */
+pre {
+  overflow: auto;
+}
+/*
+ * Address odd `em`-unit font size rendering in all browsers.
+ * 1. Consolas has a better baseline in running text compared to `Courier`
+ */
+code,
+kbd,
+pre,
+samp {
+  font-size: 1em;
+  /* 1 */
+  font-family: Consolas, monospace, serif;
+}
 /* Forms
  ========================================================================== */
 /*
- * Define consistent border, margin, and padding.
- */
-fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
-}
-/*
- * 1. Corrects color not being inherited in IE 8/9.
- * 2. Remove padding so people aren't caught out if they zero out fieldsets.
- */
-legend {
-  border: 0;
-  /* 1 */
-
-  padding: 0;
-  /* 2 */
-
-}
-/*
- * 1. Corrects font family not being inherited in all browsers.
- * 2. Corrects font size not being inherited in all browsers.
- * 3. Addresses margins set differently in Firefox 4+, Safari 5, and Chrome
+ * 1. Correct color not being inherited. Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.
  * 4. Define consistent box sizing
  *    Defaults:   `button`, `input` and `textarea` have box sizing set to `content-box`
  *                `select`, `input[type="checkbox"]` and `input[type="radio"]` have box sizing set to `border-box`
@@ -345,35 +189,38 @@ legend {
  */
 button,
 input,
+optgroup,
 select,
 textarea {
-  font-family: inherit;
   /* 1 */
-
-  font-size: 100%;
+  color: inherit;
   /* 2 */
-
-  margin: 0;
+  font: inherit;
   /* 3 */
-
-  -moz-box-sizing: border-box;
+  margin: 0;
   /* 4 */
-
+  -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-/*
- * Addresses Firefox 4+ setting `line-height` on `input` using `!important` in the UA stylesheet.
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
  */
-button,
-input {
-  line-height: normal;
+optgroup {
+  font-weight: bold;
+}
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10.
+ */
+button {
+  overflow: visible;
 }
 /*
  * Address inconsistent `text-transform` inheritance for `button` and `select`.
  * All other form control elements do not inherit `text-transform` values.
- * Correct `button` style inheritance in Chrome, Safari 5+, and IE 8+.
- * Correct `select` style inheritance in Firefox 4+ and Opera.
+ * Correct `button` style inheritance in Firefox, IE 8+, and Opera
+ * Correct `select` style inheritance in Firefox.
  */
 button,
 select {
@@ -381,53 +228,24 @@ select {
 }
 /*
  * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio` and `video` controls.
- * 2. Corrects inability to style clickable `input` types in iOS.
- * 3. Improves usability and consistency of cursor style between image-type `input` and others.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type `input` and others.
  */
 button,
 html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
-  -webkit-appearance: button;
   /* 2 */
-
-  cursor: pointer;
+  -webkit-appearance: button;
   /* 3 */
-
-}
-/*
- * Improves consistency of cursor style for clickable elements
- */
-input[type="radio"],
-input[type="checkbox"] {
   cursor: pointer;
 }
 /*
  * Re-set default cursor for disabled elements.
  */
 button:disabled,
-input:disabled {
+html input:disabled {
   cursor: default;
-}
-/*
- * 2. Removes excess padding in IE 8/9.
- */
-input[type="checkbox"],
-input[type="radio"] {
-  padding: 0;
-}
-/*
- * 1. Addresses `appearance` set to `searchfield` in Safari 5 and Chrome.
- */
-input[type="search"] {
-  -webkit-appearance: textfield;
-}
-/*
- * Removes inner padding and search cancel button in Safari 5 and Chrome on OS X.
- */
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
 }
 /*
  * Removes inner padding and border in Firefox 4+.
@@ -438,16 +256,73 @@ input::-moz-focus-inner {
   padding: 0;
 }
 /*
- * 1. Removes default vertical scrollbar in IE 8/9.
- * 2. Improves readability and alignment in all browsers.
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in the UA stylesheet.
+ */
+input {
+  line-height: normal;
+}
+/*
+ * 1. Removes excess padding in IE 8/9.
+ * 2. Improves consistency of cursor style for clickable elements
+ */
+input[type="checkbox"],
+input[type="radio"] {
+  /* 1 */
+  padding: 0;
+  /* 2 */
+  cursor: pointer;
+}
+/*
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+/*
+ * Addresses `appearance` set to `searchfield` in Safari 5 and Chrome.
+ */
+input[type="search"] {
+  -webkit-appearance: textfield;
+}
+/*
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+/*
+ * Define consistent border, margin, and padding.
+ */
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+/*
+ * 1. Corrects color not being inherited in IE 8/9.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+legend {
+  /* 1 */
+  border: 0;
+  /* 2 */
+  padding: 0;
+}
+/**
+ * 1. Remove default vertical scrollbar in IE 8/9.
+ * 2. Improve readability and alignment in all browsers.
  */
 textarea {
   overflow: auto;
   /* 1 */
-
   vertical-align: top;
   /* 2 */
-
 }
 /*
  * Removes placeholder transparency in Firefox.
@@ -464,13 +339,8 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-/*
- * Component:		Base
- * Description:		Sets default values for HTML elements
- *
- * Component:		`uk-h1`, `uk-h2`, `uk-h3`, `uk-h4`, `uk-h5`, `uk-h6`
- *					`uk-img-preserve`
- *
+/* ========================================================================
+   Component: Base
  ========================================================================== */
 /* Body
  ========================================================================== */
@@ -487,11 +357,11 @@ body {
   line-height: 20px;
   color: #444444;
 }
-/* Only phones */
+/* Phone landscape and smaller */
 @media (max-width: 767px) {
   /*
-  	 * Break strings if their length exceeds the width of their container
-  	 */
+     * Break strings if their length exceeds the width of their container
+     */
   body {
     word-wrap: break-word;
     -webkit-hyphens: auto;
@@ -505,17 +375,16 @@ body {
 /*
  * Links
  */
-a {
-  text-decoration: none;
-}
-a:hover {
-  text-decoration: underline;
-}
-a {
+a,
+.uk-link {
   color: #0077dd;
+  text-decoration: none;
+  cursor: pointer;
 }
-a:hover {
+a:hover,
+.uk-link:hover {
   color: #005599;
+  text-decoration: underline;
 }
 /*
  * Emphasize
@@ -567,21 +436,18 @@ dfn[title] {
  ========================================================================== */
 /*
  * 1. Corrects max-width behavior (2.) if padding and border are used
- * 2. Responsiveness: Sets a maxium width relative to the parent and auto scales the height
+ * 2. Responsiveness: Sets a maximum width relative to the parent and auto scales the height
  * 3. Remove the gap between images and the bottom of their containers
  */
 img {
+  /* 1 */
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  /* 1 */
-
+  /* 2 */
   max-width: 100%;
   height: auto;
-  /* 2 */
-
-  vertical-align: middle;
   /* 3 */
-
+  vertical-align: middle;
 }
 /*
  * Preserve original image dimensions
@@ -649,9 +515,6 @@ h6 {
 * + h6 {
   margin-top: 25px;
 }
-/*
- * TODO: Use `:extend` to move heading classes to the utility component
- */
 h1,
 .uk-h1 {
   font-size: 36px;
@@ -780,33 +643,14 @@ iframe {
   border: 0;
 }
 /* Fix viewport for IE10 snap mode
- * http://timkadlec.com/2012/10/ie10-snap-mode-and-responsive-design/
  ========================================================================== */
-@-ms-viewport {
-  width: device-width;
+@media screen and (max-width: 400px) {
+  @-ms-viewport {
+    width: device-width;
+  }
 }
-/* Hooks
- ========================================================================== */
-/* Layout */
-/*
- * Name:			Grid
- * Description:		Provides a responsive, fluid and nestable grid
- *
- * Component:		`uk-grid`
- *					`uk-width-*`
- *					`uk-push-*`
- *					`uk-pull-*`
- *
- * Modifiers:		`uk-grid-divider`
- *					`uk-grid-margin`
- *					`uk-grid-preserve`
- *
- * Uses:			Panel: `uk-panel`
- *
- * Used by:			Dropdown
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Grid
  ========================================================================== */
 /*
  * Micro clearfix
@@ -825,51 +669,94 @@ iframe {
  */
 .uk-grid {
   /* 1 */
-
   margin: 0 0 0 -25px;
   /* 2 */
-
   padding: 0;
   list-style: none;
 }
+/*
+ * Grid cell
+ * 1. Makes grid more robust so that it can be used with other block elements
+ * 2. Create horizontal gutter
+ * 3. `float` is set by default so columns always behave the same and create a new block format context
+ */
+.uk-grid > * {
+  /* 1 */
+  margin: 0;
+  /* 2 */
+  padding-left: 25px;
+  /* 3 */
+  float: left;
+}
+/*
+ * Remove margin from the last-child
+ */
+.uk-grid > * > :last-child {
+  margin-bottom: 0;
+}
+/* Grid gutter
+ ========================================================================== */
 /*
  * Vertical gutter
  */
 .uk-grid + .uk-grid {
   margin-top: 25px;
 }
-/* Grid column
- ========================================================================== */
-/*
- * 1. Makes grid more robust so that it can be used with other block elements
- * 2. Create horizontal gutter
- * 3. `float` is set by default so columns always behave the same and create a new block format context
- */
-.uk-grid > [class*='uk-width-'] {
-  /* 1 */
-
-  margin: 0;
-  /* 2 */
-
-  padding-left: 25px;
-  /* 3 */
-
-  float: left;
-}
-/*
- * Remove margin from the last-child
- */
-.uk-grid > [class*='uk-width-'] > :last-child {
-  margin-bottom: 0;
-}
-/* Sub-modifier: `uk-grid-margin`
- ========================================================================== */
 /*
  * This class is set by JavaScript and applies a vertical gutter if the columns stack or float into the next row
  * Higher specificity to override margin
  */
 .uk-grid > .uk-grid-margin {
   margin-top: 25px;
+}
+/*
+ * Vertical gutter for panels
+ */
+.uk-grid > * > .uk-panel + .uk-panel {
+  margin-top: 25px;
+}
+/*
+ * Larger gutter for large screens
+ */
+/* Large screen and bigger */
+@media (min-width: 1220px) {
+  /* Horizontal gutter */
+  .uk-grid:not(.uk-grid-preserve) {
+    margin-left: -35px;
+  }
+  .uk-grid:not(.uk-grid-preserve) > * {
+    padding-left: 35px;
+  }
+  /* Vertical gutter */
+  .uk-grid:not(.uk-grid-preserve) + .uk-grid {
+    margin-top: 35px;
+  }
+  .uk-grid:not(.uk-grid-preserve) > .uk-grid-margin {
+    margin-top: 35px;
+  }
+  /* Vertical gutter for panels */
+  .uk-grid:not(.uk-grid-preserve) > * > .uk-panel + .uk-panel {
+    margin-top: 35px;
+  }
+}
+/*
+ * Small gutter
+ * Higher specificity to override large gutter
+ */
+.uk-grid.uk-grid-small {
+  margin-left: -10px;
+}
+.uk-grid.uk-grid-small > * {
+  padding-left: 10px;
+}
+.uk-grid.uk-grid-small + .uk-grid-small {
+  margin-top: 10px;
+}
+.uk-grid.uk-grid-small > .uk-grid-margin {
+  margin-top: 10px;
+}
+.uk-grid.uk-grid-small > * > .uk-panel + .uk-panel {
+  margin-top: 10px;
 }
 /* Modifier: `uk-grid-divider`
  ========================================================================== */
@@ -881,31 +768,49 @@ iframe {
   margin-left: -25px;
   margin-right: -25px;
 }
-.uk-grid-divider:not(:empty) > [class*='uk-width-'] {
+.uk-grid-divider > * {
   padding-left: 25px;
   padding-right: 25px;
 }
-.uk-grid-divider:not(:empty) > [class*='uk-width-1-']:not(.uk-width-1-1):nth-child(n+2),
-.uk-grid-divider:not(:empty) > [class*='uk-width-2-']:nth-child(n+2),
-.uk-grid-divider:not(:empty) > [class*='uk-width-3-']:nth-child(n+2),
-.uk-grid-divider:not(:empty) > [class*='uk-width-4-']:nth-child(n+2),
-.uk-grid-divider:not(:empty) > [class*='uk-width-5-']:nth-child(n+2),
-.uk-grid-divider:not(:empty) > [class*='uk-width-6-']:nth-child(n+2),
-.uk-grid-divider:not(:empty) > [class*='uk-width-7-']:nth-child(n+2),
-.uk-grid-divider:not(:empty) > [class*='uk-width-8-']:nth-child(n+2),
-.uk-grid-divider:not(:empty) > [class*='uk-width-9-']:nth-child(n+2) {
+.uk-grid-divider > [class*='uk-width-1-']:not(.uk-width-1-1):nth-child(n+2),
+.uk-grid-divider > [class*='uk-width-2-']:nth-child(n+2),
+.uk-grid-divider > [class*='uk-width-3-']:nth-child(n+2),
+.uk-grid-divider > [class*='uk-width-4-']:nth-child(n+2),
+.uk-grid-divider > [class*='uk-width-5-']:nth-child(n+2),
+.uk-grid-divider > [class*='uk-width-6-']:nth-child(n+2),
+.uk-grid-divider > [class*='uk-width-7-']:nth-child(n+2),
+.uk-grid-divider > [class*='uk-width-8-']:nth-child(n+2),
+.uk-grid-divider > [class*='uk-width-9-']:nth-child(n+2) {
   border-left: 1px solid #dddddd;
 }
-/* Only tablets and desktop */
+/* Tablet and bigger */
 @media (min-width: 768px) {
-  .uk-grid-divider:not(:empty) > [class*='uk-width-medium-']:not(.uk-width-medium-1-1):nth-child(n+2) {
+  .uk-grid-divider > [class*='uk-width-medium-']:not(.uk-width-medium-1-1):nth-child(n+2) {
     border-left: 1px solid #dddddd;
   }
 }
-/* Only desktop */
+/* Desktop and bigger */
 @media (min-width: 960px) {
-  .uk-grid-divider:not(:empty) > [class*='uk-width-large-']:not(.uk-width-large-1-1):nth-child(n+2) {
+  .uk-grid-divider > [class*='uk-width-large-']:not(.uk-width-large-1-1):nth-child(n+2) {
     border-left: 1px solid #dddddd;
+  }
+}
+/* Large screen and bigger */
+@media (min-width: 1220px) {
+  /*
+     * Large gutter
+     */
+  .uk-grid-divider:not(.uk-grid-preserve):not(:empty) {
+    margin-left: -35px;
+    margin-right: -35px;
+  }
+  .uk-grid-divider:not(.uk-grid-preserve) > * {
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+  .uk-grid-divider:not(.uk-grid-preserve):empty {
+    margin-top: 35px;
+    margin-bottom: 35px;
   }
 }
 /*
@@ -916,58 +821,118 @@ iframe {
   margin-bottom: 25px;
   border-top: 1px solid #dddddd;
 }
-/* Panel in grid
+/* Even grid cell widths
  ========================================================================== */
-/*
- * Vertical gutter for panels
- */
-.uk-grid > [class*='uk-width-'] > .uk-panel + .uk-panel {
-  margin-top: 25px;
+[class*='uk-grid-width'] > * {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
 }
-/* Large gutter
- ========================================================================== */
-/* Only large screens */
+.uk-grid-width-1-2 > * {
+  width: 50%;
+}
+.uk-grid-width-1-3 > * {
+  width: 33.333%;
+}
+.uk-grid-width-1-4 > * {
+  width: 25%;
+}
+.uk-grid-width-1-5 > * {
+  width: 20%;
+}
+.uk-grid-width-1-6 > * {
+  width: 16.666%;
+}
+.uk-grid-width-1-10 > * {
+  width: 10%;
+}
+/* Phone landscape and bigger */
+@media (min-width: 480px) {
+  .uk-grid-width-small-1-2 > * {
+    width: 50%;
+  }
+  .uk-grid-width-small-1-3 > * {
+    width: 33.333%;
+  }
+  .uk-grid-width-small-1-4 > * {
+    width: 25%;
+  }
+  .uk-grid-width-small-1-5 > * {
+    width: 20%;
+  }
+  .uk-grid-width-small-1-6 > * {
+    width: 16.666%;
+  }
+  .uk-grid-width-small-1-10 > * {
+    width: 10%;
+  }
+}
+/* Tablet and bigger */
+@media (min-width: 768px) {
+  .uk-grid-width-medium-1-2 > * {
+    width: 50%;
+  }
+  .uk-grid-width-medium-1-3 > * {
+    width: 33.333%;
+  }
+  .uk-grid-width-medium-1-4 > * {
+    width: 25%;
+  }
+  .uk-grid-width-medium-1-5 > * {
+    width: 20%;
+  }
+  .uk-grid-width-medium-1-6 > * {
+    width: 16.666%;
+  }
+  .uk-grid-width-medium-1-10 > * {
+    width: 10%;
+  }
+}
+/* Desktop and bigger */
+@media (min-width: 960px) {
+  .uk-grid-width-large-1-2 > * {
+    width: 50%;
+  }
+  .uk-grid-width-large-1-3 > * {
+    width: 33.333%;
+  }
+  .uk-grid-width-large-1-4 > * {
+    width: 25%;
+  }
+  .uk-grid-width-large-1-5 > * {
+    width: 20%;
+  }
+  .uk-grid-width-large-1-6 > * {
+    width: 16.666%;
+  }
+  .uk-grid-width-large-1-10 > * {
+    width: 10%;
+  }
+}
+/* Large screen and bigger */
 @media (min-width: 1220px) {
-  /*
-  	 * Grid
-  	 */
-  /* Horizontal gutter */
-  .uk-grid:not(.uk-grid-preserve) {
-    margin-left: -35px;
+  .uk-grid-width-xlarge-1-2 > * {
+    width: 50%;
   }
-  .uk-grid:not(.uk-grid-preserve) > [class*='uk-width-'] {
-    padding-left: 35px;
+  .uk-grid-width-xlarge-1-3 > * {
+    width: 33.333%;
   }
-  /* Vertical gutter */
-  .uk-grid:not(.uk-grid-preserve) + .uk-grid {
-    margin-top: 35px;
+  .uk-grid-width-xlarge-1-4 > * {
+    width: 25%;
   }
-  .uk-grid:not(.uk-grid-preserve) > .uk-grid-margin {
-    margin-top: 35px;
+  .uk-grid-width-xlarge-1-5 > * {
+    width: 20%;
   }
-  /* Vertical gutter for panels */
-  .uk-grid:not(.uk-grid-preserve) > [class*='uk-width-'] > .uk-panel + .uk-panel {
-    margin-top: 35px;
+  .uk-grid-width-xlarge-1-6 > * {
+    width: 16.666%;
   }
-  /*
-  	 * Modifier: `uk-grid-divider`
-  	 */
-  .uk-grid-divider:not(.uk-grid-preserve):not(:empty) {
-    margin-left: -35px;
-    margin-right: -35px;
-  }
-  .uk-grid-divider:not(.uk-grid-preserve):not(:empty) > [class*='uk-width-'] {
-    padding-left: 35px;
-    padding-right: 35px;
-  }
-  .uk-grid-divider:not(.uk-grid-preserve):empty {
-    margin-top: 35px;
-    margin-bottom: 35px;
+  .uk-grid-width-xlarge-1-10 > * {
+    width: 10%;
   }
 }
-/* Sub-object: `uk-width-*`
+/* Sub-objects: `uk-width-*`
  ========================================================================== */
-[class*='uk-width-'] {
+[class*='uk-width'] {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
@@ -1039,7 +1004,74 @@ iframe {
 .uk-width-9-10 {
   width: 90%;
 }
-/* Only tablets and desktop */
+/* Phone landscape and bigger */
+@media (min-width: 480px) {
+  /* Whole */
+  .uk-width-small-1-1 {
+    width: 100%;
+  }
+  /* Halves */
+  .uk-width-small-1-2,
+  .uk-width-small-2-4,
+  .uk-width-small-3-6,
+  .uk-width-small-5-10 {
+    width: 50%;
+  }
+  /* Thirds */
+  .uk-width-small-1-3,
+  .uk-width-small-2-6 {
+    width: 33.333%;
+  }
+  .uk-width-small-2-3,
+  .uk-width-small-4-6 {
+    width: 66.666%;
+  }
+  /* Quarters */
+  .uk-width-small-1-4 {
+    width: 25%;
+  }
+  .uk-width-small-3-4 {
+    width: 75%;
+  }
+  /* Fifths */
+  .uk-width-small-1-5,
+  .uk-width-small-2-10 {
+    width: 20%;
+  }
+  .uk-width-small-2-5,
+  .uk-width-small-4-10 {
+    width: 40%;
+  }
+  .uk-width-small-3-5,
+  .uk-width-small-6-10 {
+    width: 60%;
+  }
+  .uk-width-small-4-5,
+  .uk-width-small-8-10 {
+    width: 80%;
+  }
+  /* Sixths */
+  .uk-width-small-1-6 {
+    width: 16.666%;
+  }
+  .uk-width-small-5-6 {
+    width: 83.333%;
+  }
+  /* Tenths */
+  .uk-width-small-1-10 {
+    width: 10%;
+  }
+  .uk-width-small-3-10 {
+    width: 30%;
+  }
+  .uk-width-small-7-10 {
+    width: 70%;
+  }
+  .uk-width-small-9-10 {
+    width: 90%;
+  }
+}
+/* Tablet and bigger */
 @media (min-width: 768px) {
   /* Whole */
   .uk-width-medium-1-1 {
@@ -1106,7 +1138,7 @@ iframe {
     width: 90%;
   }
 }
-/* Only desktop */
+/* Desktop and bigger */
 @media (min-width: 960px) {
   /* Whole */
   .uk-width-large-1-1 {
@@ -1179,15 +1211,15 @@ iframe {
  * Source ordering
  * Works only with `uk-width-medium-*`
  */
-/* Only tablets and desktop */
+/* Tablet and bigger */
 @media (min-width: 768px) {
   [class*='uk-push-'],
   [class*='uk-pull-'] {
     position: relative;
   }
   /*
-  	 * Push
-  	 */
+     * Push
+     */
   /* Halves */
   .uk-push-1-2,
   .uk-push-2-4,
@@ -1249,8 +1281,8 @@ iframe {
     left: 90%;
   }
   /*
-  	 * Pull
-  	 */
+     * Pull
+     */
   /* Halves */
   .uk-pull-1-2,
   .uk-pull-2-4,
@@ -1312,35 +1344,17 @@ iframe {
     left: -90%;
   }
 }
-/*
- * Name:			Panel
- * Description:		Defines styles for reusable content areas
- *
- * Component:		`uk-panel`
- *
- * Sub-objects:		`uk-panel-title`
- *					`uk-panel-badge`
- *
- * Modifiers:		`uk-panel-box`
- *					`uk-panel-box-primary`
- *					`uk-panel-box-secondary`
- *					`uk-panel-header`
- *					`uk-panel-space`
- *					`uk-panel-divider`
- *
- * Uses:			Nav: `uk-nav-side`
- *
- * Used by:			Dropdown
- *					Off-canvas
- *					Grid
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Panel
  ========================================================================== */
 /*
- * Create position context for badges
+ * 1. Needed for `a` elements
+ * 2. Create position context for badges
  */
 .uk-panel {
+  /* 1 */
+  display: block;
+  /* 2 */
   position: relative;
 }
 /*
@@ -1355,7 +1369,7 @@ iframe {
   clear: both;
 }
 /*
- * Remove margin from the last-child if not `uk-windget-title`
+ * Remove margin from the last-child if not `uk-widget-title`
  */
 .uk-panel > :not(.uk-panel-title):last-child {
   margin-bottom: 0;
@@ -1363,6 +1377,7 @@ iframe {
 /* Sub-object: `uk-panel-title`
  ========================================================================== */
 .uk-panel-title {
+  margin-top: 0;
   margin-bottom: 15px;
   font-size: 18px;
   line-height: 24px;
@@ -1378,12 +1393,6 @@ iframe {
   right: 0;
   z-index: 1;
 }
-/*
- * Remove margin from adjacent element
- */
-.uk-panel-badge + * {
-  margin-top: 0;
-}
 /* Modifier: `uk-panel-box`
  ========================================================================== */
 .uk-panel-box {
@@ -1398,10 +1407,13 @@ iframe {
   top: 10px;
   right: 10px;
 }
+.uk-panel-box .uk-panel-teaser {
+  margin: -15px -15px 15px -15px;
+}
 /*
  * Nav in panel
  */
-.uk-panel-box .uk-nav-side {
+.uk-panel-box > .uk-nav-side {
   margin: 0 -15px;
 }
 /*
@@ -1454,7 +1466,7 @@ iframe {
   right: 0;
   border-top: 1px solid #dddddd;
 }
-/* Only large screens */
+/* Large screen and bigger */
 @media (min-width: 1220px) {
   .uk-panel + .uk-panel-divider {
     margin-top: 70px !important;
@@ -1463,21 +1475,8 @@ iframe {
     top: -35px;
   }
 }
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Article
- * Description:		Defines styles for articles within your page
- *
- * Component:		`uk-article`
- *
- * Sub-objects:		`uk-article-title`
- *					`uk-article-meta`
- *					`uk-article-lead`
- *					`uk-article-divider`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Article
  ========================================================================== */
 /*
  * Micro clearfix to make articles more robust
@@ -1500,7 +1499,7 @@ iframe {
  * Vertical gutter for articles
  */
 .uk-article + .uk-article {
-  margin-top: 15px;
+  margin-top: 25px;
 }
 /* Sub-object `uk-article-title`
  ========================================================================== */
@@ -1538,23 +1537,8 @@ iframe {
 * + .uk-article-divider {
   margin-top: 25px;
 }
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Comment
- * Description:		Defines styles for comment threads
- *
- * Component:		`uk-comment`
- *
- * Sub-objects:		`uk-comment-header`
- *					`uk-comment-avatar`
- *					`uk-comment-title`
- *					`uk-comment-meta`
- *					`uk-comment-body`
- *					`uk-comment-list`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Comment
  ========================================================================== */
 /* Sub-object `uk-comment-header`
  ========================================================================== */
@@ -1609,45 +1593,22 @@ iframe {
 }
 .uk-comment-list .uk-comment + ul {
   margin: 15px 0 0 0;
-  padding-left: 100px;
   list-style: none;
 }
 .uk-comment-list > li:nth-child(n+2),
 .uk-comment-list .uk-comment + ul > li:nth-child(n+2) {
   margin-top: 15px;
 }
-/* Hooks
+/* Tablet and bigger */
+@media (min-width: 768px) {
+  .uk-comment-list .uk-comment + ul {
+    padding-left: 100px;
+  }
+}
+/* Modifier `uk-comment-primary`
  ========================================================================== */
-/* Navs */
-/*
- * Name:			Nav
- * Description:		Defines styles for list navigations
- *
- * Component:		`uk-nav`
- *
- * Sub-objects: 	`uk-nav-header`
- *					`uk-nav-divider`
- *					`uk-nav-sub`
- *
- * Modifiers:		`uk-nav-parent-icon`
- *					`uk-nav-side`
- *					`uk-nav-dropdown`
- *					`uk-nav-navbar`
- *					`uk-nav-search`
- *					`uk-nav-offcanvas`
- *
- * States:		 	`uk-active`
- *					`uk-parent`
- *					`uk-open`
- *					`uk-touch`
- *
- * Uses:			Icon: FontAwesome
- *
- * Used by:			Panel
- *					Dropdown
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Nav
  ========================================================================== */
 .uk-nav,
 .uk-nav ul {
@@ -1712,7 +1673,7 @@ ul.uk-nav-sub {
   width: 20px;
   margin-right: -10px;
   float: right;
-  font-family: "FontAwesome";
+  font-family: FontAwesome;
   text-align: center;
 }
 .uk-nav-parent-icon > .uk-parent.uk-open > a:after {
@@ -1733,13 +1694,10 @@ ul.uk-nav-sub {
  */
 .uk-nav-side > li > a:hover,
 .uk-nav-side > li > a:focus {
-  /* 1 */
-
   background: rgba(0, 0, 0, 0.05);
   color: #444444;
-  outline: none;
   /* 2 */
-
+  outline: none;
 }
 /* Active */
 .uk-nav-side > li.uk-active > a {
@@ -1782,13 +1740,10 @@ ul.uk-nav-sub {
  */
 .uk-nav-dropdown > li > a:hover,
 .uk-nav-dropdown > li > a:focus {
-  /* 1 */
-
   background: #00a8e6;
   color: #ffffff;
-  outline: none;
   /* 2 */
-
+  outline: none;
 }
 /*
  * Sub-object: `uk-nav-header`
@@ -1826,13 +1781,10 @@ ul.uk-nav-sub {
  */
 .uk-nav-navbar > li > a:hover,
 .uk-nav-navbar > li > a:focus {
-  /* 1 */
-
   background: #00a8e6;
   color: #ffffff;
-  outline: none;
   /* 2 */
-
+  outline: none;
 }
 /*
  * Sub-object: `uk-nav-header`
@@ -1855,46 +1807,6 @@ ul.uk-nav-sub {
 .uk-nav-navbar ul a:hover {
   color: #005599;
 }
-/* Modifier `uk-nav-search`
- ========================================================================== */
-/*
- * Items
- */
-.uk-nav-search > li > a {
-  color: #444444;
-}
-/*
- * Active
- * 1. Remove default focus style
- */
-.uk-nav-search > li.uk-active > a {
-  background: #00a8e6;
-  color: #ffffff;
-  outline: none;
-  /* 2 */
-
-}
-/*
- * Sub-object: `uk-nav-header`
- */
-.uk-nav-search .uk-nav-header {
-  color: #999999;
-}
-/*
- * Sub-object: `uk-nav-divider`
- */
-.uk-nav-search .uk-nav-divider {
-  border-top: 1px solid #dddddd;
-}
-/*
- * Nested items
- */
-.uk-nav-search ul a {
-  color: #0077dd;
-}
-.uk-nav-search ul a:hover {
-  color: #005599;
-}
 /* Modifier `uk-nav-offcanvas`
  ========================================================================== */
 /*
@@ -1913,13 +1825,10 @@ ul.uk-nav-sub {
 .uk-nav-offcanvas > .uk-open > a,
 html:not(.uk-touch) .uk-nav-offcanvas > li > a:hover,
 html:not(.uk-touch) .uk-nav-offcanvas > li > a:focus {
-  /* 1 */
-
   background: #404040;
   color: #ffffff;
-  outline: none;
   /* 2 */
-
+  outline: none;
 }
 /*
  * Active
@@ -1951,33 +1860,8 @@ html .uk-nav.uk-nav-offcanvas > li.uk-active > a {
 html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   color: #ffffff;
 }
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Navbar
- * Description:		Defines styles for the navigation bar
- *
- * Component:		`uk-navbar`
- *
- * Sub-objects:		`uk-navbar-nav`
- *					`uk-navbar-nav-subtitle`
- *					`uk-navbar-content`
- *					`uk-navbar-brand`
- *					`uk-navbar-toggle`
- *					`uk-navbar-toggle-alt`
- *					`uk-navbar-center`
- *					`uk-navbar-flip`
- *
- * Modifiers:		`uk-navbar-attached`
- *
- * States:			`uk-active`
- *					`uk-parent`
- *					`uk-open`
- *
- * Used by:			Dropdown
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Navbar
  ========================================================================== */
 .uk-navbar {
   background: #eeeeee;
@@ -2006,10 +1890,9 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  * 1. Create position context for dropdowns
  */
 .uk-navbar-nav > li {
-  position: relative;
-  /* 1 */
-
   float: left;
+  /* 1 */
+  position: relative;
 }
 /*
  * 1. Dimensions
@@ -2021,12 +1904,10 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   box-sizing: border-box;
   text-decoration: none;
   /* 1 */
-
   height: 40px;
   padding: 0 15px;
   line-height: 40px;
   /* 2 */
-
   color: #444444;
   font-size: 14px;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -2034,7 +1915,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 }
 /* Appear not as link */
 .uk-navbar-nav > li > a[href='#'] {
-  cursor: auto;
+  cursor: text;
 }
 /*
  * Hover
@@ -2045,15 +1926,13 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-navbar-nav > li:hover > a,
 .uk-navbar-nav > li > a:focus,
 .uk-navbar-nav > li.uk-open > a {
-  /* 2 */
-
   background-color: #f5f5f5;
   color: #444444;
-  outline: none;
   /* 3 */
-
+  outline: none;
 }
-/* OnClick */.uk-navbar-nav > li > a:active {
+/* OnClick */
+.uk-navbar-nav > li > a:active {
   background-color: #dddddd;
   color: #444444;
 }
@@ -2082,6 +1961,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-navbar-toggle {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  display: block;
   height: 40px;
   padding: 0 15px;
   float: left;
@@ -2126,13 +2006,10 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  */
 .uk-navbar-brand:hover,
 .uk-navbar-brand:focus {
-  /* 1 */
-
   color: #444444;
   text-decoration: none;
-  outline: none;
   /* 2 */
-
+  outline: none;
 }
 /* Sub-object: `uk-navbar-toggle`
  ========================================================================== */
@@ -2146,23 +2023,19 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  */
 .uk-navbar-toggle:hover,
 .uk-navbar-toggle:focus {
-  /* 1 */
-
   color: #444444;
   text-decoration: none;
-  outline: none;
   /* 2 */
-
+  outline: none;
 }
 /*
  * 1. Center icon vertically
  */
 .uk-navbar-toggle:after {
   content: "\f0c9";
-  font-family: "FontAwesome";
-  vertical-align: middle;
+  font-family: FontAwesome;
   /* 1 */
-
+  vertical-align: middle;
 }
 .uk-navbar-toggle-alt:after {
   content: "\f002";
@@ -2174,33 +2047,20 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  * 1. This hack is needed because other float elements shift centered text
  */
 .uk-navbar-center {
-  max-width: 50%;
-  margin: auto;
-  /* 1 */
-
   float: none;
   text-align: center;
+  /* 1 */
+  max-width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 /* Sub-object: `uk-navbar-flip`
  ========================================================================== */
 .uk-navbar-flip {
   float: right;
 }
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Subnav
- * Description:		Defines styles for the sub navigation
- *
- * Component:		`uk-subnav`
- *
- * Modifiers: 		`uk-subnav-line`
- *					`uk-subnav-pill`
- *
- * States:		 	`uk-active`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Subnav
  ========================================================================== */
 /*
  * 1. Remove default list style
@@ -2208,12 +2068,10 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  */
 .uk-subnav {
   /* 1 */
-
   padding: 0;
   list-style: none;
   /* 2 */
-
-  letter-spacing: -0.31em;
+  font-size: 0.001px;
 }
 /* Items
  ========================================================================== */
@@ -2222,12 +2080,11 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  * 2. Reset whitespace hack
  */
 .uk-subnav > li {
-  position: relative;
   /* 1 */
-
-  letter-spacing: normal;
+  position: relative;
   /* 2 */
-
+  font-size: 1rem;
+  vertical-align: top;
 }
 .uk-subnav > li,
 .uk-subnav > li > a,
@@ -2246,6 +2103,9 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-subnav > li > a:hover {
   color: #005599;
 }
+/*
+ * Active
+ */
 /*
  * Disabled
  */
@@ -2275,13 +2135,10 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  */
 .uk-subnav-pill > li > a:hover,
 .uk-subnav-pill > li > a:focus {
-  /* 1 */
-
   background: #eeeeee;
   color: #444444;
-  outline: none;
   /* 2 */
-
+  outline: none;
 }
 /*
  * Active
@@ -2291,18 +2148,8 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   background: #00a8e6;
   color: #ffffff;
 }
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Breadcrumb
- * Description:		Defines styles for a breadcrumb navigation
- *
- * Component:		`uk-breadcrumb`
- *
- * States:		 	`uk-active`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Breadcrumb
  ========================================================================== */
 /*
  * 1. Remove default list style
@@ -2310,12 +2157,10 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  */
 .uk-breadcrumb {
   /* 1 */
-
   padding: 0;
   list-style: none;
   /* 2 */
-
-  letter-spacing: -0.31em;
+  font-size: 0.001px;
 }
 /* Items
  ========================================================================== */
@@ -2323,7 +2168,8 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  * Reset whitespace hack
  */
 .uk-breadcrumb > li {
-  letter-spacing: normal;
+  font-size: 1rem;
+  vertical-align: top;
 }
 .uk-breadcrumb > li,
 .uk-breadcrumb > li > a,
@@ -2334,9 +2180,6 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   content: "/";
   display: inline-block;
   margin: 0 8px;
-  vertical-align: top;
-  /* 2 */
-
 }
 /*
  * Disabled
@@ -2344,25 +2187,8 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-breadcrumb > li:not(.uk-active) > span {
   color: #999999;
 }
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Pagination
- * Description:		Defines styles for a navigation between pages
- *
- * Component:		`uk-pagination`
- *
- * Sub-objects:		`uk-pagination-previous`
- *					`uk-pagination-next`
- *
- * States:		 	`uk-active`
- *					`uk-disabled`
- *
- * Modifiers:		`uk-pagination-left`
- *					`uk-pagination-right`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Pagination
  ========================================================================== */
 /*
  * 1. Remove default list style
@@ -2371,15 +2197,12 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  */
 .uk-pagination {
   /* 1 */
-
   padding: 0;
   list-style: none;
   /* 2 */
-
   text-align: center;
   /* 3 */
-
-  letter-spacing: -0.31em;
+  font-size: 0.001px;
 }
 /*
  * Micro clearfix
@@ -2397,12 +2220,14 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  ========================================================================== */
 /*
  * 1. Reset whitespace hack
+ * 2. Remove the gap at the bottom of it container
  */
 .uk-pagination > li {
   display: inline-block;
-  letter-spacing: normal;
   /* 1 */
-
+  font-size: 1rem;
+  /* 2 */
+  vertical-align: top;
 }
 .uk-pagination > li:nth-child(n+2) {
   margin-left: 5px;
@@ -2413,18 +2238,16 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  */
 .uk-pagination > li > a,
 .uk-pagination > li > span {
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  /* 1 */
-
   display: inline-block;
   min-width: 16px;
   padding: 3px 5px;
   line-height: 20px;
   text-decoration: none;
-  text-align: center;
+  /* 1 */
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
   /* 2 */
-
+  text-align: center;
 }
 /*
  * Links
@@ -2440,13 +2263,10 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  */
 .uk-pagination > li > a:hover,
 .uk-pagination > li > a:focus {
-  /* 1 */
-
   background-color: #f5f5f5;
   color: #444444;
-  outline: none;
   /* 2 */
-
+  outline: none;
 }
 /* OnClick */
 .uk-pagination > li > a:active {
@@ -2483,27 +2303,8 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-pagination-right {
   text-align: right;
 }
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Tab
- * Description:		Defines styles for a tabbed navigation
- *
- * Component:		`uk-tab`
- *
- * Modifiers:		`uk-tab-flip`
- *					`uk-tab-center`
- *					`uk-tab-grid`
- *					`uk-tab-bottom`
- *					`uk-tab-left`
- *					`uk-tab-right`
- *					`uk-tab-responsive`
- *
- * States:			`uk-active`
- *					`uk-disabled`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Tab
  ========================================================================== */
 .uk-tab {
   margin: 0;
@@ -2527,15 +2328,14 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  * 1. Create position context for dropdowns
  */
 .uk-tab > li {
-  position: relative;
-  /* 1 */
-
   margin-bottom: -1px;
   float: left;
+  /* 1 */
+  position: relative;
 }
 .uk-tab > li > a {
   display: block;
-  padding: 8px 12px;
+  padding: 8px 12px 8px 12px;
   border: 1px solid transparent;
   border-bottom-width: 0;
   color: #0077dd;
@@ -2553,14 +2353,11 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-tab > li > a:hover,
 .uk-tab > li > a:focus,
 .uk-tab > li.uk-open > a {
-  /* 2 */
-
   border-color: #f5f5f5;
   background: #f5f5f5;
   color: #005599;
+  /* 2 */
   outline: none;
-  /* 3 */
-
 }
 .uk-tab > li:not(.uk-active) > a:hover,
 .uk-tab > li:not(.uk-active) > a:focus,
@@ -2605,9 +2402,9 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 }
 .uk-tab-responsive > a:before {
   content: "\f0c9\00a0";
-  font-family: "FontAwesome";
+  font-family: FontAwesome;
 }
-/* Only phones */
+/* Phone landscape and smaller */
 @media (max-width: 767px) {
   [data-uk-tab] > li {
     display: none;
@@ -2637,15 +2434,18 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-tab-center:after {
   clear: both;
 }
+/*
+ * 1. Using `right` to prevent vertical scrollbar caused by centering if to many tabs
+ */
 .uk-tab-center .uk-tab {
   position: relative;
-  left: 50%;
+  right: 50%;
   border: none;
-  float: left;
+  float: right;
 }
 .uk-tab-center .uk-tab > li {
   position: relative;
-  left: -50%;
+  right: -50%;
 }
 .uk-tab-center .uk-tab > li > a {
   text-align: center;
@@ -2661,6 +2461,8 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   margin-bottom: 0;
 }
 .uk-tab-bottom > li > a {
+  padding-top: 8px;
+  padding-bottom: 8px;
   border-bottom-width: 1px;
   border-top-width: 0;
 }
@@ -2682,23 +2484,21 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  * 1. Create position context to prevent hidden border because of negative `z-index`
  */
 .uk-tab-grid {
-  position: relative;
-  z-index: 0;
-  /* 1 */
-
   margin-left: -5px;
   border-bottom: none;
+  /* 1 */
+  position: relative;
+  z-index: 0;
 }
 .uk-tab-grid:before {
   display: block;
   position: absolute;
   left: 5px;
-  right: 0px;
+  right: 0;
   bottom: -1px;
-  z-index: -1;
-  /* 1 */
-
   border-top: 1px solid #dddddd;
+  /* 1 */
+  z-index: -1;
 }
 .uk-tab-grid > li:first-child > a {
   margin-left: 5px;
@@ -2718,7 +2518,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 }
 /* Modifier: 'tab-left', 'tab-right'
  ========================================================================== */
-/* Only tablets and desktops */
+/* Tablet and bigger */
 @media (min-width: 768px) {
   .uk-tab-left,
   .uk-tab-right {
@@ -2728,6 +2528,11 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   .uk-tab-right > li {
     margin-bottom: 0;
     float: none;
+  }
+  .uk-tab-left > li > a,
+  .uk-tab-right > li > a {
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
   .uk-tab-left > li:nth-child(n+2) > a,
   .uk-tab-right > li:nth-child(n+2) > a {
@@ -2739,8 +2544,8 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
     border-color: #dddddd;
   }
   /*
-  	 * Modifier: 'tab-left'
-  	 */
+     * Modifier: 'tab-left'
+     */
   .uk-tab-left {
     border-right: 1px solid #dddddd;
   }
@@ -2762,8 +2567,8 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
     border-right-color: transparent;
   }
   /*
-  	 * Modifier: 'tab-right'
-  	 */
+     * Modifier: 'tab-right'
+     */
   .uk-tab-right {
     border-left: 1px solid #dddddd;
   }
@@ -2785,25 +2590,29 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
     border-left-color: transparent;
   }
 }
-/* Hooks
- ========================================================================== */
-/* Elements */
-/*
- * Name:			List
- * Description:		Defines styles for ordered and unordered lists
- *
- * Component:		`uk-list`
- *
- * Modifiers:		`uk-list-line`
- *					`uk-list-striped`
- *					`uk-list-space`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: List
  ========================================================================== */
 .uk-list {
   padding: 0;
   list-style: none;
+}
+/*
+ * Micro clearfix to make list more robust
+ */
+.uk-list > li:before,
+.uk-list > li:after {
+  content: " ";
+  display: table;
+}
+.uk-list > li:after {
+  clear: both;
+}
+/*
+ * Remove margin from the last-child
+ */
+.uk-list > li > :last-child {
+  margin-bottom: 0;
 }
 /*
  * Nested lists
@@ -2833,23 +2642,12 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-list-space > li:nth-child(n+2) {
   margin-top: 10px;
 }
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Description list
- * Description:		Defines styles for description lists
- *
- * Component:		`uk-description-list`
- *
- * Modifiers:		`uk-description-list-horizontal`
- *					`uk-description-list-line`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Description list
  ========================================================================== */
 /* Modifier: `uk-description-list-horizontal`
  ========================================================================== */
-/* Only tablets and desktops */
+/* Tablet and bigger */
 @media (min-width: 768px) {
   .uk-description-list-horizontal {
     overflow: hidden;
@@ -2879,24 +2677,15 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-description-list-line > dd {
   color: #999999;
 }
+/* ========================================================================
+   Component: Table
+ ========================================================================== */
 /*
- * Name:			Table
- * Description:		Defines styles for tables
- *
- * Component:		`uk-table`
- *
- * Modifiers:		`uk-table-middle`
- *					`uk-table-striped`
- *					`uk-table-condensed`
- *					`uk-table-hover`
- *
- ========================================================================== */
-/* Component
- ========================================================================== */
-/* Block element behavior */
+ * Block element behavior
+ */
 .uk-table {
   width: 100%;
-  margin-bottom: 15px 0;
+  margin-bottom: 15px;
 }
 /*
  * Add margin if adjacent element
@@ -2908,7 +2697,9 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-table td {
   padding: 8px 8px;
 }
-/* Set alignment */
+/*
+ * Set alignment
+ */
 .uk-table th {
   text-align: left;
 }
@@ -2930,7 +2721,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   text-align: left;
   color: #999999;
 }
-/* Sub-modifier: `uk-table-middel`
+/* Sub-modifier: `uk-table-middle`
  ========================================================================== */
 .uk-table-middle,
 .uk-table-middle td {
@@ -2938,7 +2729,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 }
 /* Modifier: `uk-table-striped`
  ========================================================================== */
-.uk-table-striped tbody tr:nth-of-type(odd) td {
+.uk-table-striped tbody tr:nth-of-type(odd) {
   background: #f5f5f5;
 }
 /* Modifier: `uk-table-condensed`
@@ -2948,40 +2739,11 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 }
 /* Modifier: `uk-table-hover`
  ========================================================================== */
-.uk-table-hover tbody tr:hover td {
+.uk-table-hover tbody tr:hover {
   background: #eeeeee;
 }
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Form
- * Description:		Defines styles for forms
- *
- * Component:		`uk-form`
- *
- * Sub-objects:		`uk-form-row`
- *					`uk-form-help-inline`
- *					`uk-form-help-block`
- *					`uk-form-label`
- *					`uk-form-controls`
- *					`uk-form-controls-condensed`
- *
- * Modifiers:		`uk-form-stacked`
- *					`uk-form-horizontal`
- *
- * Sub-modifiers:	`uk-form-danger`
- *					`uk-form-success`
- *					`uk-form-small`
- *					`uk-form-large`
- *					`uk-form-blank`
- *					`uk-form-width-mini`
- *					`uk-form-width-small`
- *					`uk-form-width-medium`
- *					`uk-form-width-large`
- *					`uk-form-controls-text`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Form
  ========================================================================== */
 /*
  * Remove margin from the last-child
@@ -2991,12 +2753,15 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 }
 /*
  * Controls
- * Exept for `range`, `radio`, `checkbox`, `file`, `submit`, `reset`, `button` and `image`
+ * Except for `range`, `radio`, `checkbox`, `file`, `submit`, `reset`, `button` and `image`
  * 1. Must be `height` because `min-height` is not working in OSX
- * 2. Responsiveness: Sets a maxium width relative to the parent to scale on narrower viewports
+ * 2. Responsiveness: Sets a maximum width relative to the parent to scale on narrower viewports
+ * 3. Vertical `padding` needed for `select` elements in Firefox
+ * 4. Style
  */
 .uk-form select,
 .uk-form textarea,
+.uk-form input:not([type]),
 .uk-form input[type="text"],
 .uk-form input[type="password"],
 .uk-form input[type="datetime"],
@@ -3011,25 +2776,24 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-form input[type="search"],
 .uk-form input[type="tel"],
 .uk-form input[type="color"] {
-  height: 30px;
   /* 1 */
-
-  max-width: 100%;
+  height: 30px;
   /* 2 */
-
+  max-width: 100%;
+  /* 3 */
   padding: 4px 6px;
+  /* 4 */
   border: 1px solid #dddddd;
   background: #ffffff;
   color: #444444;
   -webkit-transition: all linear 0.2s;
   transition: all linear 0.2s;
   /* Focus state */
-
   /* Disabled state */
-
 }
 .uk-form select:focus,
 .uk-form textarea:focus,
+.uk-form input:not([type]):focus,
 .uk-form input[type="text"]:focus,
 .uk-form input[type="password"]:focus,
 .uk-form input[type="datetime"]:focus,
@@ -3051,6 +2815,7 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 }
 .uk-form select:disabled,
 .uk-form textarea:disabled,
+.uk-form input:not([type]):disabled,
 .uk-form input[type="text"]:disabled,
 .uk-form input[type="password"]:disabled,
 .uk-form input[type="datetime"]:disabled,
@@ -3069,20 +2834,13 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   background-color: #f5f5f5;
   color: #999999;
 }
-.uk-form textarea,
-.uk-form select[multiple],
-.uk-form select[size] {
-  height: auto;
-}
-/* 1 */
 /*
  * Placeholder
- * 1. Higher specificity needed to override color in IE
+ * Higher specificity (!important) needed to override color in IE
  */
 .uk-form :-ms-input-placeholder {
   color: #999999 !important;
 }
-/* 1. */
 .uk-form ::-moz-placeholder {
   color: #999999;
 }
@@ -3092,7 +2850,6 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
 .uk-form :disabled:-ms-input-placeholder {
   color: #999999 !important;
 }
-/* 1. */
 .uk-form :disabled::-moz-placeholder {
   color: #999999;
 }
@@ -3100,15 +2857,35 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   color: #999999;
 }
 /*
+ * Reset style on iOS.
+ */
+.uk-form textarea,
+.uk-form input:not([type]),
+.uk-form input[type="text"],
+.uk-form input[type="password"],
+.uk-form input[type="email"],
+.uk-form input[type="url"],
+.uk-form input[type="search"],
+.uk-form input[type="tel"] {
+  -webkit-appearance: none;
+}
+/*
+ * Removes box-shadow for invalid controls in Firefox.
+ */
+.uk-form :invalid {
+  box-shadow: none;
+}
+/*
  * Legend style
  * 1. `margin-bottom` is not working in Safari and Opera.
  *    Using `padding` and :after instead to create the border
+ * 2. Style
  */
 .uk-form legend {
   width: 100%;
-  padding-bottom: 15px;
   /* 1 */
-
+  padding-bottom: 15px;
+  /* 2 */
   font-size: 18px;
   line-height: 30px;
 }
@@ -3117,6 +2894,33 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   content: "";
   display: block;
   border-bottom: 1px solid #dddddd;
+}
+/* Size modifiers
+ * Higher specificity needed to override defaults
+ ========================================================================== */
+select.uk-form-small,
+textarea.uk-form-small,
+input[type].uk-form-small,
+input:not([type]).uk-form-small {
+  height: 25px;
+  padding: 3px 3px;
+  font-size: 12px;
+}
+select.uk-form-large,
+textarea.uk-form-large,
+input[type].uk-form-large,
+input:not([type]).uk-form-large {
+  height: 40px;
+  padding: 8px 6px;
+  font-size: 16px;
+}
+/* Reset height
+ * Must be after size modifiers
+ ========================================================================== */
+.uk-form textarea,
+.uk-form select[multiple],
+.uk-form select[size] {
+  height: auto;
 }
 /* Validation states
  * Using !important to keep the selector simple
@@ -3137,19 +2941,6 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
   background: #fafff2 !important;
   color: #539022 !important;
 }
-/* Size modifiers
- * Using !important to keep the selector simple
- ========================================================================== */
-.uk-form-small {
-  height: 25px !important;
-  padding: 3px 3px !important;
-  font-size: 12px;
-}
-.uk-form-large {
-  height: 40px !important;
-  padding: 8px 6px !important;
-  font-size: 16px;
-}
 /* Style modifiers
  * Using !important to keep the selector simple
  ========================================================================== */
@@ -3157,28 +2948,25 @@ html:not(.uk-touch) .uk-nav-offcanvas ul a:hover {
  * Blank form
  */
 .uk-form-blank {
-  border: none !important;
+  border-color: transparent !important;
+  border-style: dashed !important;
   background: none !important;
-  box-shadow: none !important;
-  outline: 1px dashed transparent !important;
 }
 .uk-form-blank:focus {
-  outline-color: #dddddd !important;
+  border-color: #dddddd !important;
 }
 /* Size sub-modifiers
  ========================================================================== */
 /*
  * Fixed widths
- * 1. Different widths for mini sized `input` and `select` elements
+ * Different widths for mini sized `input` and `select` elements
  */
 input.uk-form-width-mini {
   width: 40px;
 }
-/* 1 */
 select.uk-form-width-mini {
   width: 65px;
 }
-/* 1 */
 .uk-form-width-small {
   width: 130px;
 }
@@ -3223,8 +3011,11 @@ select.uk-form-width-mini {
  * Sub-object: `uk-form-controls`, `uk-form-controls-condensed`
  ========================================================================== */
 /*
- * Remove margin from the last-child
+ * Remove margins
  */
+.uk-form-controls > :first-child {
+  margin-top: 0;
+}
 .uk-form-controls > :last-child {
   margin-bottom: 0;
 }
@@ -3235,7 +3026,7 @@ select.uk-form-width-mini {
   margin: 5px 0;
 }
 /* Modifier: `uk-form-stacked`
- * Requrires sub-object: `uk-form-label`
+ * Requires sub-object: `uk-form-label`
  ========================================================================== */
 .uk-form-stacked .uk-form-label {
   display: block;
@@ -3243,19 +3034,18 @@ select.uk-form-width-mini {
   font-weight: bold;
 }
 /* Modifier: `uk-form-horizontal`
- * Requrires sub-objects: `uk-form-label`, `uk-form-controls`
+ * Requires sub-objects: `uk-form-label`, `uk-form-controls`
  ========================================================================== */
-/* Only phones and tablets portrait */
+/* Tablet portrait and smaller */
 @media (max-width: 959px) {
+  /* Behave like `uk-form-stacked` */
   .uk-form-horizontal .uk-form-label {
-    /* Behave like `uk-form-stacked` */
-  
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
   }
 }
-/* Only tablets and desktops */
+/* Desktop and bigger */
 @media (min-width: 960px) {
   .uk-form-horizontal .uk-form-label {
     width: 200px;
@@ -3270,80 +3060,80 @@ select.uk-form-width-mini {
     padding-top: 5px;
   }
 }
-/* Hooks
+/* Sub-object: `uk-form-icon`
  ========================================================================== */
-/* Common */
+.uk-form-icon {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+.uk-form-icon > [class*='uk-icon-'] {
+  position: absolute;
+  top: 50%;
+  width: 30px;
+  margin-top: -7px;
+  font-size: 14px;
+  color: #999999;
+  text-align: center;
+}
+.uk-form-icon:not(.uk-form-icon-flip) > input {
+  padding-left: 30px !important;
+}
 /*
- * Name:			Button
- * Description:		Defines styles for buttons
- *
- * Component:		`uk-button`
- *
- * Sub-objects:		`uk-button-group`
- *					`uk-button-dropdown`
- *
- * Modifiers:		`uk-button-primary`
- *					`uk-button-success`
- *					`uk-button-danger`
- *					`uk-button-link`
- *					`uk-button-mini`
- *					`uk-button-small`
- *					`uk-button-large`
- *					`uk-button-expand`
- *
- * States:		 	`uk-active`
- *
- ========================================================================== */
-/* Component
+ * Sub-modifier: `uk-form-icon-flip`
+ */
+.uk-form-icon-flip > [class*='uk-icon-'] {
+  right: 0;
+}
+.uk-form-icon-flip > input {
+  padding-right: 30px !important;
+}
+/* ========================================================================
+   Component: Button
  ========================================================================== */
 /*
- * 1. Required for `a` elements. Can't be moved to `a.button` selector because needs to be overwritable for `uk-button-link` and `uk-button-expand`
- * 2. `min-height` is neccesary for `input` elments in Firefox and Opera because `line-height` is not working.
- * 3. Required for `button` and `input` elements
- * 4. `line-height` is used to create a height
+ * 1. Required for `a` elements
+ * 2. Required for `button` and `input` elements
+ * 3. `line-height` is used to create a height
+ * 4. `min-height` is necessary for `input` elements in Firefox and Opera because `line-height` is not working.
  * 5. Reset button group whitespace hack
+ * 6. Style
  */
 .uk-button {
-  display: inline-block;
   /* 1 */
-
-  min-height: 30px;
-  /* 2 */
-
-  padding: 0 12px;
-  border: none;
-  /* 3 */
-
-  background: #eeeeee;
-  line-height: 30px;
-  /* 4 */
-
-  color: #444444;
-  letter-spacing: normal;
-  /* 5 */
-
-}
-/* Required for `a` elements */
-a.uk-button {
+  display: inline-block;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   vertical-align: middle;
   text-decoration: none;
+  text-align: center;
+  /* 2 */
+  border: none;
+  /* 3 */
+  line-height: 30px;
+  /* 4 */
+  min-height: 30px;
+  /* 5 */
+  font-size: 1rem;
+  /* 6 */
+  padding: 0 12px;
+  background: #eeeeee;
+  color: #444444;
 }
 /*
  * Hover
  * 1. Apply hover style also to focus state
  * 2. Remove default focus style
+ * 3. Required for `a` elements
  */
 .uk-button:hover,
 .uk-button:focus {
-  /* 1 */
-
   background-color: #f5f5f5;
   color: #444444;
-  outline: none;
   /* 2 */
-
+  outline: none;
+  /* 3 */
+  text-decoration: none;
 }
 /* Active */
 .uk-button:active,
@@ -3427,8 +3217,7 @@ a.uk-button {
 .uk-button-link:active,
 .uk-button-link.uk-active,
 .uk-button-link:disabled {
-  display: inline;
-  border: none;
+  border-color: transparent;
   background: none;
 }
 /* Color */
@@ -3469,17 +3258,6 @@ a.uk-button {
   line-height: 40px;
   font-size: 16px;
 }
-/*
- * Behave like a block element and take the full width
- */
-.uk-button-expand {
-  display: block;
-  width: 100%;
-  text-align: center;
-}
-.uk-button-expand + .uk-button-expand {
-  margin-top: 10px;
-}
 /* Sub-object `uk-button-group`
  ========================================================================== */
 /*
@@ -3487,24 +3265,25 @@ a.uk-button {
  * 2. Create position context for dropdowns
  * 3. Remove whitespace between child elements when using `inline-block`
  * 4. Prevent buttons from wrapping
+ * 5. Remove whitespace between child elements when using `inline-block`
  */
 .uk-button-group {
   /* 1 */
-
   display: inline-block;
   vertical-align: middle;
   /* 2 */
-
   position: relative;
   /* 3 */
-
-  letter-spacing: -0.31em;
+  font-size: 0.001px;
   /* 4 */
-
   white-space: nowrap;
 }
 .uk-button-group > * {
   display: inline-block;
+}
+/* 5 */
+.uk-button-group .uk-button {
+  vertical-align: top;
 }
 /* Sub-object: `uk-button-dropdown`
  ========================================================================== */
@@ -3514,34 +3293,13 @@ a.uk-button {
  */
 .uk-button-dropdown {
   /* 1 */
-
   display: inline-block;
   vertical-align: middle;
   /* 2 */
-
   position: relative;
 }
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Icon
- * Description:		Defines styles for icons
- *
- * Adapted from http://fortawesome.github.com/Font-Awesome (Version 3.2.1)
- *
- * Component:		`uk-icon-*`
- *
- * Sub-objects:		`uk-icon-button`
- *
- * Modifiers:		`uk-icon-small`
- *					`uk-icon-medium`
- *					`uk-icon-large`
- *					`uk-icon-spin`
- *
- * Uses:			Animation
- *
- ========================================================================== */
-/* Font-face
+/* ========================================================================
+   Component: Icon
  ========================================================================== */
 @font-face {
   font-family: 'FontAwesome';
@@ -3550,33 +3308,24 @@ a.uk-button {
   font-weight: normal;
   font-style: normal;
 }
-/* Component
- ========================================================================== */
 /*
  * 1. Allow margin
  * 2. Prevent inherit font style
- * 3. Align vertical to text
  * 4. Correct line-height
- * 5. Better font rendering in Webkit
+ * 5. Better font rendering
  */
-[class*='uk-icon-']:before {
-  display: inline-block;
+[class*='uk-icon-'] {
+  font-family: FontAwesome;
   /* 1 */
-
-  font-family: "FontAwesome";
+  display: inline-block;
+  /* 2 */
   font-weight: normal;
   font-style: normal;
-  /* 2 */
-
-  vertical-align: baseline;
-  /* 3 */
-
-  line-height: 1;
   /* 4 */
-
-  -webkit-font-smoothing: antialiased;
+  line-height: 1;
   /* 5 */
-
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 /* Size modifiers
  ========================================================================== */
@@ -3611,7 +3360,7 @@ a.uk-button {
   background: #eeeeee;
   line-height: 35px;
   color: #444444;
-  font-size: 17.5px;
+  font-size: 18px;
   text-align: center;
 }
 /*
@@ -3621,14 +3370,11 @@ a.uk-button {
  */
 .uk-icon-button:hover,
 .uk-icon-button:focus {
-  /* 1 */
-
   background-color: #f5f5f5;
   color: #444444;
   text-decoration: none;
-  outline: none;
   /* 2 */
-
+  outline: none;
 }
 /* Active */
 .uk-icon-button:active {
@@ -3646,7 +3392,7 @@ a.uk-button {
 .uk-icon-search:before {
   content: "\f002";
 }
-.uk-icon-envelope-alt:before {
+.uk-icon-envelope-o:before {
   content: "\f003";
 }
 .uk-icon-heart:before {
@@ -3655,7 +3401,7 @@ a.uk-button {
 .uk-icon-star:before {
   content: "\f005";
 }
-.uk-icon-star-empty:before {
+.uk-icon-star-o:before {
   content: "\f006";
 }
 .uk-icon-user:before {
@@ -3673,20 +3419,19 @@ a.uk-button {
 .uk-icon-th-list:before {
   content: "\f00b";
 }
-.uk-icon-ok:before {
+.uk-icon-check:before {
   content: "\f00c";
 }
-.uk-icon-remove:before {
+.uk-icon-times:before {
   content: "\f00d";
 }
-.uk-icon-zoom-in:before {
+.uk-icon-search-plus:before {
   content: "\f00e";
 }
-.uk-icon-zoom-out:before {
+.uk-icon-search-minus:before {
   content: "\f010";
 }
-.uk-icon-power-off:before,
-.uk-icon-off:before {
+.uk-icon-power-off:before {
   content: "\f011";
 }
 .uk-icon-signal:before {
@@ -3696,34 +3441,34 @@ a.uk-button {
 .uk-icon-cog:before {
   content: "\f013";
 }
-.uk-icon-trash:before {
+.uk-icon-trash-o:before {
   content: "\f014";
 }
 .uk-icon-home:before {
   content: "\f015";
 }
-.uk-icon-file-alt:before {
+.uk-icon-file-o:before {
   content: "\f016";
 }
-.uk-icon-time:before {
+.uk-icon-clock-o:before {
   content: "\f017";
 }
 .uk-icon-road:before {
   content: "\f018";
 }
-.uk-icon-download-alt:before {
+.uk-icon-download:before {
   content: "\f019";
 }
-.uk-icon-download:before {
+.uk-icon-arrow-circle-o-down:before {
   content: "\f01a";
 }
-.uk-icon-upload:before {
+.uk-icon-arrow-circle-o-up:before {
   content: "\f01b";
 }
 .uk-icon-inbox:before {
   content: "\f01c";
 }
-.uk-icon-play-circle:before {
+.uk-icon-play-circle-o:before {
   content: "\f01d";
 }
 .uk-icon-rotate-right:before,
@@ -3808,16 +3553,17 @@ a.uk-button {
 .uk-icon-list:before {
   content: "\f03a";
 }
-.uk-icon-indent-left:before {
+.uk-icon-dedent:before,
+.uk-icon-outdent:before {
   content: "\f03b";
 }
-.uk-icon-indent-right:before {
+.uk-icon-indent:before {
   content: "\f03c";
 }
-.uk-icon-facetime-video:before {
+.uk-icon-video-camera:before {
   content: "\f03d";
 }
-.uk-icon-picture:before {
+.uk-icon-picture-o:before {
   content: "\f03e";
 }
 .uk-icon-pencil:before {
@@ -3832,16 +3578,17 @@ a.uk-button {
 .uk-icon-tint:before {
   content: "\f043";
 }
-.uk-icon-edit:before {
+.uk-icon-edit:before,
+.uk-icon-pencil-square-o:before {
   content: "\f044";
 }
-.uk-icon-share:before {
+.uk-icon-share-square-o:before {
   content: "\f045";
 }
-.uk-icon-check:before {
+.uk-icon-check-square-o:before {
   content: "\f046";
 }
-.uk-icon-move:before {
+.uk-icon-arrows:before {
   content: "\f047";
 }
 .uk-icon-step-backward:before {
@@ -3880,34 +3627,34 @@ a.uk-button {
 .uk-icon-chevron-right:before {
   content: "\f054";
 }
-.uk-icon-plus-sign:before {
+.uk-icon-plus-circle:before {
   content: "\f055";
 }
-.uk-icon-minus-sign:before {
+.uk-icon-minus-circle:before {
   content: "\f056";
 }
-.uk-icon-remove-sign:before {
+.uk-icon-times-circle:before {
   content: "\f057";
 }
-.uk-icon-ok-sign:before {
+.uk-icon-check-circle:before {
   content: "\f058";
 }
-.uk-icon-question-sign:before {
+.uk-icon-question-circle:before {
   content: "\f059";
 }
-.uk-icon-info-sign:before {
+.uk-icon-info-circle:before {
   content: "\f05a";
 }
-.uk-icon-screenshot:before {
+.uk-icon-crosshairs:before {
   content: "\f05b";
 }
-.uk-icon-remove-circle:before {
+.uk-icon-times-circle-o:before {
   content: "\f05c";
 }
-.uk-icon-ok-circle:before {
+.uk-icon-check-circle-o:before {
   content: "\f05d";
 }
-.uk-icon-ban-circle:before {
+.uk-icon-ban:before {
   content: "\f05e";
 }
 .uk-icon-arrow-left:before {
@@ -3923,13 +3670,13 @@ a.uk-button {
   content: "\f063";
 }
 .uk-icon-mail-forward:before,
-.uk-icon-share-alt:before {
+.uk-icon-share:before {
   content: "\f064";
 }
-.uk-icon-resize-full:before {
+.uk-icon-expand:before {
   content: "\f065";
 }
-.uk-icon-resize-small:before {
+.uk-icon-compress:before {
   content: "\f066";
 }
 .uk-icon-plus:before {
@@ -3941,7 +3688,7 @@ a.uk-button {
 .uk-icon-asterisk:before {
   content: "\f069";
 }
-.uk-icon-exclamation-sign:before {
+.uk-icon-exclamation-circle:before {
   content: "\f06a";
 }
 .uk-icon-gift:before {
@@ -3953,13 +3700,14 @@ a.uk-button {
 .uk-icon-fire:before {
   content: "\f06d";
 }
-.uk-icon-eye-open:before {
+.uk-icon-eye:before {
   content: "\f06e";
 }
-.uk-icon-eye-close:before {
+.uk-icon-eye-slash:before {
   content: "\f070";
 }
-.uk-icon-warning-sign:before {
+.uk-icon-warning:before,
+.uk-icon-exclamation-triangle:before {
   content: "\f071";
 }
 .uk-icon-plane:before {
@@ -3989,25 +3737,25 @@ a.uk-button {
 .uk-icon-shopping-cart:before {
   content: "\f07a";
 }
-.uk-icon-folder-close:before {
+.uk-icon-folder:before {
   content: "\f07b";
 }
 .uk-icon-folder-open:before {
   content: "\f07c";
 }
-.uk-icon-resize-vertical:before {
+.uk-icon-arrows-v:before {
   content: "\f07d";
 }
-.uk-icon-resize-horizontal:before {
+.uk-icon-arrows-h:before {
   content: "\f07e";
 }
-.uk-icon-bar-chart:before {
+.uk-icon-bar-chart-o:before {
   content: "\f080";
 }
-.uk-icon-twitter-sign:before {
+.uk-icon-twitter-square:before {
   content: "\f081";
 }
-.uk-icon-facebook-sign:before {
+.uk-icon-facebook-square:before {
   content: "\f082";
 }
 .uk-icon-camera-retro:before {
@@ -4023,56 +3771,55 @@ a.uk-button {
 .uk-icon-comments:before {
   content: "\f086";
 }
-.uk-icon-thumbs-up-alt:before {
+.uk-icon-thumbs-o-up:before {
   content: "\f087";
 }
-.uk-icon-thumbs-down-alt:before {
+.uk-icon-thumbs-o-down:before {
   content: "\f088";
 }
 .uk-icon-star-half:before {
   content: "\f089";
 }
-.uk-icon-heart-empty:before {
+.uk-icon-heart-o:before {
   content: "\f08a";
 }
-.uk-icon-signout:before {
+.uk-icon-sign-out:before {
   content: "\f08b";
 }
-.uk-icon-linkedin-sign:before {
+.uk-icon-linkedin-square:before {
   content: "\f08c";
 }
-.uk-icon-pushpin:before {
+.uk-icon-thumb-tack:before {
   content: "\f08d";
 }
 .uk-icon-external-link:before {
   content: "\f08e";
 }
-.uk-icon-signin:before {
+.uk-icon-sign-in:before {
   content: "\f090";
 }
 .uk-icon-trophy:before {
   content: "\f091";
 }
-.uk-icon-github-sign:before {
+.uk-icon-github-square:before {
   content: "\f092";
 }
-.uk-icon-upload-alt:before {
+.uk-icon-upload:before {
   content: "\f093";
 }
-.uk-icon-lemon:before {
+.uk-icon-lemon-o:before {
   content: "\f094";
 }
 .uk-icon-phone:before {
   content: "\f095";
 }
-.uk-icon-unchecked:before,
-.uk-icon-check-empty:before {
+.uk-icon-square-o:before {
   content: "\f096";
 }
-.uk-icon-bookmark-empty:before {
+.uk-icon-bookmark-o:before {
   content: "\f097";
 }
-.uk-icon-phone-sign:before {
+.uk-icon-phone-square:before {
   content: "\f098";
 }
 .uk-icon-twitter:before {
@@ -4093,40 +3840,40 @@ a.uk-button {
 .uk-icon-rss:before {
   content: "\f09e";
 }
-.uk-icon-hdd:before {
+.uk-icon-hdd-o:before {
   content: "\f0a0";
 }
 .uk-icon-bullhorn:before {
   content: "\f0a1";
 }
 .uk-icon-bell:before {
-  content: "\f0a2";
+  content: "\f0f3";
 }
 .uk-icon-certificate:before {
   content: "\f0a3";
 }
-.uk-icon-hand-right:before {
+.uk-icon-hand-o-right:before {
   content: "\f0a4";
 }
-.uk-icon-hand-left:before {
+.uk-icon-hand-o-left:before {
   content: "\f0a5";
 }
-.uk-icon-hand-up:before {
+.uk-icon-hand-o-up:before {
   content: "\f0a6";
 }
-.uk-icon-hand-down:before {
+.uk-icon-hand-o-down:before {
   content: "\f0a7";
 }
-.uk-icon-circle-arrow-left:before {
+.uk-icon-arrow-circle-left:before {
   content: "\f0a8";
 }
-.uk-icon-circle-arrow-right:before {
+.uk-icon-arrow-circle-right:before {
   content: "\f0a9";
 }
-.uk-icon-circle-arrow-up:before {
+.uk-icon-arrow-circle-up:before {
   content: "\f0aa";
 }
-.uk-icon-circle-arrow-down:before {
+.uk-icon-arrow-circle-down:before {
   content: "\f0ab";
 }
 .uk-icon-globe:before {
@@ -4144,38 +3891,42 @@ a.uk-button {
 .uk-icon-briefcase:before {
   content: "\f0b1";
 }
-.uk-icon-fullscreen:before {
+.uk-icon-arrows-alt:before {
   content: "\f0b2";
 }
-.uk-icon-group:before {
+.uk-icon-group:before,
+.uk-icon-users:before {
   content: "\f0c0";
 }
+.uk-icon-chain:before,
 .uk-icon-link:before {
   content: "\f0c1";
 }
 .uk-icon-cloud:before {
   content: "\f0c2";
 }
-.uk-icon-beaker:before {
+.uk-icon-flask:before {
   content: "\f0c3";
 }
-.uk-icon-cut:before {
+.uk-icon-cut:before,
+.uk-icon-scissors:before {
   content: "\f0c4";
 }
-.uk-icon-copy:before {
+.uk-icon-copy:before,
+.uk-icon-files-o:before {
   content: "\f0c5";
 }
-.uk-icon-paperclip:before,
-.uk-icon-paper-clip:before {
+.uk-icon-paperclip:before {
   content: "\f0c6";
 }
-.uk-icon-save:before {
+.uk-icon-save:before,
+.uk-icon-floppy-o:before {
   content: "\f0c7";
 }
-.uk-icon-sign-blank:before {
+.uk-icon-square:before {
   content: "\f0c8";
 }
-.uk-icon-reorder:before {
+.uk-icon-bars:before {
   content: "\f0c9";
 }
 .uk-icon-list-ul:before {
@@ -4202,10 +3953,10 @@ a.uk-button {
 .uk-icon-pinterest:before {
   content: "\f0d2";
 }
-.uk-icon-pinterest-sign:before {
+.uk-icon-pinterest-square:before {
   content: "\f0d3";
 }
-.uk-icon-google-plus-sign:before {
+.uk-icon-google-plus-square:before {
   content: "\f0d4";
 }
 .uk-icon-google-plus:before {
@@ -4229,13 +3980,16 @@ a.uk-button {
 .uk-icon-columns:before {
   content: "\f0db";
 }
+.uk-icon-unsorted:before,
 .uk-icon-sort:before {
   content: "\f0dc";
 }
-.uk-icon-sort-down:before {
+.uk-icon-sort-down:before,
+.uk-icon-sort-asc:before {
   content: "\f0dd";
 }
-.uk-icon-sort-up:before {
+.uk-icon-sort-up:before,
+.uk-icon-sort-desc:before {
   content: "\f0de";
 }
 .uk-icon-envelope:before {
@@ -4248,18 +4002,21 @@ a.uk-button {
 .uk-icon-undo:before {
   content: "\f0e2";
 }
-.uk-icon-legal:before {
+.uk-icon-legal:before,
+.uk-icon-gavel:before {
   content: "\f0e3";
 }
-.uk-icon-dashboard:before {
+.uk-icon-dashboard:before,
+.uk-icon-tachometer:before {
   content: "\f0e4";
 }
-.uk-icon-comment-alt:before {
+.uk-icon-comment-o:before {
   content: "\f0e5";
 }
-.uk-icon-comments-alt:before {
+.uk-icon-comments-o:before {
   content: "\f0e6";
 }
+.uk-icon-flash:before,
 .uk-icon-bolt:before {
   content: "\f0e7";
 }
@@ -4269,10 +4026,11 @@ a.uk-button {
 .uk-icon-umbrella:before {
   content: "\f0e9";
 }
-.uk-icon-paste:before {
+.uk-icon-paste:before,
+.uk-icon-clipboard:before {
   content: "\f0ea";
 }
-.uk-icon-lightbulb:before {
+.uk-icon-lightbulb-o:before {
   content: "\f0eb";
 }
 .uk-icon-exchange:before {
@@ -4293,22 +4051,22 @@ a.uk-button {
 .uk-icon-suitcase:before {
   content: "\f0f2";
 }
-.uk-icon-bell-alt:before {
-  content: "\f0f3";
+.uk-icon-bell-o:before {
+  content: "\f0a2";
 }
 .uk-icon-coffee:before {
   content: "\f0f4";
 }
-.uk-icon-food:before {
+.uk-icon-cutlery:before {
   content: "\f0f5";
 }
-.uk-icon-file-text-alt:before {
+.uk-icon-file-text-o:before {
   content: "\f0f6";
 }
-.uk-icon-building:before {
+.uk-icon-building-o:before {
   content: "\f0f7";
 }
-.uk-icon-hospital:before {
+.uk-icon-hospital-o:before {
   content: "\f0f8";
 }
 .uk-icon-ambulance:before {
@@ -4323,22 +4081,22 @@ a.uk-button {
 .uk-icon-beer:before {
   content: "\f0fc";
 }
-.uk-icon-h-sign:before {
+.uk-icon-h-square:before {
   content: "\f0fd";
 }
-.uk-icon-plus-sign-alt:before {
+.uk-icon-plus-square:before {
   content: "\f0fe";
 }
-.uk-icon-double-angle-left:before {
+.uk-icon-angle-double-left:before {
   content: "\f100";
 }
-.uk-icon-double-angle-right:before {
+.uk-icon-angle-double-right:before {
   content: "\f101";
 }
-.uk-icon-double-angle-up:before {
+.uk-icon-angle-double-up:before {
   content: "\f102";
 }
-.uk-icon-double-angle-down:before {
+.uk-icon-angle-double-down:before {
   content: "\f103";
 }
 .uk-icon-angle-left:before {
@@ -4362,10 +4120,11 @@ a.uk-button {
 .uk-icon-tablet:before {
   content: "\f10a";
 }
-.uk-icon-mobile-phone:before {
+.uk-icon-mobile-phone:before,
+.uk-icon-mobile:before {
   content: "\f10b";
 }
-.uk-icon-circle-blank:before {
+.uk-icon-circle-o:before {
   content: "\f10c";
 }
 .uk-icon-quote-left:before {
@@ -4387,34 +4146,28 @@ a.uk-button {
 .uk-icon-github-alt:before {
   content: "\f113";
 }
-.uk-icon-folder-close-alt:before {
+.uk-icon-folder-o:before {
   content: "\f114";
 }
-.uk-icon-folder-open-alt:before {
+.uk-icon-folder-open-o:before {
   content: "\f115";
 }
-.uk-icon-expand-alt:before {
-  content: "\f116";
-}
-.uk-icon-collapse-alt:before {
-  content: "\f117";
-}
-.uk-icon-smile:before {
+.uk-icon-smile-o:before {
   content: "\f118";
 }
-.uk-icon-frown:before {
+.uk-icon-frown-o:before {
   content: "\f119";
 }
-.uk-icon-meh:before {
+.uk-icon-meh-o:before {
   content: "\f11a";
 }
 .uk-icon-gamepad:before {
   content: "\f11b";
 }
-.uk-icon-keyboard:before {
+.uk-icon-keyboard-o:before {
   content: "\f11c";
 }
-.uk-icon-flag-alt:before {
+.uk-icon-flag-o:before {
   content: "\f11d";
 }
 .uk-icon-flag-checkered:before {
@@ -4432,8 +4185,9 @@ a.uk-button {
 .uk-icon-mail-reply-all:before {
   content: "\f122";
 }
+.uk-icon-star-half-empty:before,
 .uk-icon-star-half-full:before,
-.uk-icon-star-half-empty:before {
+.uk-icon-star-half-o:before {
   content: "\f123";
 }
 .uk-icon-location-arrow:before {
@@ -4445,7 +4199,8 @@ a.uk-button {
 .uk-icon-code-fork:before {
   content: "\f126";
 }
-.uk-icon-unlink:before {
+.uk-icon-unlink:before,
+.uk-icon-chain-broken:before {
   content: "\f127";
 }
 .uk-icon-question:before {
@@ -4472,13 +4227,13 @@ a.uk-button {
 .uk-icon-microphone:before {
   content: "\f130";
 }
-.uk-icon-microphone-off:before {
+.uk-icon-microphone-slash:before {
   content: "\f131";
 }
 .uk-icon-shield:before {
   content: "\f132";
 }
-.uk-icon-calendar-empty:before {
+.uk-icon-calendar-o:before {
   content: "\f133";
 }
 .uk-icon-fire-extinguisher:before {
@@ -4490,16 +4245,16 @@ a.uk-button {
 .uk-icon-maxcdn:before {
   content: "\f136";
 }
-.uk-icon-chevron-sign-left:before {
+.uk-icon-chevron-circle-left:before {
   content: "\f137";
 }
-.uk-icon-chevron-sign-right:before {
+.uk-icon-chevron-circle-right:before {
   content: "\f138";
 }
-.uk-icon-chevron-sign-up:before {
+.uk-icon-chevron-circle-up:before {
   content: "\f139";
 }
-.uk-icon-chevron-sign-down:before {
+.uk-icon-chevron-circle-down:before {
   content: "\f13a";
 }
 .uk-icon-html5:before {
@@ -4517,25 +4272,25 @@ a.uk-button {
 .uk-icon-bullseye:before {
   content: "\f140";
 }
-.uk-icon-ellipsis-horizontal:before {
+.uk-icon-ellipsis-h:before {
   content: "\f141";
 }
-.uk-icon-ellipsis-vertical:before {
+.uk-icon-ellipsis-v:before {
   content: "\f142";
 }
-.uk-icon-rss-sign:before {
+.uk-icon-rss-square:before {
   content: "\f143";
 }
-.uk-icon-play-sign:before {
+.uk-icon-play-circle:before {
   content: "\f144";
 }
 .uk-icon-ticket:before {
   content: "\f145";
 }
-.uk-icon-minus-sign-alt:before {
+.uk-icon-minus-square:before {
   content: "\f146";
 }
-.uk-icon-check-minus:before {
+.uk-icon-minus-square-o:before {
   content: "\f147";
 }
 .uk-icon-level-up:before {
@@ -4544,28 +4299,31 @@ a.uk-button {
 .uk-icon-level-down:before {
   content: "\f149";
 }
-.uk-icon-check-sign:before {
+.uk-icon-check-square:before {
   content: "\f14a";
 }
-.uk-icon-edit-sign:before {
+.uk-icon-pencil-square:before {
   content: "\f14b";
 }
-.uk-icon-external-link-sign:before {
+.uk-icon-external-link-square:before {
   content: "\f14c";
 }
-.uk-icon-share-sign:before {
+.uk-icon-share-square:before {
   content: "\f14d";
 }
 .uk-icon-compass:before {
   content: "\f14e";
 }
-.uk-icon-collapse:before {
+.uk-icon-toggle-down:before,
+.uk-icon-caret-square-o-down:before {
   content: "\f150";
 }
-.uk-icon-collapse-top:before {
+.uk-icon-toggle-up:before,
+.uk-icon-caret-square-o-up:before {
   content: "\f151";
 }
-.uk-icon-expand:before {
+.uk-icon-toggle-right:before,
+.uk-icon-caret-square-o-right:before {
   content: "\f152";
 }
 .uk-icon-euro:before,
@@ -4583,12 +4341,15 @@ a.uk-button {
 .uk-icon-inr:before {
   content: "\f156";
 }
+.uk-icon-cny:before,
+.uk-icon-rmb:before,
 .uk-icon-yen:before,
 .uk-icon-jpy:before {
   content: "\f157";
 }
-.uk-icon-renminbi:before,
-.uk-icon-cny:before {
+.uk-icon-ruble:before,
+.uk-icon-rouble:before,
+.uk-icon-rub:before {
   content: "\f158";
 }
 .uk-icon-won:before,
@@ -4605,22 +4366,22 @@ a.uk-button {
 .uk-icon-file-text:before {
   content: "\f15c";
 }
-.uk-icon-sort-by-alphabet:before {
+.uk-icon-sort-alpha-asc:before {
   content: "\f15d";
 }
-.uk-icon-sort-by-alphabet-alt:before {
+.uk-icon-sort-alpha-desc:before {
   content: "\f15e";
 }
-.uk-icon-sort-by-attributes:before {
+.uk-icon-sort-amount-asc:before {
   content: "\f160";
 }
-.uk-icon-sort-by-attributes-alt:before {
+.uk-icon-sort-amount-desc:before {
   content: "\f161";
 }
-.uk-icon-sort-by-order:before {
+.uk-icon-sort-numeric-asc:before {
   content: "\f162";
 }
-.uk-icon-sort-by-order-alt:before {
+.uk-icon-sort-numeric-desc:before {
   content: "\f163";
 }
 .uk-icon-thumbs-up:before {
@@ -4629,7 +4390,7 @@ a.uk-button {
 .uk-icon-thumbs-down:before {
   content: "\f165";
 }
-.uk-icon-youtube-sign:before {
+.uk-icon-youtube-square:before {
   content: "\f166";
 }
 .uk-icon-youtube:before {
@@ -4638,7 +4399,7 @@ a.uk-button {
 .uk-icon-xing:before {
   content: "\f168";
 }
-.uk-icon-xing-sign:before {
+.uk-icon-xing-square:before {
   content: "\f169";
 }
 .uk-icon-youtube-play:before {
@@ -4647,7 +4408,7 @@ a.uk-button {
 .uk-icon-dropbox:before {
   content: "\f16b";
 }
-.uk-icon-stackexchange:before {
+.uk-icon-stack-overflow:before {
   content: "\f16c";
 }
 .uk-icon-instagram:before {
@@ -4662,13 +4423,13 @@ a.uk-button {
 .uk-icon-bitbucket:before {
   content: "\f171";
 }
-.uk-icon-bitbucket-sign:before {
+.uk-icon-bitbucket-square:before {
   content: "\f172";
 }
 .uk-icon-tumblr:before {
   content: "\f173";
 }
-.uk-icon-tumblr-sign:before {
+.uk-icon-tumblr-square:before {
   content: "\f174";
 }
 .uk-icon-long-arrow-down:before {
@@ -4716,10 +4477,10 @@ a.uk-button {
 .uk-icon-gittip:before {
   content: "\f184";
 }
-.uk-icon-sun:before {
+.uk-icon-sun-o:before {
   content: "\f185";
 }
-.uk-icon-moon:before {
+.uk-icon-moon-o:before {
   content: "\f186";
 }
 .uk-icon-archive:before {
@@ -4737,71 +4498,84 @@ a.uk-button {
 .uk-icon-renren:before {
   content: "\f18b";
 }
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Close
- * Description:		Defines styles for a close button
- *
- * Component:		`uk-close`
- *
- * Modifiers:		`uk-close-alt`
- *
- * Uses:			Icon: FontAwesome
- *
- * Used by:			Alert
- *					Modal
- *
- ========================================================================== */
-/* Component
+.uk-icon-pagelines:before {
+  content: "\f18c";
+}
+.uk-icon-stack-exchange:before {
+  content: "\f18d";
+}
+.uk-icon-arrow-circle-o-right:before {
+  content: "\f18e";
+}
+.uk-icon-arrow-circle-o-left:before {
+  content: "\f190";
+}
+.uk-icon-toggle-left:before,
+.uk-icon-caret-square-o-left:before {
+  content: "\f191";
+}
+.uk-icon-dot-circle-o:before {
+  content: "\f192";
+}
+.uk-icon-wheelchair:before {
+  content: "\f193";
+}
+.uk-icon-vimeo-square:before {
+  content: "\f194";
+}
+.uk-icon-turkish-lira:before,
+.uk-icon-try:before {
+  content: "\f195";
+}
+.uk-icon-plus-square-o:before {
+  content: "\f196";
+}
+/* ========================================================================
+   Component: Close
  ========================================================================== */
 /*
  * 1. Required for `button` elements and makes
  *    close button more robust against different box-sizing use
- * 2. Required for `button` elements
+ * 2. Style
+ * 3. Required for `button` elements
+ * 4. Needed for Safari
  */
 .uk-close {
+  /* 1 */
   -moz-box-sizing: content-box;
   box-sizing: content-box;
-  /* 1 */
-
+  /* 2 */
   display: inline-block;
   width: 20px;
   line-height: 20px;
   text-align: center;
   color: inherit;
   opacity: 0.3;
-  /* 2. */
-
+  /* 3. */
   padding: 0;
   border: 0;
   -webkit-appearance: none;
+  /* 4. */
   background: transparent;
-  /* Needed for Sarari */
-
 }
 /* Icon */
 .uk-close:after {
   display: block;
   content: "\f00d";
-  font-family: "FontAwesome";
+  font-family: FontAwesome;
 }
 /*
  * Hover
  * 1. Apply hover style also to focus state
  * 2. Remove default focus style
+ * 3. Required for `a` elements
  */
 .uk-close:hover,
 .uk-close:focus {
-  /* 1 */
-
   opacity: 0.5;
-  outline: none;
   /* 2 */
-
-}
-/* Required for `a` elements */
-a.uk-close:hover {
+  outline: none;
+  /* 3 */
   color: inherit;
   text-decoration: none;
   cursor: pointer;
@@ -4810,7 +4584,7 @@ a.uk-close:hover {
  ========================================================================== */
 .uk-close-alt {
   padding: 2px;
-  border-radius: 100%;
+  border-radius: 50%;
   background: #eeeeee;
   opacity: 1;
 }
@@ -4827,20 +4601,8 @@ a.uk-close:hover {
 .uk-close-alt:focus:after {
   opacity: 0.8;
 }
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Badge
- * Description:		Defines styles for badges 
- *
- * Component:		`uk-badge`
- *
- * Modifiers:		`uk-badge-notification`
- *					`uk-badge-success`
- *					`uk-badge-danger`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Badge
  ========================================================================== */
 .uk-badge {
   display: inline-block;
@@ -4884,25 +4646,8 @@ a.uk-close:hover {
 .uk-badge-danger {
   background-color: #da314b;
 }
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Alert
- * Description:		Defines styles for alert messages
- *
- * Component: 		`uk-alert`
- *
- * Sub-objects: 	`uk-alert-close`
- * 
- * Modifiers:		`uk-alert-success`
- *					`uk-alert-warning`
- *					`uk-alert-danger`
- *					`uk-alert-large`
- *
- * Uses:			Close: `uk-close`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Alert
  ========================================================================== */
 .uk-alert {
   margin-bottom: 15px;
@@ -4970,44 +4715,25 @@ a.uk-close:hover {
 .uk-alert-large > .uk-close:first-child {
   margin: -10px -10px 0 0;
 }
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Thumbnail
- * Description:		Defines styles for image thumbnails
- *
- * Component:		`uk-thumbnail`
- *
- * Sub-objects: 	`uk-thumbnail-caption`
- *
- * Modifiers:		`uk-thumbnail-mini`
- *					`uk-thumbnail-small`
- *					`uk-thumbnail-medium`
- *					`uk-thumbnail-large`
- *					`uk-thumbnail-expand`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Thumbnail
  ========================================================================== */
 /*
  * 1. Corrects max-width behavior (2.) if padding and border are used
  * 2. Responsive behavior
  * 3. Required for `figure` element
+ * 4. Style
  */
 .uk-thumbnail {
-  /* Required for `a`, `div` or `figure` elements */
-
   display: inline-block;
-  -moz-box-sizing: border-box;
   /* 1 */
-
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
-  max-width: 100%;
   /* 2 */
-
-  margin: 0;
+  max-width: 100%;
   /* 3 */
-
+  margin: 0;
+  /* 4 */
   padding: 4px;
   border: 1px solid #dddddd;
   background: #ffffff;
@@ -5020,21 +4746,17 @@ a.uk-close:hover {
  */
 a.uk-thumbnail:hover,
 a.uk-thumbnail:focus {
-  /* 1 */
-
   border-color: #aaaaaa;
   background-color: #ffffff;
-  text-decoration: none;
   /* 2 */
-
-  outline: none;
+  text-decoration: none;
   /* 3 */
-
+  outline: none;
 }
 /* Caption
  ========================================================================== */
 .uk-thumbnail-caption {
-  padding-top: 5px;
+  padding-top: 4px;
   text-align: center;
   color: #444444;
 }
@@ -5056,20 +4778,8 @@ a.uk-thumbnail:focus {
 .uk-thumbnail-expand > img {
   width: 100%;
 }
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Overlay
- * Description:		Defines styles for image overlays
- *
- * Component:		`uk-overlay`
- *
- * Sub-objects:		`uk-overlay-area`
- *					`uk-overlay-caption`
- *					`uk-overlay-toggle`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Overlay
  ========================================================================== */
 /*
  * 1. Container width fits its content
@@ -5079,17 +4789,19 @@ a.uk-thumbnail:focus {
  */
 .uk-overlay {
   /* 1 */
-
   display: inline-block;
   /* 2 */
-
   position: relative;
   /* 3 */
-
   max-width: 100%;
   /* 4 */
-
   vertical-align: middle;
+}
+/*
+ * Fixed wrong scaling calculation for images in Chrome
+ */
+.uk-overlay > img:first-child {
+  display: block;
 }
 /* Sub-object `uk-overlay-area`
  ========================================================================== */
@@ -5100,20 +4812,18 @@ a.uk-thumbnail:focus {
  */
 .uk-overlay-area {
   /* 1 */
-
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   /* 2 */
-
   background: rgba(0, 0, 0, 0.3);
   /* 3 */
-
   opacity: 0;
   -webkit-transition: opacity 0.15s linear;
   transition: opacity 0.15s linear;
+  -webkit-transform: translate3d(0, 0, 0);
 }
 /*
  * Hover
@@ -5123,11 +4833,10 @@ a.uk-thumbnail:focus {
 .uk-overlay-toggle:hover .uk-overlay-area {
   opacity: 1;
 }
-/* 1 */
 /*
  * Icon
  */
-.uk-overlay-area:before {
+.uk-overlay-area:empty:before {
   content: "\f002";
   position: absolute;
   top: 50%;
@@ -5138,9 +4847,61 @@ a.uk-thumbnail:focus {
   margin-left: -25px;
   font-size: 50px;
   line-height: 1;
-  font-family: "FontAwesome";
+  font-family: FontAwesome;
   text-align: center;
   color: #ffffff;
+}
+/* Sub-object `uk-overlay-area-content`
+ ========================================================================== */
+/*
+ * Remove whitespace between child elements when using `inline-block`
+ * Needed for Firefox
+ */
+.uk-overlay-area:not(:empty) {
+  font-size: 0.001px;
+}
+/*
+ * 1. Needed for vertical alignment
+ */
+.uk-overlay-area:not(:empty):before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+/*
+ * 1. Set vertical alignment
+ * 2. Reset whitespace hack
+ * 3. Set horizontal alignment
+ * 4. Set style
+ */
+.uk-overlay-area-content {
+  /* 1 */
+  display: inline-block;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  vertical-align: middle;
+  /* 2 */
+  font-size: 1rem;
+  /* 3 */
+  text-align: center;
+  /* 4 */
+  padding: 0 15px;
+  color: #ffffff;
+}
+/*
+ * Remove margin from the last-child
+ */
+.uk-overlay-area-content > :last-child {
+  margin-bottom: 0;
+}
+/*
+ * Links in overlay area
+ */
+.uk-overlay-area-content a:not([class]),
+.uk-overlay-area-content a:not([class]):hover {
+  color: inherit;
 }
 /* Sub-object `uk-overlay-caption`
  ========================================================================== */
@@ -5151,21 +4912,19 @@ a.uk-thumbnail:focus {
  */
 .uk-overlay-caption {
   /* 1 */
-
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   /* 2 */
-
   padding: 15px;
   background: rgba(0, 0, 0, 0.5);
   color: #ffffff;
   /* 3 */
-
   opacity: 0;
   -webkit-transition: opacity 0.15s linear;
   transition: opacity 0.15s linear;
+  -webkit-transform: translate3d(0, 0, 0);
 }
 /*
  * Hover
@@ -5175,26 +4934,8 @@ a.uk-thumbnail:focus {
 .uk-overlay-toggle:hover .uk-overlay-caption {
   opacity: 1;
 }
-/* 1 */
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Progress
- * Description:		Defines styles for progress bars
- *
- * Component: 		`uk-progress`
- *
- * Sub-objects: 	`uk-progress-bar`
- * 
- * Modifiers:		`uk-progress-mini`
- *					`uk-progress-small`
- *					`uk-progress-success`
- *					`uk-progress-warning`
- *					`uk-progress-danger`
- *					`uk-progress-striped`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Progress
  ========================================================================== */
 /*
  * 1. Clearing
@@ -5206,12 +4947,10 @@ a.uk-thumbnail:focus {
   height: 20px;
   margin-bottom: 15px;
   background: #eeeeee;
-  overflow: hidden;
   /* 1 */
-
-  line-height: 20px;
+  overflow: hidden;
   /* 2 */
-
+  line-height: 20px;
 }
 /*
  * Add margin if adjacent element
@@ -5221,17 +4960,19 @@ a.uk-thumbnail:focus {
 }
 /* Sub-object: `uk-progress-bar`
  ========================================================================== */
+/*
+ * 1. Transition
+ * 2. Needed for text
+ */
 .uk-progress-bar {
   width: 0;
   height: 100%;
   background: #00a8e6;
   float: left;
-  /* Transition */
-
+  /* 1 */
   -webkit-transition: width 0.6s ease;
   transition: width 0.6s ease;
-  /* Allow text */
-
+  /* 2 */
   font-size: 12px;
   color: #ffffff;
   text-align: center;
@@ -5287,169 +5028,8 @@ a.uk-thumbnail:focus {
     background-position: 30px 0;
   }
 }
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Search
- * Description:		Defines a search component
- *
- * Component:		`uk-search`
- *
- * Sub-objects:		`uk-search-field`
- *					`uk-search-close`
- *
- * States:		 	`uk-active`
- *					`uk-loading`
- *
- * Uses:			Animation
- *					Icon: FontAwesome
- *
- * Used by:			Off-canvas
- *
- ========================================================================== */
-/* Component
- ========================================================================== */
-/*
- * 1. Create position context for dropdowns
- * 2. Needed for `form` element
- */
-.uk-search {
-  display: inline-block;
-  position: relative;
-  /* 1 */
-
-  margin: 0;
-  /* 2 */
-
-}
-/*
- * Icon
- */
-.uk-search:before {
-  content: "\f002";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 30px;
-  line-height: 30px;
-  text-align: center;
-  font-family: "FontAwesome";
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.2);
-}
-/* Sub-object `uk-search-field`
- ========================================================================== */
-/*
- * 1. Needed to reset iOS `input[type="search"]` appearance
- */
-.uk-search-field {
-  width: 120px;
-  height: 30px;
-  padding: 0 30px;
-  border: 1px solid rgba(0, 0, 0, 0);
-  border-radius: 0;
-  /* 1 */
-
-  background: rgba(0, 0, 0, 0);
-  color: #444444;
-  -webkit-transition: all linear 0.2s;
-  transition: all linear 0.2s;
-}
-/*
- * Needed to reset iOS `input[type="search"]` appearance
- * Higher specificity to override appearance set by normalize.less
- */
-input.uk-search-field {
-  -webkit-appearance: none;
-}
-/* Placeholder */
-.uk-search-field:-ms-input-placeholder {
-  color: #999999;
-}
-.uk-search-field::-moz-placeholder {
-  color: #999999;
-}
-.uk-search-field::-webkit-input-placeholder {
-  color: #999999;
-}
-/* Removes cancel button in IE10 */
-.uk-search-field::-ms-clear {
-  display: none;
-}
-/* Focus */
-.uk-search-field:focus {
-  outline: 0;
-}
-/* Focus + active */
-.uk-search-field:focus,
-.uk-active .uk-search-field {
-  width: 180px;
-}
-/* Sub-object `uk-search-close`
- ========================================================================== */
-/*
- * 1. Required for `button` elements
- */
-.uk-search-close {
-  display: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 30px;
-  line-height: 30px;
-  text-align: center;
-  font-size: 14px;
-  color: rgba(0, 0, 0, 0.2);
-  /* 1. */
-
-  padding: 0;
-  border: 0;
-  -webkit-appearance: none;
-  background: transparent;
-  /* Needed for Sarari */
-
-}
-.uk-loading > .uk-search-close,
-.uk-active > .uk-search-close {
-  display: block;
-}
-/*
- * Icon
- */
-.uk-search-close:after {
-  display: block;
-  content: "\f00d";
-  font-family: "FontAwesome";
-}
-/* Loading icon */
-.uk-loading > .uk-search-close:after {
-  content: "\f110";
-  -webkit-animation: uk-spin 2s infinite linear;
-  animation: uk-spin 2s infinite linear;
-}
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Animation
- * Description:		Provides a useful set of keyframe animations
- *
- * Component:		`uk-animation-*`
- *
- * Modifiers:		`uk-animation-fade`
- *					`uk-animation-scale-up`
- *					`uk-animation-scale-down`
- *					`uk-animation-slide-top`
- *					`uk-animation-slide-bottom`
- *					`uk-animation-slide-left`
- *					`uk-animation-slide-right`
- *					`uk-animation-reverse`
- *
- * Used by:			Dropdown
- *					Icon
- *					Search
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Animation
  ========================================================================== */
 [class*='uk-animation-'] {
   -webkit-animation-duration: 0.5s;
@@ -5458,6 +5038,10 @@ input.uk-search-field {
   animation-timing-function: ease-out;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
+}
+/* Hide animated element if scrollspy is used */
+[data-uk-scrollspy*='uk-animation-'] {
+  opacity: 0;
 }
 /*
  * Fade
@@ -5499,6 +5083,13 @@ input.uk-search-field {
 .uk-animation-slide-right {
   -webkit-animation-name: uk-slide-right;
   animation-name: uk-slide-right;
+}
+/*
+ * Shake
+ */
+.uk-animation-shake {
+  -webkit-animation-name: uk-shake;
+  animation-name: uk-shake;
 }
 /* Modifiers
  ========================================================================== */
@@ -5666,6 +5257,75 @@ input.uk-search-field {
   }
 }
 /*
+ * Shake
+ */
+@-webkit-keyframes uk-shake {
+  0%,
+  100% {
+    -webkit-transform: translateX(0);
+  }
+  10% {
+    -webkit-transform: translateX(-9px);
+  }
+  20% {
+    -webkit-transform: translateX(8px);
+  }
+  30% {
+    -webkit-transform: translateX(-7px);
+  }
+  40% {
+    -webkit-transform: translateX(6px);
+  }
+  50% {
+    -webkit-transform: translateX(-5px);
+  }
+  60% {
+    -webkit-transform: translateX(4px);
+  }
+  70% {
+    -webkit-transform: translateX(-3px);
+  }
+  80% {
+    -webkit-transform: translateX(2px);
+  }
+  90% {
+    -webkit-transform: translateX(-1px);
+  }
+}
+@keyframes uk-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  10% {
+    transform: translateX(-9px);
+  }
+  20% {
+    transform: translateX(8px);
+  }
+  30% {
+    transform: translateX(-7px);
+  }
+  40% {
+    transform: translateX(6px);
+  }
+  50% {
+    transform: translateX(-5px);
+  }
+  60% {
+    transform: translateX(4px);
+  }
+  70% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+  90% {
+    transform: translateX(-1px);
+  }
+}
+/*
  * Slide top fixed
  */
 @-webkit-keyframes uk-slide-top-fixed {
@@ -5730,35 +5390,8 @@ input.uk-search-field {
     transform: rotate(359deg);
   }
 }
-/* JavaScript */
-/*
- * Name:			Dropdown
- * Description:		Defines styles for a toggleable dropdown
- *
- * Component:		`uk-dropdown`
- *
- * Modifiers:		`uk-dropdown-flip`
- *					`uk-dropdown-center`
- *					`uk-dropdown-justify`
- *					`uk-dropdown-up`
- *					`uk-dropdown-width-2`
- *					`uk-dropdown-width-3`
- *					`uk-dropdown-width-4`
- *					`uk-dropdown-width-5`
- *					`uk-dropdown-stack`
- *					`uk-dropdown-small`
- *					`uk-dropdown-navbar`
- *					`uk-dropdown-search`
- *
- * States:		 	`uk-open`
- *
- * Uses:			Animation
- *					Grid: `uk-grid`, `uk-width-*`
- *					Panel: `uk-panel`
- *					Navbar: `uk-navbar-flip`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Dropdown
  ========================================================================== */
 /*
  * 1. Hide by default
@@ -5769,28 +5402,24 @@ input.uk-search-field {
  */
 .uk-dropdown {
   /* 1 */
-
   display: none;
   /* 2 */
-
   position: absolute;
   top: 100%;
   left: 0;
-  z-index: 1000;
+  z-index: 1020;
   /* 3 */
-
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   /* 4 */
-
   width: 200px;
   margin-top: 5px;
   padding: 15px;
   background: #f5f5f5;
   color: #444444;
   /* 5 */
-
-  letter-spacing: normal;
+  font-size: 1rem;
+  vertical-align: top;
 }
 /*
  * 1. Show dropdown
@@ -5799,14 +5428,11 @@ input.uk-search-field {
  */
 .uk-open > .uk-dropdown {
   /* 1 */
-
   display: block;
   /* 2 */
-
   -webkit-animation: uk-fade 0.2s ease-in-out;
   animation: uk-fade 0.2s ease-in-out;
   /* 3 */
-
   -webkit-transform-origin: 0 0;
   transform-origin: 0 0;
 }
@@ -5846,11 +5472,11 @@ input.uk-search-field {
 .uk-dropdown > .uk-grid > [class*='uk-width-'] > .uk-panel + .uk-panel {
   margin-top: 15px;
 }
-/* Only tablets and desktops */
+/* Tablet and bigger */
 @media (min-width: 768px) {
   /*
-  	 * Horizontal gutter
-  	 */
+     * Horizontal gutter
+     */
   .uk-dropdown:not(.uk-dropdown-stack) > .uk-grid {
     margin-left: -15px;
     margin-right: -15px;
@@ -5860,14 +5486,14 @@ input.uk-search-field {
     padding-right: 15px;
   }
   /*
-  	 * Column divider
-  	 */
+     * Column divider
+     */
   .uk-dropdown:not(.uk-dropdown-stack) > .uk-grid > [class*='uk-width-']:nth-child(n+2) {
     border-left: 1px solid #dddddd;
   }
   /*
-  	 * Width multiplier for dropdown columns
-  	 */
+     * Width multiplier for dropdown columns
+     */
   .uk-dropdown-width-2:not(.uk-dropdown-stack) {
     width: 400px;
   }
@@ -5881,17 +5507,17 @@ input.uk-search-field {
     width: 1000px;
   }
 }
-/* Only phones */
+/* Phone landscape and smaller */
 @media (max-width: 767px) {
   /*
-  	 * Stack columns and take full width
-  	 */
+     * Stack columns and take full width
+     */
   .uk-dropdown > .uk-grid > [class*='uk-width-'] {
     width: 100%;
   }
   /*
-  	 * Vertical gutter
-  	 */
+     * Vertical gutter
+     */
   .uk-dropdown > .uk-grid > [class*='uk-width-']:nth-child(n+2) {
     margin-top: 15px;
   }
@@ -5933,82 +5559,39 @@ input.uk-search-field {
   -webkit-animation: uk-slide-top-fixed 0.2s ease-in-out;
   animation: uk-slide-top-fixed 0.2s ease-in-out;
 }
-/* Modifier: `uk-dropdown-search`
- ========================================================================== */
-.uk-dropdown-search {
-  width: 300px;
-  margin-top: 0;
-  background: #f5f5f5;
-  color: #444444;
-}
-.uk-open > .uk-dropdown-search {
-  -webkit-animation: uk-slide-top-fixed 0.2s ease-in-out;
-  animation: uk-slide-top-fixed 0.2s ease-in-out;
-}
-/*
- * Dependency `uk-navbar-flip`
- */
-.uk-navbar-flip .uk-dropdown-search {
-  margin-top: 5px;
-  margin-right: -15px;
-}
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Modal
- * Description:		Defines styles for modal dialogs
- *
- * Component: 		`uk-modal`
- *
- * Sub-objects:		`uk-modal-dialog`
- *					`uk-modal-close`
- *
- * Modifiers:		`uk-modal-dialog-slide`
- *					`uk-modal-dialog-frameless`
- *
- * States:			`uk-open`
- *
- * Uses:			Close: `uk-close`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Modal
  ========================================================================== */
 /*
  * This is the modal overlay and modal dialog container
  * 1. Hide by default
  * 2. Set fixed position
- * 3. Webkit needs a height to position the modal dialog vertically in percent
- * 4. Allow scrolling for the modal dialog
- * 5. Mask the background page
- * 6. Fade-in transition
+ * 3. Allow scrolling for the modal dialog
+ * 4. Mask the background page
+ * 5. Fade-in transition
+ * 6. Fix transition in Webkit
  */
 .uk-modal {
   /* 1 */
-
   display: none;
   /* 2 */
-
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1020;
+  z-index: 1010;
   /* 3 */
-
-  height: 100%;
-  /* 4 */
-
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  /* 5 */
-
+  /* 4 */
   background: rgba(0, 0, 0, 0.6);
-  /* 6 */
-
+  /* 5 */
   opacity: 0;
   -webkit-transition: opacity 0.15s linear;
   transition: opacity 0.15s linear;
+  /* 6 */
+  -webkit-transform: translateZ(0);
 }
 /*
  * Open state
@@ -6017,73 +5600,64 @@ input.uk-search-field {
   opacity: 1;
 }
 /*
- * Prevents dublicated scrollbar caused by 4.
+ * Prevents duplicated scrollbar caused by 4.
  */
-.uk-modal-page {
+.uk-modal-page,
+.uk-modal-page body {
   overflow: hidden;
 }
 /* Sub-object: `uk-modal-dialog`
  ========================================================================== */
 /*
- * 1. Set position
+ * 1. Create position context for `uk-modal-dialog-frameless`
  * 2. Set box sizing
- * 3. Center dialog box
- * 4. Set style
+ * 3. Set style
+ * 4. Slide-in transition
  */
 .uk-modal-dialog {
   /* 1 */
-
   position: relative;
-  top: 10%;
-  left: 50%;
   /* 2 */
-
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  margin: 50px auto;
   padding: 20px;
   width: 600px;
+  max-width: 100%;
+  max-width: calc(100% - 20px);
   /* 3 */
-
-  margin-left: -300px;
-  /* 4 */
-
   background: #ffffff;
+  /* 4 */
+  opacity: 0;
+  -webkit-transform: translateY(-100px);
+  transform: translateY(-100px);
+  -webkit-transition: opacity 0.3s linear, -webkit-transform 0.3s ease-out;
+  transition: opacity 0.3s linear, transform 0.3s ease-out;
 }
-/* Only phones */
+/* Phone landscape and smaller */
 @media (max-width: 767px) {
   /*
-  	 * Fit the phone width perfectly
-  	 */
+     * Fit in small screen
+     */
   .uk-modal-dialog {
-    top: 0;
-    left: 0;
-    right: 0;
     width: auto;
     margin: 10px;
   }
+}
+/*
+ * Open state
+ */
+.uk-open .uk-modal-dialog {
+  /* 4 */
+  opacity: 1;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
 }
 /*
  * Remove margin from the last-child
  */
 .uk-modal-dialog > :last-child {
   margin-bottom: 0;
-}
-/* Modifier: `uk-modal-dialog-slide`
- ========================================================================== */
-/*
- * Adds a slide-in transition to the modal dialog
- */
-.uk-modal-dialog-slide {
-  opacity: 0;
-  -webkit-transform: translateY(-25%);
-  transform: translateY(-25%);
-  -webkit-transition: opacity 0.3s linear, -webkit-transform 0.3s ease-out;
-  transition: opacity 0.3s linear, transform 0.3s ease-out;
-}
-.uk-open .uk-modal-dialog-slide {
-  opacity: 1;
-  -webkit-transform: translateY(0);
-  transform: translateY(0);
 }
 /* Close in modal
  ========================================================================== */
@@ -6112,33 +5686,29 @@ input.uk-search-field {
   margin: 0;
   float: none;
 }
-/* Only phones */
+/* Phone landscape and smaller */
 @media (max-width: 767px) {
   .uk-modal-dialog-frameless > .uk-close:first-child {
     top: -7px;
     right: -7px;
   }
 }
-/* Hooks
+/* Modifier: `uk-modal-dialog-large`
  ========================================================================== */
-/*
- * Name:			Off-canvas
- * Description:		Defines styles for an off-canvas sidebar that slides in and out of the page
- *
- * Component:		`uk-offcanvas`
- *
- * Sub-objects:		`uk-offcanvas-page`
- *					`uk-offcanvas-bar`
- *
- * Modifiers:		`uk-offcanvas-bar-flip`
- *
- * States:		 	`uk-active`
- *
- * Uses:			Panel: `uk-panel`
- *					Search: `uk-search`, `uk-search-field`
- *
- ========================================================================== */
-/* Component
+/* Tablet and bigger */
+@media (min-width: 768px) {
+  .uk-modal-dialog-large {
+    width: 930px;
+  }
+}
+/* Large screen and bigger */
+@media (min-width: 1220px) {
+  .uk-modal-dialog-large {
+    width: 1130px;
+  }
+}
+/* ========================================================================
+   Component: Off-canvas
  ========================================================================== */
 /*
  * This is the offcanvas overlay and bar container
@@ -6148,18 +5718,15 @@ input.uk-search-field {
  */
 .uk-offcanvas {
   /* 1 */
-
   display: none;
   /* 2 */
-
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1010;
+  z-index: 1000;
   /* 3 */
-
   background: rgba(0, 0, 0, 0.1);
 }
 .uk-offcanvas.uk-active {
@@ -6174,10 +5741,8 @@ input.uk-search-field {
  */
 .uk-offcanvas-page {
   /* 1 */
-
   position: fixed;
   /* 2 */
-
   -webkit-transition: margin-left 0.3s ease-in-out 50ms;
   transition: margin-left 0.3s ease-in-out 50ms;
 }
@@ -6192,25 +5757,21 @@ input.uk-search-field {
  */
 .uk-offcanvas-bar {
   /* 1 */
-
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   -webkit-transform: translateX(-100%);
   transform: translateX(-100%);
-  z-index: 1011;
+  z-index: 1001;
   /* 2 */
-
   width: 270px;
   max-width: 100%;
   background: #333333;
   /* 3 */
-
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   /* 4 */
-
   -webkit-transition: -webkit-transform 0.3s ease-in-out;
   transition: transform 0.3s ease-in-out;
 }
@@ -6241,42 +5802,8 @@ input.uk-search-field {
 .uk-offcanvas .uk-panel a:not([class]):hover {
   color: #ffffff;
 }
-/* Search in offcanvas
- ========================================================================== */
-.uk-offcanvas .uk-search {
-  display: block;
-  margin: 20px 15px;
-}
-.uk-offcanvas .uk-search:before {
-  color: #777777;
-}
-.uk-offcanvas .uk-search-field {
-  width: 100%;
-  border-color: rgba(0, 0, 0, 0);
-  background: #1a1a1a;
-  color: #cccccc;
-}
-.uk-offcanvas .uk-search-field:-ms-input-placeholder {
-  color: #777777;
-}
-.uk-offcanvas .uk-search-field::-moz-placeholder {
-  color: #777777;
-}
-.uk-offcanvas .uk-search-field::-webkit-input-placeholder {
-  color: #777777;
-}
-/* Hooks
- ========================================================================== */
-/*
- * Name:			Switcher
- * Description:		Defines styles for the switcher
- *
- * Component:		`uk-switcher`
- *
- * States:			`uk-active`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Switcher
  ========================================================================== */
 .uk-switcher {
   margin: 0;
@@ -6289,23 +5816,8 @@ input.uk-search-field {
 .uk-switcher > *:not(.uk-active) {
   display: none;
 }
-/*
- * Name:			Tooltip
- * Description:		Defines styles for tooltips
- *
- * Component: 		`uk-tooltip`
- *
- * Modifiers		`uk-tooltip-top`
- *					`uk-tooltip-top-left`
- *					`uk-tooltip-top-right`
- *					`uk-tooltip-bottom`
- *					`uk-tooltip-bottom-left`
- *					`uk-tooltip-bottom-right`
- *					`uk-tooltip-left`
- *					`uk-tooltip-right`
- *
- ========================================================================== */
-/* Component
+/* ========================================================================
+   Component: Tooltip
  ========================================================================== */
 /*
  * 1. Hide by default
@@ -6315,20 +5827,16 @@ input.uk-search-field {
  */
 .uk-tooltip {
   /* 1 */
-
   display: none;
   /* 2 */
-
   position: absolute;
   z-index: 1030;
   /* 3 */
-
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   max-width: 200px;
   padding: 5px 8px;
   /* 4 */
-
   background: #333333;
   color: rgba(255, 255, 255, 0.7);
   font-size: 12px;
@@ -6346,9 +5854,8 @@ input.uk-search-field {
   position: absolute;
   width: 0;
   height: 0;
-  border: 5px dashed #333333;
   /* 1 */
-
+  border: 5px dashed #333333;
 }
 /* Direction modifiers
  ========================================================================== */
@@ -6426,15 +5933,8 @@ input.uk-search-field {
   border-bottom-color: transparent;
   border-right-color: #333333;
 }
-/* Hooks
- ========================================================================== */
-/* Need to be loaded last */
-/*
- * Name:			Text
- * Description:		Collection of useful text utility classes to style your content
- *
- * Component:		`uk-text-*`
- *
+/* ========================================================================
+   Component: Text
  ========================================================================== */
 /* Size modifiers
  ========================================================================== */
@@ -6454,19 +5954,19 @@ input.uk-search-field {
 /* Color modifiers
  ========================================================================== */
 .uk-text-muted {
-  color: #999999;
+  color: #999999 !important;
 }
-.uk-text-info {
-  color: #2d7091;
+.uk-text-primary {
+  color: #2d7091 !important;
 }
 .uk-text-success {
-  color: #659f13;
+  color: #659f13 !important;
 }
 .uk-text-warning {
-  color: #e28327;
+  color: #e28327 !important;
 }
 .uk-text-danger {
-  color: #d85030;
+  color: #d85030 !important;
 }
 /* Alignment modifiers
  ========================================================================== */
@@ -6482,8 +5982,35 @@ input.uk-search-field {
 .uk-text-justify {
   text-align: justify !important;
 }
+.uk-text-top {
+  vertical-align: top !important;
+}
+.uk-text-middle {
+  vertical-align: middle !important;
+}
+.uk-text-bottom {
+  vertical-align: bottom !important;
+}
+/* Only tablets portrait */
+@media (max-width: 959px) {
+  .uk-text-center-medium {
+    text-align: center !important;
+  }
+}
+/* Phone landscape and smaller */
+@media (max-width: 767px) {
+  .uk-text-center-small {
+    text-align: center !important;
+  }
+}
 /* Wrap modifiers
  ========================================================================== */
+/*
+ * Prevent text from wrapping onto multiple lines
+ */
+.uk-text-nowrap {
+  white-space: nowrap;
+}
 /*
  * Prevent text from wrapping onto multiple lines, and truncate with an ellipsis
  */
@@ -6502,26 +6029,8 @@ input.uk-search-field {
   -moz-hyphens: auto;
   hyphens: auto;
 }
-/*
- * Name:			Utility
- * Description:		Collection of useful utility classes to style your content
- *
- * Component:		`uk-container-*`
- *					`uk-clearfix`
- *					`uk-nbfc-*`
- *					`uk-float-*`
- *					`uk-align-*`
- *					`uk-vertical-align`
- *					`uk-height-1-1`
- *					`uk-responsive-*`
- *					`uk-margin-*`
- *					`uk-heading-*`
- *					`uk-link-muted`
- *					`uk-scrollable-*`
- *					`uk-display-*`
- *					`uk-visible-*`
- *					`uk-hidden-*`
- *
+/* ========================================================================
+   Component: Utility
  ========================================================================== */
 /* Container
  ========================================================================== */
@@ -6531,7 +6040,7 @@ input.uk-search-field {
   max-width: 980px;
   padding: 0 25px;
 }
-/* Only large screens */
+/* Large screen and bigger */
 @media (min-width: 1220px) {
   .uk-container {
     max-width: 1200px;
@@ -6583,12 +6092,17 @@ input.uk-search-field {
  ========================================================================== */
 /*
  * Float blocks
+ * 1. Prevent content overflow on small devices
  */
 .uk-float-left {
   float: left;
 }
 .uk-float-right {
   float: right;
+}
+/* 1 */
+[class*='uk-float-'] {
+  max-width: 100%;
 }
 /* Alignment of images and objects
  ========================================================================== */
@@ -6607,7 +6121,7 @@ input.uk-search-field {
   margin-left: 15px;
   float: right;
 }
-/* Only tablets and desktop */
+/* Tablet and bigger */
 @media (min-width: 768px) {
   .uk-align-medium-left {
     margin-right: 15px;
@@ -6630,9 +6144,9 @@ input.uk-search-field {
  * Remove whitespace between child elements when using `inline-block`
  */
 .uk-vertical-align {
-  letter-spacing: -0.31em;
+  font-size: 0.001px;
 }
-/*  
+/*
  *  The `uk-vertical-align` container needs a specific height
  */
 .uk-vertical-align:before {
@@ -6648,10 +6162,9 @@ input.uk-search-field {
 .uk-vertical-align-middle,
 .uk-vertical-align-bottom {
   display: inline-block;
-  letter-spacing: normal;
-  /* 1 */
-
   max-width: 100%;
+  /* 1 */
+  font-size: 1rem;
 }
 .uk-vertical-align-middle {
   vertical-align: middle;
@@ -6659,7 +6172,7 @@ input.uk-search-field {
 .uk-vertical-align-bottom {
   vertical-align: bottom;
 }
-/*  
+/*
  *  This helper class is very useful to extend the `html` and `body` element to the full height of the page.
  */
 .uk-height-1-1 {
@@ -6677,14 +6190,14 @@ input.uk-search-field {
   box-sizing: border-box;
 }
 /*
- * Responsiveness: Sets a maxium width relative to the parent and auto scales the height
+ * Responsiveness: Sets a maximum width relative to the parent and auto scales the height
  */
 .uk-responsive-width {
   max-width: 100%;
   height: auto;
 }
 /*
- * Responsiveness: Sets a maxium height relative to the parent and auto scales the width
+ * Responsiveness: Sets a maximum height relative to the parent and auto scales the width
  * Only works if the parent element has a fixed height.
  */
 .uk-responsive-height {
@@ -6693,26 +6206,69 @@ input.uk-search-field {
 }
 /* Margin
  ========================================================================== */
-/* 
+/*
  * Create a block with the same margin of a paragraph
+ * Add margin if adjacent element
  */
 .uk-margin {
   margin-bottom: 15px;
 }
-/*
- * Add margin if adjacent element
- */
 * + .uk-margin {
   margin-top: 15px;
 }
-/*
- * Margin top and bottom
- */
 .uk-margin-top {
   margin-top: 15px !important;
 }
 .uk-margin-bottom {
   margin-bottom: 15px !important;
+}
+.uk-margin-left {
+  margin-left: 15px !important;
+}
+.uk-margin-right {
+  margin-right: 15px !important;
+}
+/*
+ * Larger margins
+ */
+.uk-margin-large {
+  margin-bottom: 50px;
+}
+* + .uk-margin-large {
+  margin-top: 50px;
+}
+.uk-margin-large-top {
+  margin-top: 50px !important;
+}
+.uk-margin-large-bottom {
+  margin-bottom: 50px !important;
+}
+.uk-margin-large-left {
+  margin-left: 50px !important;
+}
+.uk-margin-large-right {
+  margin-right: 50px !important;
+}
+/*
+ * Smaller margins
+ */
+.uk-margin-small {
+  margin-bottom: 5px;
+}
+* + .uk-margin-small {
+  margin-top: 5px;
+}
+.uk-margin-small-top {
+  margin-top: 5px !important;
+}
+.uk-margin-small-bottom {
+  margin-bottom: 5px !important;
+}
+.uk-margin-small-left {
+  margin-left: 5px !important;
+}
+.uk-margin-small-right {
+  margin-right: 5px !important;
 }
 /*
  * Remove margins
@@ -6726,9 +6282,17 @@ input.uk-search-field {
 .uk-margin-bottom-remove {
   margin-bottom: 0 !important;
 }
+/* Border
+ ========================================================================== */
+.uk-border-circle {
+  border-radius: 50%;
+}
+.uk-border-rounded {
+  border-radius: 5px;
+}
 /* Headings
  ========================================================================== */
-/* Only tablets and desktops */
+/* Tablet and bigger */
 @media (min-width: 768px) {
   .uk-heading-large {
     font-size: 52px;
@@ -6737,13 +6301,26 @@ input.uk-search-field {
 }
 /* Link
  ========================================================================== */
+/*
+ * Let links appear in default text color
+ */
 .uk-link-muted,
-.uk-link-muted * {
+.uk-link-muted a {
   color: #444444;
 }
 .uk-link-muted:hover,
-.uk-link-muted *:hover {
+.uk-link-muted a:hover {
   color: #444444;
+}
+/*
+ * Reset link style
+ */
+.uk-link-reset,
+.uk-link-reset a,
+.uk-link-reset:hover,
+.uk-link-reset a:hover {
+  color: inherit;
+  text-decoration: none;
 }
 /* Scrollable
  ========================================================================== */
@@ -6751,22 +6328,37 @@ input.uk-search-field {
  * Enable scrolling for preformatted text
  */
 .uk-scrollable-text {
-  max-height: 300px;
+  height: 300px;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+  resize: both;
 }
 /*
  * Box with scrolling enabled
  */
 .uk-scrollable-box {
-  max-height: 150px;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height: 170px;
   padding: 10px;
   border: 1px solid #dddddd;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  resize: both;
 }
-/*
- * Remove margin from the last-child
- */
 .uk-scrollable-box > :last-child {
+  margin-bottom: 0;
+}
+/* Overflow
+ ========================================================================== */
+/*
+ * Enable scrollbars if content is clipped
+ */
+.uk-overflow-container {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.uk-overflow-container > :last-child {
   margin-bottom: 0;
 }
 /* Display
@@ -6787,7 +6379,7 @@ input.uk-search-field {
  * Visibility
  * Avoids setting display to `block`
  */
-/* Only desktops */
+/* Desktop and bigger */
 @media (min-width: 960px) {
   .uk-visible-small {
     display: none !important;
@@ -6811,7 +6403,7 @@ input.uk-search-field {
     display: none !important;
   }
 }
-/* Only phones */
+/* Phone landscape and smaller */
 @media (max-width: 767px) {
   .uk-visible-medium {
     display: none !important;
@@ -6828,25 +6420,23 @@ input.uk-search-field {
   display: none !important;
   visibility: hidden !important;
 }
+/* It's hidden, but still affects layout */
+.uk-invisible {
+  visibility: hidden !important;
+}
 /* Show on hover */
-.uk-visible-hover:hover .uk-hidden {
+.uk-visible-hover:hover .uk-hidden,
+.uk-visible-hover:hover .uk-invisible {
   display: block !important;
   visibility: visible !important;
 }
-.uk-visible-hover-inline:hover .uk-hidden {
+.uk-visible-hover-inline:hover .uk-hidden,
+.uk-visible-hover-inline:hover .uk-invisible {
   display: inline-block !important;
   visibility: visible !important;
 }
-/* Hooks
- ========================================================================== */
-/*
- * Component:		Print
- * Description:		Optimize page for printing
- *
- * Adapted from http://github.com/h5bp/html5-boilerplate
- *
- * Modifications:	Removed link `href` and `title` related rules
- *
+/* ========================================================================
+   Component: Print
  ========================================================================== */
 @media print {
   * {
@@ -6874,7 +6464,7 @@ input.uk-search-field {
   img {
     max-width: 100% !important;
   }
-  @page  {
+  @page {
     margin: 0.5cm;
   }
   p,
