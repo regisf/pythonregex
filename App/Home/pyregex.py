@@ -36,6 +36,7 @@ class PyRegex(object):
             count = 0
 
         if regex != '' or content != '':
+            result = {}
             if method == 'search':
                 result = self._do_search(regex,content, flags, options)
             elif method == 'match':
@@ -49,7 +50,10 @@ class PyRegex(object):
             elif method == 'split':
                 result = self._do_split(regex, content, count, flags, options)
 
-            result['content'] = html.escape(result['content'])
+            if 'content' in result:
+                # in case of no error
+                result['content'] = html.escape(result['content'])
+
             return json.dumps(result, ensure_ascii=False)
 
         else:
