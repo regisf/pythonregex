@@ -30,27 +30,29 @@ import html2text
 
 import private_settings
 
+
 def send_mail(sender, dest, subject, body, host_pref={'name': 'localhost'}):
     """
     Send an email with HTML content
     """
-    msg = MIMEMultipart()
-    msg['Subject'] = subject
-    msg['From'] = sender
-    msg['To'] = dest
+    if getattr(private_settings, "USE_EMAIL", False):
+        msg = MIMEMultipart()
+        msg['Subject'] = subject
+        msg['From'] = sender
+        msg['To'] = dest
 
-    text_part = MIMEText(html2text.html2text(body), 'text')
-    html_part = MIMEText(body, 'html')
-    msg.attach(html_part)
-    msg.attach(text_part)
+        text_part = MIMEText(html2text.html2text(body), 'text')
+        html_part = MIMEText(body, 'html')
+        msg.attach(html_part)
+        msg.attach(text_part)
 
-    smtp = smtplib.SMTP(host_pref['name'])
-    smtp.sendmail(
-        getattr(private_settings, 'DEFAULT_EMAIL', "nobody@nowhere.tld"),
-        dest,
-        msg.as_string()
-    )
-    smtp.quit()
+        smtp = smtplib.SMTP(host_pref['name'])
+        smtp.sendmail(
+            getattr(private_settings, 'DEFAULT_EMAIL', "nobody@nowhere.tld"),
+            dest,
+            msg.as_string()
+        )
+        smtp.quit()
 
 def is_email(email):
     """ Test if an email is valid

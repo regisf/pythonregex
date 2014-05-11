@@ -18,6 +18,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import json
+import time
+import hashlib
 
 import tornado.web
 import tornado.gen
@@ -26,7 +28,9 @@ from App.models.user import UserModel
 from App.models.email import EmailModel
 from App.models.preference import PreferenceModel
 from App.utils.email import send_mail
+from App.utils.template import micro_template
 
+import private_settings
 
 class RegisterHandler(tornado.web.RequestHandler):
     def get(self):
@@ -34,6 +38,7 @@ class RegisterHandler(tornado.web.RequestHandler):
             'register.html',
             page='register',
             errors=False,
+            username='',
             email='',
             fields=[],
             messages={},
@@ -41,10 +46,21 @@ class RegisterHandler(tornado.web.RequestHandler):
         )
 
     def post(self):
+        username = self.get_argument('username')
         email = self.get_argument('email')
         password = self.get_argument('password')
         confirm = self.get_argument('confirm')
+        question = self.get_argument('question')
+        answer = self.get_argument('answer')
+
         error = []
+        if question != answer:
+            error.append({'message': "You didn't answer correctly to the question", "field": "question"})
+
+        if not username:
+            error.append({'message': 'The user name must be filled', 'field': 'username'})
+        elif UserModel().is_username_exists(username):
+            error.append({'message': 'The user name you choose already exists.', 'field': 'username'})
 
         if not email:
             error.append({'message': 'Email is required and must be valid', 'field': 'email'})
@@ -53,22 +69,29 @@ class RegisterHandler(tornado.web.RequestHandler):
 
         if not password:
             error.append({'message': 'A password is required', 'field': 'password'})
-
         elif confirm != password:
             error.append({'message': 'The password and its confirmation are different', 'field': 'confirm'})
 
         if not error:
             mail_model = EmailModel()
             subject, body = mail_model.get_template('registration')
+            registration_key = hashlib.md5(email.encode('utf-8') + str(time.time()).encode('utf-8')).hexdigest()
+            UserModel().create_temp_user(username, email, password, registration_key)
+            keys = {
+                'website': private_settings.SITE_NAME,
+                'registration_key': registration_key
+            }
+            content = micro_template(body, keys)
             host_pref = PreferenceModel().get_mail_server()
 
-            # Should be async
-            send_mail(email, subject, body, host_pref)
+            # FIXME: Should be async
+            send_mail(host_pref['sender'], email, subject, content, host_pref)
 
             self.render(
                 'register_success.html',
                 page='register_success',
-                email_receiver=email
+                email_receiver=email,
+                question=self.application.settings.get("question")
             )
         else:
             messages = {}
@@ -79,6 +102,7 @@ class RegisterHandler(tornado.web.RequestHandler):
                 'register.html',
                 page='register',
                 errors=error,
+                username=username,
                 email=email,
                 fields=[err['field'] for err in error],
                 messages=messages,
@@ -100,3 +124,30 @@ class CheckEmailHandler(tornado.web.RequestHandler):
             exists = UserModel().is_email_exists(email)
 
         self.write(json.dumps({'success': success, 'exists': exists, 'action': 'checkmail'}, ensure_ascii=False))
+
+
+class ConfirmHandler(tornado.web.RequestHandler):
+    def get(self, hash):
+        """
+        Confirm the inscription by mail
+        """
+        model = UserModel()
+        user = model.find_by_hash(hash)
+        if user:
+            model.set_user_registered(user)
+            self.render(
+                "registration_confirm.html",
+                error=False,
+                question=self.application.settings.get('question')
+            )
+        else:
+            self.render(
+                "registration_confirm.html",
+                error=True,
+                question=self.application.settings.get("question")
+            )
+
+
+class LoginHandler(tornado.web.RequestHandler):
+    def post(self):
+        self.write("OK")

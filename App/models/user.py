@@ -44,7 +44,7 @@ class UserModel:
         """
         Test if an email exists
         """
-        return self.users.find_one({'email':email}) is not None
+        return self.users.find_one({'email': email}) is not None
 
     def create_user(self, username, email, password, temp=True, is_admin=False):
         """
@@ -57,6 +57,19 @@ class UserModel:
             'password': self._generate_password(password),
             'creation_date': datetime.datetime.now(),
             'is_admin': is_admin
+        })
+
+    def create_temp_user(self, username, email, password, hash):
+        """
+        Create an user not registred
+        """
+        return self.users.insert({
+            'username': username,
+            'email': email,
+            'password': self._generate_password(password),
+            'creation_date': datetime.datetime.now(),
+            'is_admin': False,
+            'temp_hash': hash
         })
 
     def edit(self, username, creation_date, email, is_admin):
@@ -78,7 +91,19 @@ class UserModel:
         Retreive an user by the sessionid key
         """
 
-    def exists(self, username):
+    def find_by_hash(self, hash):
+        """
+        Find an user by its temp_hash.
+        """
+        return self.users.find_one({'temp_hash': hash})
+
+    def set_user_registered(self, user):
+        """
+        Set the user as an active user
+        """
+        self.users.update({'_id': user['_id']}, {'$set': {'temp_hash': None}})
+
+    def is_username_exists(self, username):
         """
         Find an user admin matching the username and his the password
         """

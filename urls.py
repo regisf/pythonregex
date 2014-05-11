@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
 """
 Contains all public urls for the WebSite
 """
@@ -27,7 +28,7 @@ import settings
 from App.Home.homehandler import HomeHandler
 from App.Home.ajaxhandler import AjaxHandler
 from App.Home.websockethandler import WebSocketHandler
-from App.Home.registerhandler import RegisterHandler
+from App.Home.registerhandler import RegisterHandler, ConfirmHandler, LoginHandler
 from App.Home.contacthandler import ContactHandler
 from App.Admin.urls import URLS as AdminURLS
 
@@ -36,7 +37,9 @@ URLS = [
 
     (r'^/$', HomeHandler),
     (r'^/contact$', ContactHandler),
+    (r'^/auth/confirm/(?P<hash>\w+)', ConfirmHandler),
     (r'^/auth/register/$', RegisterHandler),
+    (r'^/auth/connect/$', LoginHandler),
 
     (r'^/wsa/$', AjaxHandler),
     (r'^/ws/$', WebSocketHandler),

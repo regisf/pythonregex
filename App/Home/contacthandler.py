@@ -23,6 +23,7 @@ from tornado.web import RequestHandler
 from App.utils.email import send_mail
 from App.models.email import EmailModel
 from App.models.preference import PreferenceModel
+from App.utils.template import micro_template
 
 import private_settings
 
@@ -53,12 +54,11 @@ class ContactHandler(RequestHandler):
                     # Replace all tags.
                     email_object = model.find_by_shortcut(private_settings.CONTACT_EMAIL)
                     email_pref = PreferenceModel().get_mail_server()
-                    content = email_object['content']
-                    content = re.sub(r'\{\{[\s+|]sender[\s+|]\}\}', name, content)
-                    content = re.sub(r'\{\{[\s+|]email[\s+|]\}\}', email, content)
-                    content = re.sub(r'\{\{[\s+|]message[\s+|]\}\}', message, content)
-                    content = re.sub(r'\{\{[\s+|].*?[\s+|]\}\}', '', content)
-
+                    content = micro_template(email_object['content'], {
+                        'sender': name,
+                        'email': email,
+                        'message': message
+                    })
 
                     send_mail(email, email_pref['sender'], email_object['title'], content, host_pref=email_pref)
 

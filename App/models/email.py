@@ -35,7 +35,7 @@ class EmailModel:
         """
         template = self.email.find_one({'shortcut': shortcut})
         if template:
-            return template.subject, template.body
+            return template['title'], template['content']
 
         return None, None
 
