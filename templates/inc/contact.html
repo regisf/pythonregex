@@ -3,7 +3,7 @@
         <a class="uk-modal-close uk-close"></a>
         <h2>Contact me</h2>
         <hr>
-        <div>
+        <div id="form-container">
             <form action="/contact" method="post" class="uk-form" id="contactform">
                 <div class="uk-form-row">
                     <label>Your email</label>
@@ -27,6 +27,7 @@
                 </div>
             </form>
         </div>
+        <div class="uk-hidden" id="wheel-container"></div>
         <hr>
         <div class="uk-clearfix">
             <button class="uk-button uk-button-primary uk-float-right" data-send>
@@ -49,6 +50,22 @@
         <div>
             Your message was delivered successfully
         </div>
+        <hr>
+        <div class="uk-clearfix">
+            <button class="uk-button uk-modal-close uk-button-primary uk-float-right">
+                <i class="uk-icon-ok"></i> OK
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<div class="uk-modal" id="connection-error">
+    <div class="uk-modal-dialog">
+        <a class=""uk-modal-close uk-close"></a>
+        <h2>Error</h2>
+        <hr>
+        <div id="connection-error-msg"></div>
         <hr>
         <div class="uk-clearfix">
             <button class="uk-button uk-modal-close uk-button-primary uk-float-right">

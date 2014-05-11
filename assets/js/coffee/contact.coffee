@@ -59,22 +59,39 @@ class ContactMessage
             alert "There is one or more error\n\n" + error.join "\n"
             return
 
+        # Get the form
         formData = new FormData(document.getElementById("contactform"))
-        $.ajax
+
+        # Display a wheel
+        $("#form-container").slideUp 'fast', () =>
+            $("#wheel-container").removeClass 'uk-hidden'
+            @addClass 'uk-hidden'
+
+        jqxhr = $.ajax
             url: '/contact'
             type: 'POST'
             data: formData
             processData: false
             contentType: false
-            success: (data) =>
-                if data == 'ok'
-                    oldModal = new $.UIkit.modal.Modal("#contact")
-                    oldModal.hide()
-                    okModal = new $.UIkit.modal.Modal("#send-success")
-                    okModal.show()
 
-            fail: (xhr) =>
-                alert "An error occured\n" + xhr.responseText
+        # Restore form
+        jqxhr.always (data) ->
+            $("#wheel-container").addClass 'uk-hidden'
+            $("#form-container").removeClass 'uk-hidden'
+
+        jqxhr.done (data) ->
+            if not data.match /^error/
+                okModal = new $.UIkit.modal.Modal("#send-success")
+                okModal.show()
+            else
+                errorModal = new $.UIkit.modal.Modal("#connection-error")
+                document.getElementById("connection-error-msg").innerHTML = data;
+                errorModal.show()
+
+        jqxhr.fail (xhr) ->
+            errorModal = new $.UIkit.modal.Modal("#connection-error")
+            document.getElementById("connection-error-msg").innerHTML = xhr.responseText;
+            errorModal.show()
 
         return
 

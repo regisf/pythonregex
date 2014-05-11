@@ -18,14 +18,14 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import re
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 
 from tornado.web import RequestHandler
+from App.utils.email import send_mail
+from App.models.email import EmailModel
+from App.models.preference import PreferenceModel
 
-from App.models.email import  EmailModel
 import private_settings
+
 
 class ContactHandler(RequestHandler):
     """
@@ -52,33 +52,15 @@ class ContactHandler(RequestHandler):
                 else:
                     # Replace all tags.
                     email_object = model.find_by_shortcut(private_settings.CONTACT_EMAIL)
-                    email_pref = model.get_host_preferences()
+                    email_pref = PreferenceModel().get_mail_server()
                     content = email_object['content']
                     content = re.sub(r'\{\{[\s+|]sender[\s+|]\}\}', name, content)
                     content = re.sub(r'\{\{[\s+|]email[\s+|]\}\}', email, content)
                     content = re.sub(r'\{\{[\s+|]message[\s+|]\}\}', message, content)
                     content = re.sub(r'\{\{[\s+|].*?[\s+|]\}\}', '', content)
 
-                    # Simply convert HTML to text
-                    text_content = re.sub(r'<p>(.*?)</p>', '\\1\n', content)
 
-                    msg = MIMEMultipart('alternative')
-                    part1 = MIMEText(text_content, 'plain')
-                    part2 = MIMEText(content, 'html')
-                    msg.attach(part1)
-                    msg.attach(part2)
-
-                    msg['Subject'] = email_object['title']
-                    if 'mail_sender' in email_pref:
-                        msg['From'] = email_pref['mail_sender']
-                    else:
-                        msg['From'] = getattr(private_settings, 'DEFAULT_EMAIL', "nobody@nowhere.tld")
-                    msg['To'] = email_pref['mail_receiver']
-
-                    smtp = smtplib.SMTP(email_pref['server'])
-                    smtp.sendmail(getattr(private_settings, 'DEFAULT_EMAIL', "nobody@nowhere.tld"),
-                                  email_pref['mail_receiver'], msg.as_string())
-                    smtp.quit()
+                    send_mail(email, email_pref['sender'], email_object['title'], content, host_pref=email_pref)
 
                     self.write("ok")
             except Exception as e:

@@ -143,7 +143,7 @@
     }
 
     ContactMessage.prototype.validateForm = function(e) {
-      var error, formData;
+      var error, formData, jqxhr;
       error = [];
       if ($.trim(this.emailField.val()).length === 0) {
         this.emailField.addClass("uk-form-danger");
@@ -178,28 +178,39 @@
         return;
       }
       formData = new FormData(document.getElementById("contactform"));
-      $.ajax({
+      $("#form-container").slideUp('fast', (function(_this) {
+        return function() {
+          $("#wheel-container").removeClass('uk-hidden');
+          return _this.addClass('uk-hidden');
+        };
+      })(this));
+      jqxhr = $.ajax({
         url: '/contact',
         type: 'POST',
         data: formData,
         processData: false,
-        contentType: false,
-        success: (function(_this) {
-          return function(data) {
-            var okModal, oldModal;
-            if (data === 'ok') {
-              oldModal = new $.UIkit.modal.Modal("#contact");
-              oldModal.hide();
-              okModal = new $.UIkit.modal.Modal("#send-success");
-              return okModal.show();
-            }
-          };
-        })(this),
-        fail: (function(_this) {
-          return function(xhr) {
-            return alert(xhr.responseText);
-          };
-        })(this)
+        contentType: false
+      });
+      jqxhr.always(function(data) {
+        $("#wheel-container").addClass('uk-hidden');
+        return $("#form-container").removeClass('uk-hidden');
+      });
+      jqxhr.done(function(data) {
+        var errorModal, okModal;
+        if (!data.match(/^error/)) {
+          okModal = new $.UIkit.modal.Modal("#send-success");
+          return okModal.show();
+        } else {
+          errorModal = new $.UIkit.modal.Modal("#connection-error");
+          document.getElementById("connection-error-msg").innerHTML = data;
+          return errorModal.show();
+        }
+      });
+      jqxhr.fail(function(xhr) {
+        var errorModal;
+        errorModal = new $.UIkit.modal.Modal("#connection-error");
+        document.getElementById("connection-error-msg").innerHTML = xhr.responseText;
+        return errorModal.show();
       });
     };
 

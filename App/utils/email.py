@@ -26,8 +26,11 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.utils import parseaddr
 
+import html2text
 
-def send_mail(sender, dest, subject, body, host_pref={'server': 'localhost'}):
+import private_settings
+
+def send_mail(sender, dest, subject, body, host_pref={'name': 'localhost'}):
     """
     Send an email with HTML content
     """
@@ -36,13 +39,18 @@ def send_mail(sender, dest, subject, body, host_pref={'server': 'localhost'}):
     msg['From'] = sender
     msg['To'] = dest
 
+    text_part = MIMEText(html2text.html2text(body), 'text')
     html_part = MIMEText(body, 'html')
     msg.attach(html_part)
+    msg.attach(text_part)
 
-    s = smtplib.SMTP(host_pref['server'])
-    s.send_message(msg)
-    s.quit()
-
+    smtp = smtplib.SMTP(host_pref['name'])
+    smtp.sendmail(
+        getattr(private_settings, 'DEFAULT_EMAIL', "nobody@nowhere.tld"),
+        dest,
+        msg.as_string()
+    )
+    smtp.quit()
 
 def is_email(email):
     """ Test if an email is valid

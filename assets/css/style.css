@@ -1,7 +1,7 @@
 body {
     background: url(../img/bg_oliva.png);
 }
-texarea { resize: vertical;}
+textarea { resize: vertical;}
 #sharethis { margin-top: 10px; text-align: right; }
 .uk-navbar.invert{
     /*background-color: #000;*/
@@ -49,5 +49,5 @@ texarea { resize: vertical;}
 #contact input { width: 100%; }
 [data-option] { display: none; }
 #messagedialog h2 { color: red; }
-
+#wheel-container { background: transparent url(../img/spinner.gif) no-repeat center center; height: 40px; }
 .uk-thumbnail-very-small { max-width: 32px; }
