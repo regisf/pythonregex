@@ -30,6 +30,7 @@ import private_settings
 class ContactHandler(RequestHandler):
     """
     Send an email via the contact form
+    FIXME: This might be async
     """
     def post(self):
         """
