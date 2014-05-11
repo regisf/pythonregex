@@ -23,14 +23,15 @@ from App.models.preference import PreferenceModel
 
 
 class PreferenceHandler(RequestHandler):
-    def post(self, ):
-        mail = self.get_argument('defaultemail')
-        name = self.get_argument('servername')
-        port = self.get_argument('serverport')
-        username = self.get_argument('serverusername')
-        password = self.get_argument('serverpassword')
+    def post(self):
+        """
+        Save preferences
+        """
+        default_email = self.get_argument('defaultemail', '')
+        server_name = self.get_argument('servername', "localhost")
+        server_port = self.get_argument("serverport", "")
+        server_username = self.get_argument("serverusername", "")
+        server_password = self.get_argument("serverpassword", "")
+        PreferenceModel().save_mail_server(default_email, server_name, server_port, server_username, server_password)
+        self.redirect("/admin/emails/")
 
-        pref = PreferenceModel()
-        pref.save(mail, name, port, username, password)
-
-        self.redirect('/admin/emails/')

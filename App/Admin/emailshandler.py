@@ -51,24 +51,18 @@ def control_arguments(handler, edit=False):
 class EmailsHandler(RequestHandler):
     def get(self):
         """
-        Get all emails tempaltes
+        Get all emails templates
         """
         emails = EmailModel().all()
         pref = PreferenceModel().get_mail_server()
         self.render("admin/emails/emails.html", emails=emails, pref={
-            'sender': '',
-            'server_name': 'localhost',
-            'server_port': '',
-            'server_username': '',
-            'server_password': '',
+            'sender': pref["sender"],
+            'server_name': pref["name"],
+            'server_port': pref["port"],
+            'server_username': pref["username"],
+            'server_password': pref["password"]
         })
 
-    def post(self):
-        """
-        Save preferences
-        """
-        default_email = self.get_argument('defaultemail', '')
-        server_name = self.get_argument('defaultemail', settings.DEFAULT_EMAIL)
 
 class EmailsAddHandler(RequestHandler):
     def get(self):
@@ -82,10 +76,13 @@ class EmailsAddHandler(RequestHandler):
             self.redirect('/admin/emails/')
             return
 
-        self.render('admin/emails/add.html', errors=errors,
-                                             title=title,
-                                             content=content,
-                                             shortcut=shortcut)
+        self.render(
+            'admin/emails/add.html',
+            errors=errors,
+            title=title,
+            content=content,
+            shortcut=shortcut
+        )
 
 
 class EmailEditHandler(RequestHandler):

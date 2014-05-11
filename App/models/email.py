@@ -27,6 +27,7 @@ from . import database
 class EmailModel:
     def __init__(self):
         self.email = database.email
+        self.pref = database.email_pref
 
     def get_template(self, shortcut):
         """
@@ -71,17 +72,4 @@ class EmailModel:
             {'$set': {'title': title, 'shortcut': shortcut, 'content': content}}
         )
 
-    def set_host_preferences(self):
-        """
-        """
 
-    def get_host_preferences(self):
-        """
-        Get the SMTP host preferences.
-        Use default if there's not pref
-        """
-        pref = self.email.find_one()
-        return {
-            'host': pref.get('server', 'localhost'),
-
-        }

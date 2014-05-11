@@ -24,37 +24,39 @@ class PreferenceModel(object):
     def __init__(self, ):
         self.db = database.preference
 
-    def save(self, sender, server_name, server_port, username, password):
+    def save_mail_server(self, sender, server_name, server_port, username, password):
         """
         Save the default preferences
         """
         preferences = {
             'sender': sender,
-            'server_name': server_name,
-            'server_port': server_port,
-            'server_username': username,
-            'server_password': password
+            'name': server_name,
+            'port': server_port,
+            'username': username,
+            'password': password
         }
-
-        pref = self.db.find_one({'name': 'smtp_server'})
+        pref = self.db.find({'name': 'smtp_server'})
         if not pref:
-            self.db.insert(preferences)
+            self.db.insert({'name': 'smtp_server', 'values': preferences})
         else:
-            pref.update(preferences)
-
-    def save_mail_server(self, hostname, server_email, ):
-        """
-        Save mail preferences
-        """
+            self.db.update({'name': 'smtp_server'}, {'$set': {'values': preferences}})
 
     def get_mail_server(self):
         """ Get the default preferences
         """
         pref = self.db.find_one({'name': 'smtp_server'})
         if not pref:
-            pref = None
-
-        return pref
+            # Default
+            pref = {
+                'values': {
+                    'sender': '',
+                    'name': 'localhost',
+                    'port': '',
+                    'username': '',
+                    'password': ''
+                }
+            }
+        return pref['values']
 
     def get_codes(self):
         """
