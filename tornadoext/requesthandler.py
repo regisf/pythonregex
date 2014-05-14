@@ -23,6 +23,7 @@ import datetime
 import tornado.web
 
 from tornadoext.usersession import UserSession
+from App.utils.question import Question
 
 class RequestHandler(tornado.web.RequestHandler):
     """
@@ -32,6 +33,17 @@ class RequestHandler(tornado.web.RequestHandler):
     def __init__(self, *args, **kwargs):
         super(RequestHandler, self).__init__(*args, **kwargs)
         self.user = UserSession(self.get_secure_cookie('sessionid'))
+
+
+    def get_template_namespace(self):
+        """
+        Make some variables global for all templates
+        """
+        ns = super(RequestHandler, self).get_template_namespace()
+        ns.update({
+            'question': Question()
+        })
+        return ns
 
     def login(self, user):
         """

@@ -21,7 +21,7 @@ import json
 import time
 import hashlib
 
-import tornado.web
+from tornadoext.requesthandler import RequestHandler
 import tornado.gen
 
 from App.models.user import UserModel
@@ -32,7 +32,7 @@ from App.utils.template import micro_template
 
 import private_settings
 
-class RegisterHandler(tornado.web.RequestHandler):
+class RegisterHandler(RequestHandler):
     def get(self):
         self.render(
             'register.html',
@@ -41,8 +41,7 @@ class RegisterHandler(tornado.web.RequestHandler):
             username='',
             email='',
             fields=[],
-            messages={},
-            question=self.application.settings.get("question")
+            messages={}
         )
 
     def post(self):
@@ -90,8 +89,7 @@ class RegisterHandler(tornado.web.RequestHandler):
             self.render(
                 'register_success.html',
                 page='register_success',
-                email_receiver=email,
-                question=self.application.settings.get("question")
+                email_receiver=email
             )
         else:
             messages = {}
@@ -105,8 +103,7 @@ class RegisterHandler(tornado.web.RequestHandler):
                 username=username,
                 email=email,
                 fields=[err['field'] for err in error],
-                messages=messages,
-                question=self.application.settings.get("question")
+                messages=messages
             )
 
 
@@ -137,14 +134,12 @@ class ConfirmHandler(tornado.web.RequestHandler):
             model.set_user_registered(user)
             self.render(
                 "registration_confirm.html",
-                error=False,
-                question=self.application.settings.get('question')
+                error=False
             )
         else:
             self.render(
                 "registration_confirm.html",
-                error=True,
-                question=self.application.settings.get("question")
+                error=True
             )
 
 

@@ -19,9 +19,9 @@
 
 import re
 
-import tornado.web
+from tornadoext.requesthandler import RequestHandler
 
-class HomeHandler(tornado.web.RequestHandler):
+class HomeHandler(RequestHandler):
     def get(self):
         msie = re.findall(r'MSIE\s(\d+)', self.request.headers.get('user-agent'))
         if len(msie) > 0:
@@ -30,4 +30,4 @@ class HomeHandler(tornado.web.RequestHandler):
                 return
 
         # Debug purpose only
-        self.render('index.html', page='index', question=self.application.settings.get("question"))
+        self.render('index.html', page='index')

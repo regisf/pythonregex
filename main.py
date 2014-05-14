@@ -27,7 +27,6 @@ import tornado.autoreload
 import settings
 import filters
 from urls import URLS
-from App.utils.question import Question
 
 def runApp():
     """
@@ -41,7 +40,6 @@ def runApp():
         ui_modules={'simple_date': filters.SimpleDate},
         login_url="/auth/login/",
         #xsrf_cookies=True,
-        question=Question()
     )
 
     # The watcher
