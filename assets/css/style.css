@@ -51,3 +51,4 @@ textarea { resize: vertical;}
 #messagedialog h2 { color: red; }
 #wheel-container { background: transparent url(../img/spinner.gif) no-repeat center center; height: 40px; }
 .uk-thumbnail-very-small { max-width: 32px; }
+.strike { text-decoration: line-through;}
