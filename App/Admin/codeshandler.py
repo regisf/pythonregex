@@ -25,7 +25,7 @@ class CodesHandler(RequestHandler):
     """
     Handle all codes for analytics or captcha, twitter,
     """
-    @authenticated
+    # @authenticated
     def get(self):
         pref = PreferenceModel().get_codes()
         if not pref:
@@ -54,8 +54,6 @@ class CodesHandler(RequestHandler):
                     'secret_key': ''
                 }
             }
-        if not 'recaptcha' in pref:
-            pref['recaptcha'] = {}
 
         self.render(
             "admin/codes/list.html",
@@ -64,19 +62,16 @@ class CodesHandler(RequestHandler):
             google=pref['google'],
             linkedin=pref['linkedin'],
             github=pref['github'],
-            analytics=pref['analytics'],
-            recaptcha=pref['recaptcha']
+            analytics=pref['analytics']
         )
 
-    @authenticated
+    # @authenticated
     def post(self):
         """
         Save the codes
         """
         PreferenceModel().save_codes(
             analytics=self.get_argument('analytics'),
-            recaptcha_private=self.get_argument('recaptcha_private'),
-            recaptcha_public=self.get_argument('recaptcha_public'),
             facebook_id=self.get_argument('facebook_app_id'),
             facebook_key=self.get_argument('facebook_secret_key'),
             google_id=self.get_argument('google_app_id'),

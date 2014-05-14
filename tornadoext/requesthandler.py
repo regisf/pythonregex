@@ -24,6 +24,7 @@ import tornado.web
 
 from tornadoext.usersession import UserSession
 from App.utils.question import Question
+from App.models.preference import PreferenceModel
 
 class RequestHandler(tornado.web.RequestHandler):
     """
@@ -40,8 +41,10 @@ class RequestHandler(tornado.web.RequestHandler):
         Make some variables global for all templates
         """
         ns = super(RequestHandler, self).get_template_namespace()
+        pref = PreferenceModel().get_codes()
         ns.update({
-            'question': Question()
+            'question': Question(),
+            'analytics': pref.get("analytics")
         })
         return ns
 
