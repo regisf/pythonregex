@@ -10,7 +10,21 @@
         </ul>
         <div class="uk-navbar-flip">
             <ul class="uk-navbar-nav">
-                <li><a href="#connect" data-uk-modal><i class="uk-icon-user"></i> Connect to save</a></li>
+                {% if connected %}
+                <li class="uk-parent" data-uk-dropdown>
+                    <a href="#">Hello, {{ username }} <i class="uk-icon-caret-down"></i></a>
+                    <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-flip">
+                        <ul class="uk-nav uk-nav-navbar">
+                            <li><a href="/user/profile/"><i class="uk-icon-user"></i> Your account</a></li>
+                            <li><a href="/user/regex/"><i class="uk-icon-list"></i> Your saved regex</a></li>
+                            <li class="uk-nav-divider"></li>
+                            <li><a href="/auth/logout/"><i class="uk-icon-sign-out"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </li>
+                {% else %}
+                <li><a href="#connect" data-uk-modal><i class="uk-icon-sign-in"></i> Connect to save</a></li>
+                {% end %}
             </ul>
         </div>
     </div>

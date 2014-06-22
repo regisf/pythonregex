@@ -17,14 +17,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import hashlib
-import datetime
-
+import pickle
 import tornado.web
 
-from tornadoext.usersession import UserSession
 from App.utils.question import Question
 from App.models.preference import PreferenceModel
+from App.models.user import UserModel
 
 class RequestHandler(tornado.web.RequestHandler):
     """
@@ -33,8 +31,22 @@ class RequestHandler(tornado.web.RequestHandler):
     """
     def __init__(self, *args, **kwargs):
         super(RequestHandler, self).__init__(*args, **kwargs)
-        self.user = UserSession(self.get_secure_cookie('sessionid'))
 
+    def add_flash_message(self, level, message):
+        """
+        Pass a message
+        """
+        cookie = self.get_secure_cookie("messages")
+        messages = None
+
+        if cookie:
+            messages = pickle.loads(cookie)
+
+        if not messages:
+            messages = []
+
+        messages.append({'level': level, 'message': message})
+        self.set_secure_cookie("messages", pickle.dumps(messages))
 
     def get_template_namespace(self):
         """
@@ -42,27 +54,24 @@ class RequestHandler(tornado.web.RequestHandler):
         """
         ns = super(RequestHandler, self).get_template_namespace()
         pref = PreferenceModel().get_codes()
+        cookie = self.get_secure_cookie("messages")
+        connected = self.get_secure_cookie("connected") or False
+
         ns.update({
             'question': Question(),
-            'analytics': pref.get("analytics")
+            'analytics': pref.get("analytics"),
+            'messages': pickle.loads(cookie) if cookie else None,
+            'connected': connected
         })
+
+        if connected:
+            user = UserModel().find_by_id(connected)
+            ns.update({
+                'username': user['username'],
+                'email': user['email']
+            })
+
+        # Remove messages
+        self.clear_cookie("messages")
         return ns
-
-    def login(self, user):
-        """
-        Log in the user
-        Create as sessionid based on the datetime
-        """
-        if user and user.get('is_admin'):
-            salt = "{}{}".format(user.get('username'), str(datetime.datetime.now()))
-            sessionid = hashlib.md5(salt.encode('utf-8')).hexdigest()
-            self.set_secure_cookie('sessionid', sessionid)
-            self.user.login(user, sessionid)
-
-
-    def logout(self):
-        """
-        Logout the user
-        """
-        self.clear_cookie('sessionid', None)
 

@@ -16,6 +16,7 @@
 
   cApplication = (function() {
     function cApplication() {
+      var message, _i, _len;
       this.view = new cUIView;
       this.optionsDialog = new cOptionDialog;
       $("#src_evaluate").on('click', this.evaluate.bind(this));
@@ -34,6 +35,16 @@
         };
       })(this));
       this.contactDialog = new ContactMessage();
+      for (_i = 0, _len = messages.length; _i < _len; _i++) {
+        message = messages[_i];
+        $.UIkit.notify({
+          message: message.message,
+          status: !message.level ? 'success' : 'danger',
+          pos: 'top-center',
+          timeout: 3000
+        });
+      }
+      this;
     }
 
     cApplication.prototype.getModel = function() {
@@ -222,7 +233,7 @@
     function cMessageDialog(title, msg) {
       $("#messagedialog").find('[data-content]').html(msg);
       $("#messagedialog").find('[data-title]').html(title);
-      new $.UIkit.modal.Modal("#messagedialog").show();
+      new $.UIkit.modal("#messagedialog").show();
     }
 
     return cMessageDialog;

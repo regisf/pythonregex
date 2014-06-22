@@ -1,4 +1,4 @@
-# The application class. The main cotnroller
+# The application class. The main controller
 class cApplication
     constructor: ->
         @view = new cUIView
@@ -16,7 +16,18 @@ class cApplication
                     new cMessageDialog "Error", data.error
                 else
                     $("#dest_result").html "<pre><code>#{data.content}</code></pre>"
+
+        # Create the message dialog
         @contactDialog = new ContactMessage()
+
+        # Display notification
+        for message in messages
+            $.UIkit.notify
+                message: message.message
+                status: if not message.level then 'success' else 'danger'
+                pos: 'top-center'
+                timeout: 3000
+        @
 
     getModel: -> @model
 

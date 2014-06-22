@@ -41,6 +41,8 @@ digits = {
 
 class Question:
     """
+    This is an anti-spam system not based on picture (which are now readable by a machine
+    but based on a simple arithmetic question (e.g.: 1 + 2)
     """
     def __init__(self):
         """ Ctor

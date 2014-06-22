@@ -5,6 +5,7 @@
         <title>Python Regex : {% block title %}{% end %}</title>
         <meta name="keywords" content="Python, regular expression, regex, kodos" />
         <link href="/assets/css/uikit.gradient.min.css" rel="stylesheet">
+        <link href="/assets/css/addons/uikit.gradient.addons.min.css" rel="stylesheet" />
         <link href="/assets/css/style.css" rel="stylesheet">
         {% if analytics %}
         <meta content="stupid" />
@@ -39,12 +40,18 @@
         <footer class="uk-container uk-container-center" id="footer">
             <p class="small muted">&copy; <a href="http://www.regisblog.fr/" target="_blank">Régis FLORET</a> 2013 and later</p>
         </footer>
+            <script>
+                var messages = [{% if messages %}{% for message in messages %}
+                    {level: {{message['level']}}, message: "{{ message['message'] }}"},
+                {% end %}{% end %}];
+            </script>
         <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
         <script src="/assets/js/libs/uikit.min.js"></script>
+        <script src="/assets/js/libs/addons/notify.min.js"></script>
         <script src="/assets/js/app.js"></script>
 
-        <!--<script type="text/javascript">var switchTo5x=true;</script>-->
-        <!--<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>-->
-        <!--<script type="text/javascript">stLight.options({publisher: "555ec0a6-2896-4c46-9f2a-fd2e81d7029e", doNotHash: true, doNotCopy: true, hashAddressBar: true});</script>-->
+{#        <script type="text/javascript">var switchTo5x=true;</script>#}
+{#        <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>#}
+{#        <script type="text/javascript">stLight.options({publisher: "555ec0a6-2896-4c46-9f2a-fd2e81d7029e", doNotHash: true, doNotCopy: true, hashAddressBar: true});</script>#}
     </body>
 </html>

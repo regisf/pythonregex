@@ -28,8 +28,12 @@ import settings
 from App.Home.homehandler import HomeHandler
 from App.Home.ajaxhandler import AjaxHandler
 from App.Home.websockethandler import WebSocketHandler
-from App.Home.registerhandler import RegisterHandler, ConfirmHandler, LoginHandler
+from App.Home.registerhandler import RegisterHandler, ConfirmHandler
 from App.Home.contacthandler import ContactHandler
+from App.Home.connecthandler import LoginHandler, LogoutHandler
+from App.User.profile import AccountProfileHandler
+from App.User.regex import AccountRegexHandler
+
 from App.Admin.urls import URLS as AdminURLS
 
 URLS = [
@@ -39,9 +43,12 @@ URLS = [
     (r'^/contact$', ContactHandler),
     (r'^/auth/confirm/(?P<hash>\w+)', ConfirmHandler),
     (r'^/auth/register/$', RegisterHandler),
-    (r'^/auth/connect/$', LoginHandler),
-
+    (r'^/auth/login/$', LoginHandler),
+    (r'^/auth/logout/$', LogoutHandler),
     (r'^/wsa/$', AjaxHandler),
     (r'^/ws/$', WebSocketHandler),
+    (r'^/user/profile/$', AccountProfileHandler),
+    (r'^/user/regex/$', AccountRegexHandler)
+
 ] + AdminURLS
 

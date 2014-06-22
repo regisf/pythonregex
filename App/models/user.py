@@ -21,6 +21,7 @@ import hashlib
 import datetime
 
 from . import database
+from bson.objectid import ObjectId
 import settings
 
 
@@ -86,16 +87,14 @@ class UserModel:
             }}
         )
 
-    def find_user_by_session_id(self, sessionid):
-        """
-        Retreive an user by the sessionid key
-        """
-
     def find_by_hash(self, hash):
         """
         Find an user by its temp_hash.
         """
         return self.users.find_one({'temp_hash': hash})
+
+    def find_by_id(self, _id):
+        return self.users.find_one({'_id': ObjectId(_id.decode('utf-8'))})
 
     def set_user_registered(self, user):
         """
@@ -132,3 +131,9 @@ class UserModel:
         Delete the entry
         """
         self.users.remove({'username': name})
+
+    def validate_user(self, email, password):
+        """
+        Find an user by its email and password
+        """
+        return self.users.find_one({'email': email, 'password': self._generate_password(password)})

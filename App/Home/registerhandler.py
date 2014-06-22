@@ -21,6 +21,7 @@ import json
 import time
 import hashlib
 
+import tornado.web
 from tornadoext.requesthandler import RequestHandler
 import tornado.gen
 
@@ -103,7 +104,7 @@ class RegisterHandler(RequestHandler):
                 username=username,
                 email=email,
                 fields=[err['field'] for err in error],
-                messages=messages
+                error_messages=messages
             )
 
 
@@ -123,7 +124,7 @@ class CheckEmailHandler(tornado.web.RequestHandler):
         self.write(json.dumps({'success': success, 'exists': exists, 'action': 'checkmail'}, ensure_ascii=False))
 
 
-class ConfirmHandler(tornado.web.RequestHandler):
+class ConfirmHandler(RequestHandler):
     def get(self, hash):
         """
         Confirm the inscription by mail
@@ -142,7 +143,3 @@ class ConfirmHandler(tornado.web.RequestHandler):
                 error=True
             )
 
-
-class LoginHandler(tornado.web.RequestHandler):
-    def post(self):
-        self.write("OK")

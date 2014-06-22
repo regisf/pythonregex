@@ -28,7 +28,8 @@ import settings
 import filters
 from urls import URLS
 
-def runApp():
+
+def run_app():
     """
     Run the application.
     """
@@ -39,7 +40,7 @@ def runApp():
         cookie_secret=settings.SECRET_KEY,
         ui_modules={'simple_date': filters.SimpleDate},
         login_url="/auth/login/",
-        #xsrf_cookies=True,
+        xsrf_cookies=True
     )
 
     # The watcher
@@ -56,4 +57,4 @@ def runApp():
     io.start()
 
 if __name__ == "__main__":
-    runApp()
+    run_app()

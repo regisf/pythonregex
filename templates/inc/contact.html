@@ -5,6 +5,7 @@
         <hr>
         <div id="form-container">
             <form action="/contact" method="post" class="uk-form" id="contactform">
+                {% raw xsrf_form_html() %}
                 <div class="uk-form-row">
                     <label>Your email</label>
                     <input type="email" name="email" placeholder="Type your mail address here">

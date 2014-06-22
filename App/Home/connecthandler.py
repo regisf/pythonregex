@@ -17,27 +17,38 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-from tornado.web import RequestHandler
+from tornadoext.requesthandler import RequestHandler
 
-from App.utils.email import is_email
 from App.models.user import UserModel
 
 
-class ConnectHandler(RequestHandler):
+class LoginHandler(RequestHandler):
+    """
+    Connect the user
+    """
     def post(self):
-        """ A user connection
-        """
-        email = self.get_argument("email")
-        password = self.get_argument('password')
-
-        if not (email and password):
-            return
-
-        if not is_email(email):
-            return
-
         model = UserModel()
+        email = self.get_argument("email")
+        password = self.get_argument("password")
+        message = "Unknow user (bad email or wrong password). You should retry."
+        message_level = 1
 
-        if not model.user_exists(email, password):
-            return
+        if email and password:
+            user = model.validate_user(email, password)
+            if user:
+                self.set_secure_cookie("connected", str(user['_id']))
+                message = "You are now connected."
+                message_level = 0
 
+        self.add_flash_message(message_level, message)
+        self.redirect('/')
+
+
+class LogoutHandler(RequestHandler):
+    """
+    Disconnect the user and go to the main page
+    """
+    def get(self):
+        self.add_flash_message(0, "You are now disconnected.")
+        self.clear_cookie("connected")
+        self.redirect('/')
