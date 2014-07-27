@@ -14,7 +14,15 @@ textarea#src_regex { height: 200px;}
         <div class="uk-form-row">
             <textarea id="src_regex" placeholder="Type here your regex" style="width: 100%;"></textarea>
         </div>
-
+        <div class="uk-clearfix uk-margin-top">
+            <div class="uk-align-right">
+        {% if connected %}
+                <a href="#" class="uk-button uk-button-primary uk-button-mini">Save this regex</a>
+        {% else %}
+                <a href="#connect" data-uk-modal class="uk-button uk-button-danger uk-button-mini">Connect to save this regex</a>
+        {% end %}
+            </div>
+        </div>
         <div class="uk-form-row">
             <input type="radio" value="search" name="regex" id="search" checked="checked"/><label for="search"> re.search</label>
             <input type="radio" value="match" name="regex" id="match"/><label for="match"> re.match</label>

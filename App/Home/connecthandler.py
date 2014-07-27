@@ -17,6 +17,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+from tornado.web import authenticated
 from tornadoext.requesthandler import RequestHandler
 
 from App.models.user import UserModel
@@ -35,10 +36,11 @@ class LoginHandler(RequestHandler):
 
         if email and password:
             user = model.validate_user(email, password)
-            if user:
-                self.set_secure_cookie("connected", str(user['_id']))
-                message = "You are now connected."
-                message_level = 0
+            self.set_secure_cookie('user', user['username'])
+            self.current_user = user
+
+            message = "You are now connected."
+            message_level = 0
 
         self.add_flash_message(message_level, message)
         self.redirect('/')
@@ -48,7 +50,8 @@ class LogoutHandler(RequestHandler):
     """
     Disconnect the user and go to the main page
     """
+    @authenticated
     def get(self):
         self.add_flash_message(0, "You are now disconnected.")
-        self.clear_cookie("connected")
+        self.clear_cookie("user")
         self.redirect('/')

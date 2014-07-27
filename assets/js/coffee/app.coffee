@@ -27,9 +27,43 @@ class cApplication
                 status: if not message.level then 'success' else 'danger'
                 pos: 'top-center'
                 timeout: 3000
+
+        # Connect: Save the regex and source text into localStorage
+        $("#connect").on 'click', () =>
+            @saveRegex()
+
+        $(document).on 'unload', () =>
+            @saveRegex()
+
+        # Restore previous regex
+        $(document).on 'load', () =>
+            @restoreRegex()
+
         @
 
     getModel: -> @model
+
+    #
+    # Save the regex and the source text
+    saveRegex: ->
+        window.localStorage.setItem 'regex', $("#src_regex").val
+        window.localStorage.setItem 'sourcetext', $("#sourcetext").val
+        @
+
+    #
+    # Restore the stored regex.
+    #
+    restoreRegex: ->
+        regex = window.localStorage.getItem('regex')
+        if regex != null && regex != undefined
+            $("#src_regex").val regex
+
+        # Restore previous regex
+        sourcetext = window.localStorage.getItem('sourcetext')
+        if sourcetext != null && sourcetext != undefined
+            $("#sourcetext").val sourcetext
+        @
+
 
     evaluate: ->
         regex = $.trim $("#src_regex").val()

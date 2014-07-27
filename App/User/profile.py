@@ -4,6 +4,7 @@ __author__ = 'Régis FLORET'
 import hashlib
 import time
 
+from tornado.web import authenticated
 from tornadoext.requesthandler import RequestHandler
 
 from App.models.user import UserModel
@@ -17,12 +18,14 @@ from App.utils.template import micro_template
 import private_settings
 
 class AccountProfileHandler(RequestHandler):
+    @authenticated
     def get(self, *args, **kwargs):
         """
         Display the information page
         """
-        self.render("profile.html")
+        self.render("profile.html", fields= {})
 
+    @authenticated
     def post(self, *args, **kwargs):
         """
         Change the information. If the usermail change, an email will be sended
@@ -52,6 +55,9 @@ class AccountProfileHandler(RequestHandler):
             if not error:
                 mail_model = EmailModel()
                 subject, body = mail_model.get_template('changing_mail_confirmation')
+                if not (subject and body):
+                    raise AttributeError('Mail model "changing_mail_confirmation" is not created')
+
                 registration_key = hashlib.md5(email.encode('utf-8') + str(time.time()).encode('utf-8')).hexdigest()
                 #UserModel().create_temp_user(username, email, password, registration_key)
                 keys = {
@@ -71,7 +77,6 @@ class AccountProfileHandler(RequestHandler):
                     messages=[{'level': 0, 'message': 'Your account has been successfully updated'}]
                 )
             else:
-                print(error)
                 errors = {}
                 for err in error:
                     errors[err['field']] = err['message']

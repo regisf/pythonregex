@@ -96,6 +96,14 @@ class UserModel:
     def find_by_id(self, _id):
         return self.users.find_one({'_id': ObjectId(_id.decode('utf-8'))})
 
+    def find_by_username(self, username):
+        """
+        Find an user by its username
+        :param username:
+        :return: A MongoDB object
+        """
+        return self.users.find_one({'username': username.decode('utf-8')})
+
     def set_user_registered(self, user):
         """
         Set the user as an active user

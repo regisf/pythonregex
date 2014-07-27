@@ -24,6 +24,7 @@ from App.utils.question import Question
 from App.models.preference import PreferenceModel
 from App.models.user import UserModel
 
+
 class RequestHandler(tornado.web.RequestHandler):
     """
     Extend the tornado requesthandler with few useful
@@ -31,6 +32,12 @@ class RequestHandler(tornado.web.RequestHandler):
     """
     def __init__(self, *args, **kwargs):
         super(RequestHandler, self).__init__(*args, **kwargs)
+
+    def get_current_user(self):
+        """
+        Return the current user. Used for tornado for authentication
+        """
+        return self.get_secure_cookie('user')
 
     def add_flash_message(self, level, message):
         """
@@ -55,20 +62,21 @@ class RequestHandler(tornado.web.RequestHandler):
         ns = super(RequestHandler, self).get_template_namespace()
         pref = PreferenceModel().get_codes()
         cookie = self.get_secure_cookie("messages")
-        connected = self.get_secure_cookie("connected") or False
+        user = self.get_current_user() or False
+        if user:
+            self.current_user = UserModel().find_by_username(user)
 
         ns.update({
             'question': Question(),
             'analytics': pref.get("analytics"),
             'messages': pickle.loads(cookie) if cookie else None,
-            'connected': connected
+            'connected': bool(self.current_user)
         })
 
-        if connected:
-            user = UserModel().find_by_id(connected)
+        if self.current_user:
             ns.update({
-                'username': user['username'],
-                'email': user['email']
+                'username': self.current_user['username'],
+                'email': self.current_user['email']
             })
 
         # Remove messages
