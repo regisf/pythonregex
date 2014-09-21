@@ -10,14 +10,14 @@ textarea#src_regex { height: 200px;}
 {% block content %}
 <div class="uk-form uk-grid">
     <fieldset class="uk-width-medium-1-2">
-        <legend>Your Regex</legend>
+        <legend>Your Regex : &laquo; <span id="regex-name">Untitled</span> &raquo;</legend>
         <div class="uk-form-row">
             <textarea id="src_regex" placeholder="Type here your regex" style="width: 100%;"></textarea>
         </div>
         <div class="uk-clearfix uk-margin-top">
             <div class="uk-align-right">
         {% if connected %}
-                <a href="#" class="uk-button uk-button-primary uk-button-mini">Save this regex</a>
+                <a href="#savedialog" data-uk-modal class="uk-button uk-button-success uk-button-mini" id="save-regex">Save this regex</a>
         {% else %}
                 <a href="#connect" data-uk-modal class="uk-button uk-button-danger uk-button-mini">Connect to save this regex</a>
         {% end %}
@@ -83,5 +83,7 @@ textarea#src_regex { height: 200px;}
     </fieldset>
 
 </div>
-
+{% if connected %}
+{% include 'inc/savedialog.html' %}
+{% end %}
 {% end %}

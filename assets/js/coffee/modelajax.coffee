@@ -1,6 +1,6 @@
-#_require cobject
+#_require basemodel
 
-class cModelAjax extends cObject
+class cModelAjax extends BaseModel
     constructor: ->
         super()
 
@@ -19,3 +19,18 @@ class cModelAjax extends cObject
 
             .done (data) =>
                 @emit Model.Signals.SendSuccess, data
+
+    saveRegex: (name, regex) ->
+        super()
+        alert name
+        alert regex
+
+    deleteRegex: (id, cb) ->
+        $.ajax '/user/regex/',
+            id: id
+            type: 'DELETE'
+            dataType: 'application/json'
+            error: (xhr) ->
+                alert("Error " + xhr.responseText)
+            success: (data) ->
+                cb(id)

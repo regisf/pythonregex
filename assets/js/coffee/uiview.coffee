@@ -73,3 +73,12 @@ class cUIView
         if $("#dest_result").html() isnt 'Not yet evaluated'
             $("#src_evaluate").trigger 'click'
         null
+
+    # Display a fine little message
+    displaySuccessMessage : (msg) ->
+        $.UIkit.notify
+            message : msg
+            status  : 'success'
+            timeout : 5000
+            pos     : 'top-center'
+

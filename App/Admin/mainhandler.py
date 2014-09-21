@@ -17,18 +17,19 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-from tornadoext.requesthandler import RequestHandler
+from tornadoext.requesthandler import RequestHandler, admin_auth_required
 
 from App.models.user import UserModel
-
+from App.models.regex import RegexModel
 
 class AdminHandler(RequestHandler):
+    @admin_auth_required
     def get(self):
-        if not self.user.is_authenticated:
-            self.redirect("/admin/login/")
-            return
-        last_users = UserModel().get_last_ten()
-        self.render('admin/index.html', last_users=last_users, regex_stored=0)
+        self.render(
+            'admin/index.html',
+            last_users=UserModel().get_last_ten(),
+            regex_stored=RegexModel().count()
+        )
 
 
 class LoginHandler(RequestHandler):
@@ -51,6 +52,7 @@ class LoginHandler(RequestHandler):
 
 
 class LogoutHandler(RequestHandler):
+    @admin_auth_required
     def get(self):
         self.logout()
         self.redirect('/admin/login/')

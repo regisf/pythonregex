@@ -9,13 +9,14 @@
 {% block content %}
 <h2>Codes for webmaster</h2>
 <form action="/admin/codes/" method="post" class="uk-form">
+    {% raw xsrf_form_html() %}
     <h3>Analytics</h3>
     <div class="uk-grid uk-grid-preserve" style="margin-top: 20px">
         <div class="uk-width-large-1-3">
             <div class="uk-panel-box">
                 <div class="uk-panel-title">Google Analytics</div>
                 <label>The Google Analytics key</label>
-                <input type="text" name="analytics" class="uk-width-1-1" value="{{ analytics.get('key', '') }}" />
+                <input type="text" name="analytics" class="uk-width-1-1" value="{{ analytics }}" />
             </div>
         </div>
     </div>
@@ -26,11 +27,11 @@
                 <div class="uk-panel-title">Facebook</div>
                 <div class="uk-form-row">
                     <label>The Facebook App ID</label>
-                    <input type="text" name="facebook_app_id" class="uk-width-1-1" value="{{ facebook.get('app_id', '') }}"/>
+{#                    <input type="text" name="facebook_app_id" class="uk-width-1-1" value="{{ facebook.get('app_id', '') }}"/>#}
                 </div>
                 <div class="uk-form-row">
                     <label>The Facebook secret key</label>
-                    <input type="text" name="facebook_secret_key" class="uk-width-1-1" value="{{ facebook.get('secret_key', '') }}" />
+{#                    <input type="text" name="facebook_secret_key" class="uk-width-1-1" value="{{ facebook.get('secret_key', '') }}" />#}
                 </div>
             </div>
         </div>
@@ -38,12 +39,12 @@
             <div class="uk-panel-box">
                 <div class="uk-panel-title">Twitter</div>
                 <div class="uk-form-row">
-                    <label>The Twitter App ID</label>
-                    <input type="text" name="twitter_app_id" class="uk-width-1-1" value="{{ twitter.get('app_id', '') }}" />
+                    <label>The Twitter consumer key</label>
+                    <input type="text" name="twitter_consumer_key" class="uk-width-1-1" value="{{ twitter_consumer_key }}" />
                 </div>
                 <div class="uk-form-row">
                     <label>The Twitter secret key</label>
-                    <input type="text" name="twitter_secret_key" class="uk-width-1-1" value="{{ twitter.get('secret_key', '') }}" />
+                    <input type="text" name="twitter_consumer_secret" class="uk-width-1-1" value="{{ twitter_consumer_secret }}" />
                 </div>
             </div>
         </div>
@@ -51,12 +52,8 @@
             <div class="uk-panel-box">
                 <div class="uk-panel-title">Google Plus</div>
                 <div class="uk-form-row">
-                    <label>The Google App ID</label>
-                    <input type="text" name="google_app_id" class="uk-width-1-1" value="{{ google.get('app_id', '') }}" />
-                </div>
-                <div class="uk-form-row">
                     <label>The Google secret key</label>
-                    <input type="text" name="google_secret_key" class="uk-width-1-1" value="{{ google.get('secret_key', '') }}" />
+                    <input type="text" name="google_secret_key" class="uk-width-1-1" value="{{ google }}" />
                 </div>
 
             </div>
@@ -68,11 +65,11 @@
                 <div class="uk-panel-title">Linkedin</div>
                 <div class="uk-form-row">
                     <label>The Linkedin App ID</label>
-                    <input type="text" name="linkedin_app_id" class="uk-width-1-1" value="{{ linkedin.get('app_id', '') }}" />
+{#                    <input type="text" name="linkedin_app_id" class="uk-width-1-1" value="{{ linkedin.get('app_id', '') }}" />#}
                 </div>
                 <div class="uk-form-row">
                     <label>The Linkedin secret key</label>
-                    <input type="text" name="linkedin_secret_key" class="uk-width-1-1" value="{{ linkedin.get('secret_key', '') }}" />
+{#                    <input type="text" name="linkedin_secret_key" class="uk-width-1-1" value="{{ linkedin.get('secret_key', '') }}" />#}
                 </div>
             </div>
         </div>
@@ -81,11 +78,11 @@
                 <div class="uk-panel-title">Github</div>
                 <div class="uk-form-row">
                     <label>The GitHub App ID</label>
-                    <input type="text" name="github_app_id" class="uk-width-1-1" value="{{ github.get('app_id', '') }}" />
+{#                    <input type="text" name="github_app_id" class="uk-width-1-1" value="{{ github.get('app_id', '') }}" />#}
                 </div>
                 <div class="uk-form-row">
                     <label>The GitHub secret key</label>
-                    <input type="text" name="github_secret_key" class="uk-width-1-1" value="{{ github.get('secret_key', '') }}" />
+{#                    <input type="text" name="github_secret_key" class="uk-width-1-1" value="{{ github.get('secret_key', '') }}" />#}
                 </div>
             </div>
         </div>

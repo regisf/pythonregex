@@ -17,12 +17,26 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+import functools
 import pickle
 import tornado.web
 
 from App.utils.question import Question
-from App.models.preference import PreferenceModel
+from App.models.preference import Config
 from App.models.user import UserModel
+
+
+def admin_auth_required(method):
+    @functools.wraps(method)
+    def wrapper(self, *args, **kwargs):
+        user = self.get_current_user()
+        if user:
+            profile = self.get_user_profile()
+            if profile['is_admin']:
+                return method(self, *args, **kwargs)
+        return self.redirect('/admin/login/')
+    return wrapper
+
 
 
 class RequestHandler(tornado.web.RequestHandler):
@@ -32,6 +46,7 @@ class RequestHandler(tornado.web.RequestHandler):
     """
     def __init__(self, *args, **kwargs):
         super(RequestHandler, self).__init__(*args, **kwargs)
+        self.current_user = self.get_user_profile()
 
     def get_current_user(self):
         """
@@ -60,15 +75,17 @@ class RequestHandler(tornado.web.RequestHandler):
         Make some variables global for all templates
         """
         ns = super(RequestHandler, self).get_template_namespace()
-        pref = PreferenceModel().get_codes()
+        # pref = PreferenceModel().get_codes()
         cookie = self.get_secure_cookie("messages")
         user = self.get_current_user() or False
         if user:
             self.current_user = UserModel().find_by_username(user)
 
+        config = Config()
+
         ns.update({
             'question': Question(),
-            'analytics': pref.get("analytics"),
+            'analytics': config.get("google_analytics_id"),
             'messages': pickle.loads(cookie) if cookie else None,
             'connected': bool(self.current_user)
         })
@@ -83,3 +100,23 @@ class RequestHandler(tornado.web.RequestHandler):
         self.clear_cookie("messages")
         return ns
 
+    def get_user_profile(self):
+        """
+        Get the user if she/he's connected
+        :return: The user db entry
+        """
+        user = self.get_current_user() or False
+        return UserModel().find_by_username(user) if user else None
+
+    def login(self, user):
+        """
+        Log the user. Convinient function
+        :param user: the user db entry
+        :return: None
+        """
+        self.set_secure_cookie('user', user['username'])
+        self.current_user = user
+
+    def logout(self):
+        self.clear_cookie('user')
+        self.current_user = None

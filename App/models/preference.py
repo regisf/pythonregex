@@ -20,10 +20,27 @@
 from . import database
 
 
-class PreferenceModel(object):
-    def __init__(self, ):
-        self.db = database.preference
+class Config:
+    """
+    Class to handler server preferences
+    """
+    def __init__(self):
+        self.__db = database.configuration
 
+    def get(self, key, default_value=None):
+        item = self.__db.find_one({'key': key})
+        return item['value'] if item else default_value
+
+    def set(self, key, value):
+        item = self.get(key)
+        if item is None:
+            self.__db.insert({'key': key, 'value': value})
+        else:
+            self.__db.update({'key': key}, {'$set': {'value': value}})
+
+
+class PreferenceModel(object):
+    @classmethod
     def save_mail_server(self, sender, server_name, server_port, username, password):
         """
         Save the default preferences
@@ -35,34 +52,37 @@ class PreferenceModel(object):
             'username': username,
             'password': password
         }
-        pref = self.db.find({'name': 'smtp_server'})
-        if not pref:
-            self.db.insert({'name': 'smtp_server', 'values': preferences})
-        else:
-            self.db.update({'name': 'smtp_server'}, {'$set': {'values': preferences}})
 
+        Config().set('smtp_server', preferences)
+
+    @classmethod
     def get_mail_server(self):
         """ Get the default preferences
         """
-        pref = self.db.find_one({'name': 'smtp_server'})
-        if not pref:
-            # Default
-            pref = {
-                'values': {
-                    'sender': '',
-                    'name': 'localhost',
-                    'port': '',
-                    'username': '',
-                    'password': ''
-                }
+        pref = Config().get('smtp_server', {
+            'values': {
+                'sender': '',
+                'name': 'localhost',
+                'port': '',
+                'username': '',
+                'password': ''
             }
+        })
         return pref['values']
 
+    @classmethod
     def get_codes(self):
         """
         Get the codes for registering
         """
-        return self.db.find_one({'name': 'codes'})
+        return Config().get('codes', {
+            'analytics': {'key': ''},
+            'facebook': {'app_id': '','secret_key': ''},
+            'twitter': {'app_id': '','secret_key': ''},
+            'google': {'app_id': '', 'secret_key': ''},
+            'linkedin': {'app_id': '','secret_key': ''},
+            'github': {'app_id': '','secret_key': ''}
+        })
 
     def save_codes(self, **kwargs):
         """
@@ -103,19 +123,9 @@ class PreferenceModel(object):
                     'public_key': ''
                 }
             }
-            
+
         if 'analytics' in kwargs:
             pref['analytics']['key'] = kwargs['analytics']
-
-        if 'recaptcha_public' in kwargs:
-            pref['recaptcha']['public_key'] = kwargs['recaptcha_public']
-        else:
-            pref['recaptcha']['public_key'] = ''
-
-        if 'recaptcha_private' in kwargs:
-            pref['recaptcha']['private_key'] = kwargs['recaptcha_private']
-        else:
-            pref['recaptcha']['private_key'] = ''
 
         if 'facebook_id' in kwargs:
             pref['facebook']['app_id'] = kwargs['facebook_id']

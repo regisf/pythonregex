@@ -24,8 +24,11 @@ import tornado.web
 import tornado.ioloop
 import tornado.autoreload
 
+from App.models.preference import Config
+
 import settings
 import filters
+
 from urls import URLS
 
 
@@ -33,11 +36,20 @@ def run_app():
     """
     Run the application.
     """
+    config = Config()
+
     application = tornado.web.Application(
         URLS,
         debug=settings.DEBUG,
         template_path=settings.ROOT_TEMPLATE_PATH,
-        cookie_secret=settings.SECRET_KEY,
+        cookie_secret=config.get('secret_key'),
+
+        # Set keys for OAuth transaction
+        twitter_consumer_key=config.get('twitter_consumer_key'),
+        twitter_consumer_secret=config.get('twitter_consumer_secret'),
+        linkedin_consumer_secret=config.get('linkedin_consumer_secret'),
+        linkedin_consumer_key=config.get('linkedin_consumer_key'),
+
         ui_modules={'simple_date': filters.SimpleDate},
         login_url="/auth/login/",
         xsrf_cookies=True

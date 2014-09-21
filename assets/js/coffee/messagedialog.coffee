@@ -7,3 +7,5 @@ class cMessageDialog
 
         new $.UIkit.modal("#messagedialog").show();
 
+    on: (signal, func) ->
+        return

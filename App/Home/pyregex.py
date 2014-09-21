@@ -21,6 +21,7 @@ import json
 import re
 import html
 
+
 class PyRegex(object):
     def doTheJob(self, value):
         regex = value['regex']
@@ -32,7 +33,8 @@ class PyRegex(object):
 
         try:
             count = int(count)
-        except:
+
+        except TypeError:
             count = 0
 
         if regex != '' or content != '':
@@ -54,10 +56,12 @@ class PyRegex(object):
                 # in case of no error
                 result['content'] = html.escape(result['content'])
 
-            return json.dumps(result, ensure_ascii=False)
+            result['success'] = True
+
+            return result
 
         else:
-            return json.dumps({'success': False})
+            return {'success': False}
 
 
     def _prepare_flags(self, flagsList):

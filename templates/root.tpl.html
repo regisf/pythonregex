@@ -8,7 +8,14 @@
         <link href="/assets/css/addons/uikit.gradient.addons.min.css" rel="stylesheet" />
         <link href="/assets/css/style.css" rel="stylesheet">
         {% if analytics %}
-        <meta content="stupid" />
+        <script type="text/javascript">
+           var _gaq = _gaq || []; _gaq.push(['_setAccount', '{{ analytics }}']); _gaq.push(['_trackPageview']);
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+        </script>
         {% end %}
     </head>
     <body >
@@ -18,6 +25,7 @@
         {% include 'inc/options.html' %}
         {% include 'inc/connect.html' %}
         {% include 'inc/messagedialog.html' %}
+        {% include 'inc/yesnodialog.html' %}
 
         <div class="uk-container uk-container-center" id="main">
             <div class="uk-grid">
@@ -49,7 +57,6 @@
         <script src="/assets/js/libs/uikit.min.js"></script>
         <script src="/assets/js/libs/addons/notify.min.js"></script>
         <script src="/assets/js/app.js"></script>
-
 {#        <script type="text/javascript">var switchTo5x=true;</script>#}
 {#        <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>#}
 {#        <script type="text/javascript">stLight.options({publisher: "555ec0a6-2896-4c46-9f2a-fd2e81d7029e", doNotHash: true, doNotCopy: true, hashAddressBar: true});</script>#}

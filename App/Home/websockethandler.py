@@ -20,16 +20,58 @@
 import json
 
 import tornado.websocket
+from tornado.web import authenticated
 
 from .pyregex import PyRegex
+from App.models.regex import RegexModel
+from App.models.user import UserModel
 
-class WebSocketHandler(tornado.websocket.WebSocketHandler, PyRegex):
-    def open(self):
-        print("Open the web socket")
+
+class WebSocketHandler(tornado.websocket.WebSocketHandler):
+    def get_current_user(self):
+        return self.get_secure_cookie('user')
+
+    def write_message(self, message, binary=False):
+        message = json.dumps(message, ensure_ascii=False)
+        super(WebSocketHandler, self).write_message(message, binary=binary)
 
     def on_message(self, message):
-        result = self.doTheJob(json.loads(message))
-        self.write_message(result)
+        result_json = json.loads(message)
 
-    def on_close(self):
-        print("Close socket")
+        if 'action' in result_json:
+            #
+            # Evaluate
+            #
+            if result_json['action'] == 'evaluate':
+                result = PyRegex().doTheJob(json.loads(message))
+                self.write_message(result)
+                return
+
+            #
+            # Save a regex
+            #
+            elif result_json['action'] == 'save':
+                user = self.get_current_user() or False
+                if user:
+                    self.current_user = UserModel().find_by_username(user)
+
+                try:
+                    saved = RegexModel().save_for_user(result_json['name'], result_json['regex'], self.current_user)
+                except AttributeError as err:
+                    self.write_message({'success': False, 'error': str(err)})
+
+                self.write_message({'success': True})
+                return
+
+            #
+            # Delete a REGEX
+            #
+            elif result_json['action'] == 'delete':
+                user = self.get_current_user() or False
+                if user:
+                    self.current_user = UserModel().find_by_username(user)
+                    RegexModel().delete(self.current_user, result_json['id'])
+                    self.write_message({'success': True})
+                    return
+
+        self.write_message({'success': False, 'error': 'Unknow action'})

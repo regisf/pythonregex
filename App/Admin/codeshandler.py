@@ -16,72 +16,52 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-from tornado.web import RequestHandler, authenticated
 
-from App.models.preference import PreferenceModel
+from tornadoext.requesthandler import RequestHandler, admin_auth_required
+
+from App.models.preference import Config
 
 
 class CodesHandler(RequestHandler):
     """
-    Handle all codes for analytics or captcha, twitter,
+    Handle all codes for analytics or twitter,
     """
-    # @authenticated
+    @admin_auth_required
     def get(self):
-        pref = PreferenceModel().get_codes()
-        if not pref:
-            pref = {
-                'analytics': {
-                    'key': ''
-                },
-                'facebook': {
-                    'app_id': '',
-                    'secret_key': ''
-                },
-                'twitter': {
-                    'app_id': '',
-                    'secret_key': ''
-                },
-                'google': {
-                    'app_id': '',
-                    'secret_key': ''
-                },
-                'linkedin': {
-                    'app_id': '',
-                    'secret_key': ''
-                },
-                'github': {
-                    'app_id': '',
-                    'secret_key': ''
-                }
-            }
-
+        config = Config()
         self.render(
             "admin/codes/list.html",
-            facebook=pref['facebook'],
-            twitter=pref['twitter'],
-            google=pref['google'],
-            linkedin=pref['linkedin'],
-            github=pref['github'],
-            analytics=pref['analytics']
+            facebook=config.get('facebook', ''),
+            twitter_consumer_key=config.get('twitter_consumer_key', ''),
+            twitter_consumer_secret=config.get('twitter_consumer_secret', ''),
+            google=config.get('google_client_id', ''),
+            linkedin=config.get('linkedin', ''),
+            github=config.get('github', ''),
+            analytics=config.get('google_analytics_id', '')
         )
 
-    # @authenticated
+    @admin_auth_required
     def post(self):
         """
         Save the codes
         """
-        PreferenceModel().save_codes(
-            analytics=self.get_argument('analytics'),
-            facebook_id=self.get_argument('facebook_app_id'),
-            facebook_key=self.get_argument('facebook_secret_key'),
-            google_id=self.get_argument('google_app_id'),
-            google_key=self.get_argument('google_secret_key'),
-            twitter_id=self.get_argument('twitter_app_id'),
-            twitter_key=self.get_argument('twitter_secret_key'),
-            linkedin_id=self.get_argument('linkedin_app_id'),
-            linkedin_key=self.get_argument('linkedin_secret_key'),
-            github_id=self.get_argument('github_app_id'),
-            github_key=self.get_argument('github_secret_key'),
-        )
+        config = Config()
+        config.set('google_analytics_id', self.get_argument('analytics'))
+        config.set('twitter_consumer_key', self.get_argument('twitter_consumer_key'))
+        config.set('twitter_consumer_secret', self.get_argument('twitter_consumer_secret'))
+
+        # PreferenceModel().save_codes(
+        #     analytics=self.get_argument('analytics'),
+        #     facebook_id=self.get_argument('facebook_app_id'),
+        #     facebook_key=self.get_argument('facebook_secret_key'),
+        #     google_id=self.get_argument('google_app_id'),
+        #     google_key=self.get_argument('google_secret_key'),
+        #     twitter_id=self.get_argument('twitter_app_id'),
+        #     twitter_key=self.get_argument('twitter_secret_key'),
+        #     linkedin_id=self.get_argument('linkedin_app_id'),
+        #     linkedin_key=self.get_argument('linkedin_secret_key'),
+        #     github_id=self.get_argument('github_app_id'),
+        #     github_key=self.get_argument('github_secret_key'),
+        # )
 
         self.redirect('/admin/codes/')

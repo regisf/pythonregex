@@ -26,4 +26,3 @@ import settings
 _client = MongoClient('localhost')
 database = _client[settings.DB_NAME]
 
-

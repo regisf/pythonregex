@@ -1,11 +1,25 @@
-#_require cobject
-class cModelSocket extends cObject
-    constructor: ->
-        super()
+#_require basemodel
 
+class cModelSocket extends BaseModel
+    send: (data, successSignal, errorSignal) ->
+        socket = new WebSocket('ws://localhost:8888/ws/')
+
+        socket.onmessage = (e) =>
+            @emit successSignal, JSON.parse e.data
+            return
+
+        socket.onerror = (e) =>
+            @emit errorSignal, e.data
+            return
+
+        socket.onopen = (e) =>
+            socket.send JSON.stringify data
+            return
+        return
 
     sendRegex: (regex, content, method, options, sub, count) ->
         data =
+            action: 'evaluate'
             regex: regex
             content: content
             method: method
@@ -14,13 +28,24 @@ class cModelSocket extends cObject
             sub: sub or null
             count: count or null
 
-        socket = new WebSocket('ws://localhost:8888/ws/')
+        @send data, Model.Signals.SendSuccess, Model.Signals.SendError
 
-        socket.onmessage = (e) =>
-            @emit Model.Signals.SendSuccess, JSON.parse e.data
+    saveRegex: (name, regex) ->
+        super()
+        data =
+            action: 'save'
+            name: name
+            regex: regex
 
-        socket.onerror = (e) =>
-            @emit Model.Signals.SendError, e
+        @send data, Model.Signals.SaveSuccess, Model.Signals.SaveError
 
-        socket.onopen = (e) =>
-            socket.send JSON.stringify data
+    deleteRegex: (id, cb) ->
+        data=
+            action: "delete"
+            id: id
+
+        @connect Model.Signals.DeleteRegexSuccess, () =>
+            if typeof cb == 'function'
+                cb(id)
+
+        @send data, Model.Signals.DeleteRegexSuccess, Model.Signals.DeleteRegexError

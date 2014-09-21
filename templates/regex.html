@@ -1,5 +1,35 @@
 {% extends 'root.tpl.html' %}
 
 {% block content %}
-Hello
+<table class="uk-table">
+    <caption>Your saved regular expression</caption>
+    <thead>
+        <tr>
+            <th class="uk-width-2-10">Name</th>
+            <th class="uk-width-6-10">Regex</th>
+            <th class="uk-width-1-10">Last edition</th>
+            <th class="uk-width-1-10">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if regex.count() > 0 %}
+            {% for r in regex %}
+            <tr data-id="{{ r['_id'] }}">
+                <td>{{ r['name'] }}</td>
+                <td data-regex-content>{{ r['regex'] }}</td>
+                <td>{{ r['last_update'].strftime('%d, %b %Y') if 'last_update' in r else "No date" }}</td>
+                <td>
+                    <div class="uk-button-group">
+                        <a href="#" data-use-regex  data-id="{{ r['_id'] }}" data-name="{{ r['name'] }}" class="uk-button uk-button-primary uk-button-mini">Use</a>
+                        <a href="#" data-delete-regex data-id="{{ r['_id'] }}" class="uk-button uk-button-danger uk-button-mini">Delete</a>
+                    </div>
+                </td>
+            </tr>
+            {% end %}
+        {% else %}
+        <tr><td colspan="4"><strong>You didn't save Regex yet</strong></td></tr>
+        {%  end %}
+    </tbody>
+</table>
+
 {% end %}

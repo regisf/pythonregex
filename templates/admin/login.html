@@ -9,6 +9,7 @@
     <body>
         <div class="uk-container uk-container-center" id="main">
             <form class="uk-form uk-container-center uk-width-3-10" action="/admin/login/" method="post">
+                {% raw xsrf_form_html() %}
                 <fieldset class="uk-container-center">
                     <legend>Login</legend>
                     {% if error is not None %}
@@ -27,6 +28,7 @@
                 <div class="uk-form-row">
                     <input type="submit" value="Connection" class="uk-button uk-button-expand uk-button-primary"/>
                 </div>
+                <div class="uk-margin-top"><a href="/"><i class="uk-icon-arrow-circle-left"></i>&nbsp;Go to the main page</a></div>
             </form>
         </div>
     </body>

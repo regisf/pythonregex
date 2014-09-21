@@ -102,6 +102,9 @@ class UserModel:
         :param username:
         :return: A MongoDB object
         """
+        if isinstance(username, str):
+            return self.users.find_one({'username': username})
+
         return self.users.find_one({'username': username.decode('utf-8')})
 
     def set_user_registered(self, user):
@@ -145,3 +148,17 @@ class UserModel:
         Find an user by its email and password
         """
         return self.users.find_one({'email': email, 'password': self._generate_password(password)})
+
+    def exists(self, username, password, is_admin=False):
+        """
+        Test if there's an entry
+        :param username:  The User name
+        :param password:  the user password
+        :param is_admin:  is the user an admin
+        :return: The user entry or None
+        """
+        return self.users.find_one({
+            'username': username,
+            'password': self._generate_password(password),
+            'is_admin': is_admin
+        })
