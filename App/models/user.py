@@ -22,7 +22,7 @@ import datetime
 
 from . import database
 from bson.objectid import ObjectId
-import settings
+from .preference import Config
 
 
 class UserModel:
@@ -39,7 +39,8 @@ class UserModel:
         """
         Generate the hash password
         """
-        return hashlib.sha256(settings.SECRET_KEY.encode() + password.encode()).hexdigest()
+        config = Config()
+        return hashlib.sha256(config.get('secret_key').encode() + password.encode()).hexdigest()
 
     def is_email_exists(self, email):
         """
@@ -162,3 +163,4 @@ class UserModel:
             'password': self._generate_password(password),
             'is_admin': is_admin
         })
+        
