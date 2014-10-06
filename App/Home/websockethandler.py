@@ -28,6 +28,9 @@ from App.models.user import UserModel
 
 
 class WebSocketHandler(tornado.websocket.WebSocketHandler):
+    def check_origin(self, origin):
+        return True
+        
     def get_current_user(self):
         return self.get_secure_cookie('user')
 
