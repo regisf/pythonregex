@@ -60,15 +60,13 @@ class PreferenceModel(object):
         """ Get the default preferences
         """
         pref = Config().get('smtp_server', {
-            'values': {
-                'sender': '',
-                'name': 'localhost',
-                'port': '',
-                'username': '',
-                'password': ''
-            }
+            'sender': '',
+            'name': 'localhost',
+            'port': '',
+            'username': '',
+            'password': ''
         })
-        return pref['values']
+        return pref
 
     @classmethod
     def get_codes(self):
