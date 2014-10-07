@@ -432,7 +432,7 @@
 
     cModelSocket.prototype.send = function(data, successSignal, errorSignal) {
       var socket;
-      socket = new WebSocket('ws://localhost:8888/ws/');
+      socket = new WebSocket('ws://python-regex.com/ws/');
       socket.onmessage = (function(_this) {
         return function(e) {
           _this.emit(successSignal, JSON.parse(e.data));

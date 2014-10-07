@@ -2,7 +2,7 @@
 
 class cModelSocket extends BaseModel
     send: (data, successSignal, errorSignal) ->
-        socket = new WebSocket('ws://localhost:8888/ws/')
+        socket = new WebSocket('ws://python-regex.com/ws/')
 
         socket.onmessage = (e) =>
             @emit successSignal, JSON.parse e.data
