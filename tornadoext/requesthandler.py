@@ -86,6 +86,7 @@ class RequestHandler(tornado.web.RequestHandler):
         ns.update({
             'question': Question(),
             'analytics': config.get("google_analytics_id"),
+            'msvalidate': config.get('msvalidate'),
             'messages': pickle.loads(cookie) if cookie else None,
             'connected': bool(self.current_user)
         })

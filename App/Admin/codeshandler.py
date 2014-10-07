@@ -37,7 +37,8 @@ class CodesHandler(RequestHandler):
             google=config.get('google_client_id', ''),
             linkedin=config.get('linkedin', ''),
             github=config.get('github', ''),
-            analytics=config.get('google_analytics_id', '')
+            analytics=config.get('google_analytics_id', ''),
+            msvalidate=config.get('msvalidate', '')
         )
 
     @admin_auth_required
@@ -47,6 +48,7 @@ class CodesHandler(RequestHandler):
         """
         config = Config()
         config.set('google_analytics_id', self.get_argument('analytics'))
+        config.set('msvalidate', self.get_argument('msvalidate'))
         config.set('twitter_consumer_key', self.get_argument('twitter_consumer_key'))
         config.set('twitter_consumer_secret', self.get_argument('twitter_consumer_secret'))
 
