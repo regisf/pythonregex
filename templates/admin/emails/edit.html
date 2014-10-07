@@ -12,6 +12,7 @@
 {% block content %}
 <h2>Edit a email content</h2>
 <form action="/admin/emails/edit/{{ email['shortcut'] }}/" method="post" class="uk-form" id="edit_mail">
+    {% raw xsrf_form_html() %}
     <div class="uk-form-row{% if errors.get('title') %} uk-alert uk-alert-danger{% end %}">
         <label>Title</label>
         <input type="text" name="title" value="{{ email['title'] }}"/>

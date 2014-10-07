@@ -12,6 +12,7 @@
 {% block content %}
 <h2>Add a email content</h2>
 <form action="/admin/emails/add/" method="post" class="uk-form" id="addmail">
+    {% raw xsrf_form_html() %}
     <div class="uk-form-row{% if errors.get('title') %} uk-alert uk-alert-danger{% end %}">
         <label>Title</label>
         <input type="text" name="title" value="{{ title }}"/>
