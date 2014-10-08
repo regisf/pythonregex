@@ -94,7 +94,7 @@ class RequestHandler(tornado.web.RequestHandler):
         if self.current_user:
             ns.update({
                 'username': self.current_user['username'],
-                'email': self.current_user['email']
+                'email': self.current_user.get('email', '')
             })
 
         # Remove messages
