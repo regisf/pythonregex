@@ -61,6 +61,26 @@ class UserModel:
             'is_admin': is_admin
         })
 
+    def create_social_user(self, username, network):
+        """
+        Create a user coming from a social network
+        :param username: The given username
+        :rtype username: str
+        :param network: Which network does he/she comes from
+        :rtype network: str
+        :return: The user entry
+        """
+        user = self.find_by_username(username)
+        if not user:
+            user = self.users.insert({
+                'username': username,
+                'from': network,
+                'creation_date': datetime.datetime.now(),
+                'is_admin': False,
+                'temp_hash': None
+            })
+        return user
+
     def create_temp_user(self, username, email, password, hash):
         """
         Create an user not registred

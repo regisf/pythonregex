@@ -21,6 +21,7 @@
             <th>Registration date</th>
             <th>Is admin</th>
             <th>Registred</th>
+            <th>Registration</th>
         </tr>
     </thead>
     <tbody>
@@ -31,6 +32,7 @@
             <td>{{ modules.simple_date(user['creation_date'], "On %d %b %Y at %Hh %Mm") }}</td>
             <td><span class="uk-text-{% if user['is_admin'] %}success">Yes{% else %}danger uk-text-bold">No{% end %}</span></td>
             <td><span class="uk-text-{% if not user['temp_hash'] %}success">Yes{% else %}danger uk-text-bold">No{% end %}</span></td>
+            <td>{{ user.get('from', 'Email') }}</td>
         </tr>
 {% end %}
     </tbody>

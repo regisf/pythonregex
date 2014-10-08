@@ -17,11 +17,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-from tornado.web import authenticated, RequestHandler
+from tornado.web import authenticated
 from tornado.auth import GoogleOAuth2Mixin, TwitterMixin, FacebookGraphMixin
 from tornado.gen import coroutine
 
-#from tornadoext.requesthandler import RequestHandler
+from tornadoext.requesthandler import RequestHandler
 from tornadoext.oauth import GithubMixin, LinkedInMixin
 
 from App.models.user import UserModel
@@ -102,7 +102,10 @@ class TwitterOAuth2Handler(RequestHandler, TwitterMixin):
             yield self.authorize_redirect()
 
     def _on_login(self, user):
-       print(user)
+        username = user['name']
+        user = UserModel().create_social_user(username, 'twitter')
+        self.login(user)
+        self.redirect('/')
 
 
 class FacebookOAuth2Handler(RequestHandler, FacebookGraphMixin):
