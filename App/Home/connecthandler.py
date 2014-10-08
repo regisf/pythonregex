@@ -18,11 +18,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 from tornado.log import gen_log as logging
-from tornado.web import authenticated
+from tornado.web import authenticated, RequestHandler
 from tornado.auth import GoogleOAuth2Mixin, TwitterMixin, FacebookGraphMixin
 from tornado.gen import coroutine
 
-from tornadoext.requesthandler import RequestHandler
+#from tornadoext.requesthandler import RequestHandler
 from tornadoext.oauth import GithubMixin, LinkedInMixin
 
 from App.models.user import UserModel
@@ -96,9 +96,8 @@ class TwitterOAuth2Handler(RequestHandler, TwitterMixin):
     @coroutine
     def get(self, *args, **kwargs):
         if self.get_argument("oauth_token", None):
-            callback = self.async_callback(self._on_login)
             yield self.get_authenticated_user(
-                callback=callback
+                callback=self._on_login
             )
             # save db
         else:
