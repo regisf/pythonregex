@@ -17,7 +17,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-from tornado.log import gen_log as logging
 from tornado.web import authenticated, RequestHandler
 from tornado.auth import GoogleOAuth2Mixin, TwitterMixin, FacebookGraphMixin
 from tornado.gen import coroutine
@@ -72,7 +71,7 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
             yield self.get_authenticated_user(
                 redirect_uri="https://www.python-regex.com/auth/google/",
                 code=self.get_argument('code'),
-                callback=self.async_callback(self._on_login)
+                callback=self._on_login
             )
         else:
             google_key = Config().get('google_client_id')
@@ -86,7 +85,7 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
             )
 
     def _on_login(self, user):
-       logging.info(user)
+       print(user)
 
 
 class TwitterOAuth2Handler(RequestHandler, TwitterMixin):
@@ -99,12 +98,11 @@ class TwitterOAuth2Handler(RequestHandler, TwitterMixin):
             yield self.get_authenticated_user(
                 callback=self._on_login
             )
-            # save db
         else:
             yield self.authorize_redirect()
 
     def _on_login(self, user):
-       logging.info(user)
+       print(user)
 
 
 class FacebookOAuth2Handler(RequestHandler, FacebookGraphMixin):
@@ -138,12 +136,12 @@ class LinkedInOAuth2Handler(RequestHandler, LinkedInMixin):
     @coroutine
     def get(self, *args, **kwargs):
         if self.get_argument("oauth_token", None):
-            self.get_authenticated_user(self.async_callback(self._on_login))
+            self.get_authenticated_user(self._on_login)
             return
         self.authorize_redirect(callback_uri=None)
 
     def _on_login(self, user):
-       logging.info(user)
+       print(user)
 
 
 class GithubOAuth2Handler(RequestHandler, GithubMixin):
@@ -163,7 +161,7 @@ class GithubOAuth2Handler(RequestHandler, GithubMixin):
                 client_id=client_id,
                 client_secret=client_secret,
                 code=self.get_argument("code"),
-                callback=self.async_callback(self._on_login)
+                callback=self._on_login
             )
             return
 
@@ -174,4 +172,4 @@ class GithubOAuth2Handler(RequestHandler, GithubMixin):
         )
 
     def _on_login(self, user):
-       logging.info(user)
+       print(user)
