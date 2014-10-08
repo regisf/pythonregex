@@ -96,8 +96,9 @@ class TwitterOAuth2Handler(RequestHandler, TwitterMixin):
     @coroutine
     def get(self, *args, **kwargs):
         if self.get_argument("oauth_token", None):
-            user = yield self.get_authenticated_user(
-                callback=self.async_callback(self._on_login)
+            callback = self.async_callback(self._on_login)
+            yield self.get_authenticated_user(
+                callback=callback
             )
             # save db
         else:
