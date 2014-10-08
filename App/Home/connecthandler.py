@@ -17,6 +17,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+from tornado.log import gen_log as logging
 from tornado.web import authenticated
 from tornado.auth import GoogleOAuth2Mixin, TwitterMixin, FacebookGraphMixin
 from tornado.gen import coroutine
@@ -26,6 +27,7 @@ from tornadoext.oauth import GithubMixin, LinkedInMixin
 
 from App.models.user import UserModel
 from App.models.preference import Config
+
 
 class LoginHandler(RequestHandler):
     """
@@ -67,12 +69,11 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
     @coroutine
     def get(self, *args, **kwargs):
         if self.get_argument("code", False):
-            user = yield self.get_authenticated_user(
+            yield self.get_authenticated_user(
                 redirect_uri="https://www.python-regex.com/auth/google/",
                 code=self.get_argument('code'),
                 callback=self.async_callback(self._on_login)
             )
-            # save
         else:
             google_key = Config().get('google_client_id')
 
@@ -85,7 +86,7 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
             )
 
     def _on_login(self, user):
-        print(user)
+       logging.info(user)
 
 
 class TwitterOAuth2Handler(RequestHandler, TwitterMixin):
@@ -103,8 +104,7 @@ class TwitterOAuth2Handler(RequestHandler, TwitterMixin):
             yield self.authorize_redirect()
 
     def _on_login(self, user):
-        print(user)
-
+       logging.info(user)
 
 
 class FacebookOAuth2Handler(RequestHandler, FacebookGraphMixin):
@@ -119,8 +119,10 @@ class FacebookOAuth2Handler(RequestHandler, FacebookGraphMixin):
                 redirect_uri='/auth/facebook/',
                 client_id=client_id,
                 client_secret=client_secret,
-                code=self.get_argument("code"))
+                code=self.get_argument("code")
+            )
             # Save the user with e.g. set_secure_cookie
+            logging.info(user)
 
         else:
             yield self.authorize_redirect(
@@ -141,7 +143,8 @@ class LinkedInOAuth2Handler(RequestHandler, LinkedInMixin):
         self.authorize_redirect(callback_uri=None)
 
     def _on_login(self, user):
-        pass
+       logging.info(user)
+
 
 class GithubOAuth2Handler(RequestHandler, GithubMixin):
     """
@@ -151,8 +154,8 @@ class GithubOAuth2Handler(RequestHandler, GithubMixin):
     def get(self, *args, **kwargs):
         redirect_uri = '/auth/github/'
         config = Config()
-        client_id = config.get('github_client_id')
-        client_secret = config.get('github_client_secret')
+        client_id = config.get('github_consumer_key')
+        client_secret = config.get('github_consumer_secret')
 
         if self.get_argument("code", False):
             self.get_authenticated_user(
@@ -171,4 +174,4 @@ class GithubOAuth2Handler(RequestHandler, GithubMixin):
         )
 
     def _on_login(self, user):
-        print(user)
+       logging.info(user)

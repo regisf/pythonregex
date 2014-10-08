@@ -34,9 +34,12 @@ class CodesHandler(RequestHandler):
             facebook=config.get('facebook', ''),
             twitter_consumer_key=config.get('twitter_consumer_key', ''),
             twitter_consumer_secret=config.get('twitter_consumer_secret', ''),
-            google=config.get('google_client_id', ''),
-            linkedin=config.get('linkedin', ''),
-            github=config.get('github', ''),
+            google_consumer_key=config.get('google_consumer_key', ''),
+            google_secret_key=config.get('google_secret_key', ''),
+            linkedin_consumer_key=config.get('linkedin_consumer_key', ''),
+            linkedin_consumer_secret=config.get('linkedin_consumer_secret', ''),
+            github_consumer_key=config.get('github_consumer_key', ''),
+            github_consumer_secret=config.get('github_consumer_secret', ''),
             analytics=config.get('google_analytics_id', ''),
             msvalidate=config.get('msvalidate', '')
         )
@@ -51,19 +54,17 @@ class CodesHandler(RequestHandler):
         config.set('msvalidate', self.get_argument('msvalidate'))
         config.set('twitter_consumer_key', self.get_argument('twitter_consumer_key'))
         config.set('twitter_consumer_secret', self.get_argument('twitter_consumer_secret'))
+        config.set('linkedin_consumer_key', self.get_argument('linkedin_consumer_key'))
+        config.set('linkedin_consumer_secret', self.get_argument('linkedin_consumer_secret'))
+        config.set('github_consumer_key', self.get_argument('github_consumer_key'))
+        config.set('github_consumer_secret', self.get_argument('github_consumer_secret'))
+        config.set('google_consumer_key', self.get_argument('google_consumer_key'))
+        config.set('google_secret_key', self.get_argument('google_secret_key'))
 
-        # PreferenceModel().save_codes(
-        #     analytics=self.get_argument('analytics'),
-        #     facebook_id=self.get_argument('facebook_app_id'),
-        #     facebook_key=self.get_argument('facebook_secret_key'),
-        #     google_id=self.get_argument('google_app_id'),
-        #     google_key=self.get_argument('google_secret_key'),
-        #     twitter_id=self.get_argument('twitter_app_id'),
-        #     twitter_key=self.get_argument('twitter_secret_key'),
-        #     linkedin_id=self.get_argument('linkedin_app_id'),
-        #     linkedin_key=self.get_argument('linkedin_secret_key'),
-        #     github_id=self.get_argument('github_app_id'),
-        #     github_key=self.get_argument('github_secret_key'),
-        # )
+        # Reset settings
+        self.settings['twitter_consumer_key'] = config.get('twitter_consumer_key')
+        self.settings['twitter_consumer_secret'] = config.get('twitter_consumer_secret')
+        self.settings['linkedin_consumer_secret'] = config.get('linkedin_consumer_secret')
+        self.settings['linkedin_consumer_key'] = config.get('linkedin_consumer_key'),
 
         self.redirect('/admin/codes/')

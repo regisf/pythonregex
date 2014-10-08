@@ -30,6 +30,7 @@ import settings
 import filters
 
 from urls import URLS
+from tornado.log import gen_log as logging
 
 
 def run_app():
@@ -52,7 +53,7 @@ def run_app():
 
         ui_modules={'simple_date': filters.SimpleDate},
         login_url="/auth/login/",
-        xsrf_cookies=True
+        xsrf_cookies=True,
     )
 
     # The watcher

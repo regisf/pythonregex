@@ -161,3 +161,4 @@ class PreferenceModel(object):
             self.db.insert(values)
         else:
             self.db.update(values, pref)
+
