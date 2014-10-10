@@ -69,15 +69,15 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
     def get(self, *args, **kwargs):
         if self.get_argument("code", False):
             yield self.get_authenticated_user(
-                redirect_uri="https://www.python-regex.com/auth/google/",
+                redirect_uri="http://python-regex.com/auth/google/",
                 code=self.get_argument('code'),
                 callback=self._on_login
             )
         else:
-            google_key = Config().get('google_client_id')
+            google_key = Config().get('google_consumer_key')
 
             yield self.authorize_redirect(
-                redirect_uri="https://www.python-regex.com/auth/google/",
+                redirect_uri="http://python-regex.com/auth/google/",
                 client_id=google_key,
                 scope=['profile', 'email'],
                 response_type='code',
