@@ -123,7 +123,6 @@ class FacebookOAuth2Handler(RequestHandler, FacebookGraphMixin):
                 code=self.get_argument("code")
             )
             # Save the user with e.g. set_secure_cookie
-            logging.info(user)
 
         else:
             yield self.authorize_redirect(
