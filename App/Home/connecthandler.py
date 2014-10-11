@@ -85,7 +85,8 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
             
             access_token = str(user['access_token'])
             http_client = self.get_auth_http_client()
-            response =  yield http_client.fetch('https://www.googleapis.com/oauth2/v1/userinfo?access_token={}'.format(access_token))
+            response = yield http_client.fetch('https://www.googleapis.com/oauth2/v1/userinfo?access_token={}'
+                                               .format(access_token))
 
             if not response:
                 HTTPError(500, "Google authentication error")
@@ -96,18 +97,15 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
             self.login(user)
             self.redirect('/')
             return
+
         else:
             yield self.authorize_redirect(
                 redirect_uri=redirect_uri,
-<<<<<<< HEAD
                 client_id=Config().get('google_consumer_key'),
                 scope=['profile', 'email'],
-=======
-                client_id=Config().get('google_client_secret'),
-                scope=['email', 'profile'],
->>>>>>> 58c8b83e7ee54304888067dd03ef8e2596525ac3
                 response_type='code',
                 extra_params={'approval_prompt': 'auto'})
+
 
 class TwitterOAuth2Handler(RequestHandler, TwitterMixin):
     """
