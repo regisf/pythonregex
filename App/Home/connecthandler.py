@@ -71,7 +71,6 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
     @coroutine
     def get(self, *args, **kwargs):
         redirect_uri = "http://python-regex.com/auth/google/"
-<<<<<<< HEAD
         if self.get_argument('code', False):
             config = Config()
             if self._OAUTH_SETTINGS_KEY not in self.settings:
@@ -84,17 +83,6 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
                 code=self.get_argument('code')
             )
             
-=======
-        if self.get_argument("code", False):
-            user = yield self.get_authenticated_user(
-                redirect_uri=redirect_uri,
-                code=self.get_argument('code'),
-            )
-            if not user:
-                HTTPError(500, "Google authentication error")
-                return
-
->>>>>>> 58c8b83e7ee54304888067dd03ef8e2596525ac3
             access_token = str(user['access_token'])
             http_client = self.get_auth_http_client()
             response =  yield http_client.fetch('https://www.googleapis.com/oauth2/v1/userinfo?access_token={}'.format(access_token))
@@ -102,10 +90,9 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
             if not response:
                 HTTPError(500, "Google authentication error")
                 return
-            print(str(response.body))
+
             user_json = json.loads(response.body.decode())
             user = UserModel().create_social_user(user_json.get('name'), 'google')
-            print(user_json)
             self.login(user)
             self.redirect('/')
             return
