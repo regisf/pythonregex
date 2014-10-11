@@ -316,12 +316,10 @@
         return;
       }
       formData = new FormData(document.getElementById("contactform"));
-      $("#form-container").slideUp('fast', (function(_this) {
-        return function() {
-          $("#wheel-container").removeClass('uk-hidden');
-          return _this.addClass('uk-hidden');
-        };
-      })(this));
+      $("#form-container").slideUp('fast', function() {
+        $("#wheel-container").removeClass('uk-hidden');
+        return this.addClass('uk-hidden');
+      });
       jqxhr = $.ajax({
         url: '/contact',
         type: 'POST',

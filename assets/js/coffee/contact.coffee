@@ -63,7 +63,7 @@ class ContactMessage
         formData = new FormData(document.getElementById("contactform"))
 
         # Display a wheel
-        $("#form-container").slideUp 'fast', () =>
+        $("#form-container").slideUp 'fast', () ->
             $("#wheel-container").removeClass 'uk-hidden'
             @addClass 'uk-hidden'
 
