@@ -16,6 +16,7 @@
 </div>
 <div class="uk-clearfix">
     <form action="/admin/users/delete/{{ username }}/" method="post">
+        {% raw xsrf_form_html() %}
         <input type="hidden" name="username" value="{{ username }}" />
         <div class="uk-align-right">
             <input type="submit" value="Yes" class="uk-button uk-button-primary" />
