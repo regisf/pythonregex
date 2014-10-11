@@ -61,23 +61,29 @@ class UserModel:
             'is_admin': is_admin
         })
 
-    def create_social_user(self, username, network):
+    def create_social_user(self, username, network, email='', avatar=''):
         """
         Create a user coming from a social network
         :param username: The given username
         :rtype username: str
         :param network: Which network does he/she comes from
         :rtype network: str
+        :param email: The user email
+        :rtype email: str
+        :param avatar: The url of the user avatar
+        :rtype avatar: str
         :return: The user entry
         """
         user = self.find_by_username(username)
         if not user:
             user_id = self.users.insert({
                 'username': username,
+                'email': email,
                 'from': network,
                 'creation_date': datetime.datetime.now(),
                 'is_admin': False,
-                'temp_hash': None
+                'temp_hash': None,
+                'avatar': avatar
             })
             user = self.find_by_id(user_id)
 

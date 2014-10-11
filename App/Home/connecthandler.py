@@ -19,6 +19,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import json
+import binascii
+import os
 
 from tornado.web import authenticated, HTTPError
 from tornado.auth import GoogleOAuth2Mixin, TwitterMixin, FacebookGraphMixin
@@ -70,7 +72,7 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
     """
     @coroutine
     def get(self, *args, **kwargs):
-        redirect_uri = "http://python-regex.com/auth/google/"
+        redirect_uri = "%s://%s" % (self.request.protocol, "python-regex.com/auth/google/")
         if self.get_argument('code', False):
             config = Config()
             if self._OAUTH_SETTINGS_KEY not in self.settings:
@@ -93,7 +95,12 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
                 return
 
             user_json = json.loads(response.body.decode())
-            user = UserModel().create_social_user(user_json.get('name'), 'google')
+            user = UserModel().create_social_user(
+                user_json.get('name'),
+                'google',
+                user_json.get('email', ''),
+                user_json.get('picture', '')
+            )
             self.login(user)
             self.redirect('/')
             return
@@ -156,13 +163,45 @@ class LinkedInOAuth2Handler(RequestHandler, LinkedInMixin):
     """
     @coroutine
     def get(self, *args, **kwargs):
-        if self.get_argument("oauth_token", None):
-            self.get_authenticated_user(self._on_login)
-            return
-        self.authorize_redirect(callback_uri=None)
+        config = Config()
+        code = self.get_argument("code", None)
+        redirect_uri = "%s://%s" % (self.request.protocol, "python-regex.com/auth/linkedin/")
 
-    def _on_login(self, user):
-       print(user)
+        if not code:
+            # Generate a random state
+            state = binascii.b2a_hex(os.urandom(15))
+
+            self.set_secure_cookie("linkedin_state", state)
+
+            yield self.authorize_redirect(
+                redirect_uri=redirect_uri,
+                client_id=config.get("linkedin_api_key"),
+                extra_params={
+                    "response_type": "code",
+                    "state": state,
+                    "scope": "r_basicprofile r_emailaddress"
+                }
+            )
+
+            return
+
+        # Validate the state
+        if self.get_argument("state", None) != self.get_secure_cookie("linkedin_state"):
+            raise HTTPError(400, "Invalid state")
+
+        user_data = yield self.get_authenticated_user(
+            redirect_uri=redirect_uri,
+            client_id=config.get("linkedin_consumer_key"),
+            client_secret=config("linkedin_consumer_secret"),
+            code=code,
+            extra_fields=["formatted-name", "email-address"]
+        )
+
+        if not user_data:
+            raise HTTPError(400, "LinkedIn authentication failed")
+
+        print(user_data)
+
 
 
 class GithubOAuth2Handler(RequestHandler, GithubMixin):

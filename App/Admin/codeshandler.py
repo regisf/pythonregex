@@ -36,6 +36,7 @@ class CodesHandler(RequestHandler):
             twitter_consumer_secret=config.get('twitter_consumer_secret', ''),
             google_consumer_key=config.get('google_consumer_key', ''),
             google_secret_key=config.get('google_secret_key', ''),
+            linkedin_api_key=config.get('linkedin_api_key', ''),
             linkedin_consumer_key=config.get('linkedin_consumer_key', ''),
             linkedin_consumer_secret=config.get('linkedin_consumer_secret', ''),
             github_consumer_key=config.get('github_consumer_key', ''),
@@ -54,6 +55,7 @@ class CodesHandler(RequestHandler):
         config.set('msvalidate', self.get_argument('msvalidate'))
         config.set('twitter_consumer_key', self.get_argument('twitter_consumer_key'))
         config.set('twitter_consumer_secret', self.get_argument('twitter_consumer_secret'))
+        config.set('linkedin_api_key', self.get_argument('linkedin_api_key'))
         config.set('linkedin_consumer_key', self.get_argument('linkedin_consumer_key'))
         config.set('linkedin_consumer_secret', self.get_argument('linkedin_consumer_secret'))
         config.set('github_consumer_key', self.get_argument('github_consumer_key'))
@@ -64,7 +66,5 @@ class CodesHandler(RequestHandler):
         # Reset settings
         self.settings['twitter_consumer_key'] = config.get('twitter_consumer_key')
         self.settings['twitter_consumer_secret'] = config.get('twitter_consumer_secret')
-        self.settings['linkedin_consumer_secret'] = config.get('linkedin_consumer_secret')
-        self.settings['linkedin_consumer_key'] = config.get('linkedin_consumer_key'),
 
         self.redirect('/admin/codes/')
