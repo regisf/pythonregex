@@ -72,13 +72,15 @@ class UserModel:
         """
         user = self.find_by_username(username)
         if not user:
-            user = self.users.insert({
+            user_id = self.users.insert({
                 'username': username,
                 'from': network,
                 'creation_date': datetime.datetime.now(),
                 'is_admin': False,
                 'temp_hash': None
             })
+            user = self.find_by_id(user_id)
+
         return user
 
     def create_temp_user(self, username, email, password, hash):
