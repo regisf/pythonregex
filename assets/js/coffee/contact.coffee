@@ -77,7 +77,7 @@ class ContactMessage
         # Restore form
         jqxhr.always (data) ->
             $("#wheel-container").addClass 'uk-hidden'
-            $("#form-container").removeClass 'uk-hidden'
+            $("#form-container").show()
 
         jqxhr.done (data) ->
             if not data.match /^error/

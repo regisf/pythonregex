@@ -329,7 +329,7 @@
       });
       jqxhr.always(function(data) {
         $("#wheel-container").addClass('uk-hidden');
-        return $("#form-container").removeClass('uk-hidden');
+        return $("#form-container").show();
       });
       jqxhr.done(function(data) {
         var errorModal, okModal;
