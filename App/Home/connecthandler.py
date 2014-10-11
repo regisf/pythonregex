@@ -68,12 +68,16 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
     Connect with Google account
     """
     @coroutine
-    def get(self):
+    def get(self, *args, **kwargs):
         redirect_uri = "http://python-regex.com/auth/google/"
-        if self.get_argument('code', False):
+        if self.get_argument("code", False):
             user = yield self.get_authenticated_user(
                 redirect_uri=redirect_uri,
-                code=self.get_argument('code'))
+                code=self.get_argument('code'),
+            )
+            if not user:
+                HTTPError(500, "Google authentication error")
+                return
 
             access_token = str(user['access_token'])
             http_client = self.get_auth_http_client()
@@ -91,42 +95,10 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
         else:
             yield self.authorize_redirect(
                 redirect_uri=redirect_uri,
-                client_id=Config().get('google_secret_key'),
-                scope=['profile', 'email'],
+                client_id=Config().get('google_client_secret'),
+                scope=['email', 'profile'],
                 response_type='code',
                 extra_params={'approval_prompt': 'auto'})
-    # @coroutine
-    # def get(self, *args, **kwargs):
-    #     redirect_uri = "http://python-regex.com/auth/google/"
-    #     if self.get_argument("code", False):
-    #         user = yield self.get_authenticated_user(
-    #             redirect_uri=redirect_uri,
-    #             code=self.get_argument('code'),
-    #         )
-    #         if not user:
-    #             HTTPError(500, "Google authentication error")
-    #             return
-    #
-    #         access_token = str(user['access_token'])
-    #         http_client = self.get_auth_http_client()
-    #         response =  yield http_client.fetch('https://www.googleapis.com/oauth2/v1/userinfo?access_token='+access_token)
-    #         if not response:
-    #             HTTPError(500, "Google authentication error")
-    #             return
-    #
-    #         user_json = json.loads(response.body)
-    #         # user = UserModel().create_social_user(user_json.get(''))
-    #         print(user_json)
-    #         # self.login(user)
-    #         self.redirect('/')
-    #         return
-    #     else:
-    #         yield self.authorize_redirect(
-    #             redirect_uri=redirect_uri,
-    #             client_id=self.settings['google_oauth']['key'],
-    #             scope=['email'],
-    #             response_type='code',
-    #             extra_params={'approval_prompt': 'auto'})
 
 class TwitterOAuth2Handler(RequestHandler, TwitterMixin):
     """
