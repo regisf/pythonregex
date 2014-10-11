@@ -81,15 +81,15 @@ class ContactMessage
 
         jqxhr.done (data) ->
             if not data.match /^error/
-                okModal = new $.UIkit.Modal("#send-success")
+                okModal = new $.UIkit.modal("#send-success")
                 okModal.show()
             else
-                errorModal = $.UIkit.Modal("#connection-error")
+                errorModal = $.UIkit.modal("#connection-error")
                 document.getElementById("connection-error-msg").innerHTML = data;
                 errorModal.show()
 
         jqxhr.fail (xhr) ->
-            errorModal = $.UIkit.Modal("#connection-error")
+            errorModal = $.UIkit.modal("#connection-error")
             document.getElementById("connection-error-msg").innerHTML = xhr.responseText;
             errorModal.show()
 

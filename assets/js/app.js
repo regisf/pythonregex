@@ -336,17 +336,17 @@
       jqxhr.done(function(data) {
         var errorModal, okModal;
         if (!data.match(/^error/)) {
-          okModal = new $.UIkit.Modal("#send-success");
+          okModal = new $.UIkit.modal("#send-success");
           return okModal.show();
         } else {
-          errorModal = $.UIkit.Modal("#connection-error");
+          errorModal = $.UIkit.modal("#connection-error");
           document.getElementById("connection-error-msg").innerHTML = data;
           return errorModal.show();
         }
       });
       jqxhr.fail(function(xhr) {
         var errorModal;
-        errorModal = $.UIkit.Modal("#connection-error");
+        errorModal = $.UIkit.modal("#connection-error");
         document.getElementById("connection-error-msg").innerHTML = xhr.responseText;
         return errorModal.show();
       });
