@@ -17,7 +17,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-from tornado.web import authenticated
+import json
+
+from tornado.web import authenticated, HTTPError
 from tornado.auth import GoogleOAuth2Mixin, TwitterMixin, FacebookGraphMixin
 from tornado.gen import coroutine
 
@@ -67,26 +69,36 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
     """
     @coroutine
     def get(self, *args, **kwargs):
+        redirect_uri = "http://python-regex.com/auth/google/"
         if self.get_argument("code", False):
-            yield self.get_authenticated_user(
-                redirect_uri="http://python-regex.com/auth/google/",
+            user = yield self.get_authenticated_user(
+                redirect_uri=redirect_uri,
                 code=self.get_argument('code'),
-                callback=self._on_login
             )
+            if not user:
+                HTTPError(500, "Google authentication error")
+                return
+
+            access_token = str(user['access_token'])
+            http_client = self.get_auth_http_client()
+            response =  yield http_client.fetch('https://www.googleapis.com/oauth2/v1/userinfo?access_token='+access_token)
+            if not response:
+                HTTPError(500, "Google authentication error")
+                return
+
+            user_json = json.loads(response.body)
+            # user = UserModel().create_social_user(user_json.get(''))
+            print(user_json)
+            # self.login(user)
+            self.redirect('/')
+            return
         else:
-            google_key = Config().get('google_consumer_key')
-
             yield self.authorize_redirect(
-                redirect_uri="http://python-regex.com/auth/google/",
-                client_id=google_key,
-                scope=['profile', 'email'],
+                redirect_uri=redirect_uri,
+                client_id=self.settings['google_oauth']['key'],
+                scope=['email'],
                 response_type='code',
-                extra_params={'approval_prompt': 'auto'}
-            )
-
-    def _on_login(self, user):
-       print(user)
-
+                extra_params={'approval_prompt': 'auto'})
 
 class TwitterOAuth2Handler(RequestHandler, TwitterMixin):
     """
