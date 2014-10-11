@@ -22,33 +22,34 @@
       this.optionsDialog = new cOptionDialog;
       this.contactDialog = new ContactMessage();
       this.model = window.WebSocket ? new cModelSocket : new cModelAjax;
-      this.model.connect(Model.Signals.SendError, (function(_this) {
-        return function(msg) {
-          new cMessageDialog("Error", "Unable to connect the server " + msg);
-        };
-      })(this)).connect(Model.Signals.SendSuccess, (function(_this) {
-        return function(data) {
-          if (!data.success) {
-            new cMessageDialog("Error", data.error);
-          } else {
-            $("#dest_result").html("<pre><code>" + data.content + "</code></pre>");
-          }
-        };
-      })(this)).connect(Model.Signals.SaveSuccess, (function(_this) {
-        return function(data) {
-          _this.saveDialog.close();
-          if (!data.success) {
-            new cMessageDialog("Error", data.error);
-          } else {
-            _this.view.displaySuccessMessage("Regular expression saved with success");
-            _this.currentSave = data.name;
-          }
-        };
-      })(this)).connect(Model.Signals.SaveError, (function(_this) {
-        return function(data) {
-          new cMessageDialog("Error", data);
-        };
-      })(this));
+      if (window.WebSocket) {
+        this.model.canDoWebSocket((function(_this) {
+          return function(cando) {
+            if (cando === false) {
+              _this.model = new cModelAjax;
+            }
+            return _this.model.connect(Model.Signals.SendError, function(msg) {
+              new cMessageDialog("Error", "Unable to connect the server " + msg);
+            }).connect(Model.Signals.SendSuccess, function(data) {
+              if (!data.success) {
+                new cMessageDialog("Error", data.error);
+              } else {
+                $("#dest_result").html("<pre><code>" + data.content + "</code></pre>");
+              }
+            }).connect(Model.Signals.SaveSuccess, function(data) {
+              _this.saveDialog.close();
+              if (!data.success) {
+                new cMessageDialog("Error", data.error);
+              } else {
+                _this.view.displaySuccessMessage("Regular expression saved with success");
+                _this.currentSave = data.name;
+              }
+            }).connect(Model.Signals.SaveError, function(data) {
+              new cMessageDialog("Error", data);
+            });
+          };
+        })(this));
+      }
       if (document.location.pathname === '/') {
         window.onunload = (function(_this) {
           return function(e) {
@@ -381,6 +382,7 @@
         content: content,
         method: method,
         options: options,
+        flags: options,
         sub: sub || null,
         count: count || null
       };
@@ -427,6 +429,29 @@
     function cModelSocket() {
       return cModelSocket.__super__.constructor.apply(this, arguments);
     }
+
+    cModelSocket.prototype.canDoWebSocket = function(cb) {
+      var e, socket;
+      try {
+        socket = new WebSocket('ws:/python-regex.com/ws/');
+        socket.onerror = (function(_this) {
+          return function(e) {
+            console.log('I cant do it');
+            cb(false);
+          };
+        })(this);
+        return socket.onopen = (function(_this) {
+          return function(e) {
+            console.log("I can do it");
+            cb(true);
+          };
+        })(this);
+      } catch (_error) {
+        e = _error;
+        console.log("i can't do it");
+        cb(false);
+      }
+    };
 
     cModelSocket.prototype.send = function(data, successSignal, errorSignal) {
       var socket;

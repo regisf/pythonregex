@@ -10,31 +10,36 @@ class cApplication
         @contactDialog = new ContactMessage()
 
         @model = if window.WebSocket then new cModelSocket else new cModelAjax
-        @model
-            .connect Model.Signals.SendError, (msg) =>
-                new cMessageDialog "Error", "Unable to connect the server #{msg}"
-                return
+        if window.WebSocket
+            @model.canDoWebSocket (cando) =>
+                if cando == false
+                    @model = new cModelAjax
 
-            .connect Model.Signals.SendSuccess, (data) =>
-                if not data.success
-                    new cMessageDialog "Error", data.error
-                else
-                    $("#dest_result").html "<pre><code>#{data.content}</code></pre>"
-                return
+                @model
+                    .connect Model.Signals.SendError, (msg) =>
+                        new cMessageDialog "Error", "Unable to connect the server #{msg}"
+                        return
 
-            .connect Model.Signals.SaveSuccess, (data) =>
-                @saveDialog.close()
+                    .connect Model.Signals.SendSuccess, (data) =>
+                        if not data.success
+                            new cMessageDialog "Error", data.error
+                        else
+                            $("#dest_result").html "<pre><code>#{data.content}</code></pre>"
+                        return
 
-                if not data.success
-                    new cMessageDialog "Error", data.error
-                else
-                    @view.displaySuccessMessage "Regular expression saved with success"
-                    @currentSave = data.name
-                return
+                    .connect Model.Signals.SaveSuccess, (data) =>
+                        @saveDialog.close()
 
-            .connect Model.Signals.SaveError, (data) =>
-                new cMessageDialog "Error", data
-                return
+                        if not data.success
+                            new cMessageDialog "Error", data.error
+                        else
+                            @view.displaySuccessMessage "Regular expression saved with success"
+                            @currentSave = data.name
+                        return
+
+                    .connect Model.Signals.SaveError, (data) =>
+                        new cMessageDialog "Error", data
+                        return
 
         # Connect: Save the regex and source text into localStorage
         if document.location.pathname == '/'

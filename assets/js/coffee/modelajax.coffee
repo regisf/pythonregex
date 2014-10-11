@@ -10,6 +10,7 @@ class cModelAjax extends BaseModel
             content: content
             method: method
             options: options
+            flags: options
             sub: sub or null
             count: count or null
 

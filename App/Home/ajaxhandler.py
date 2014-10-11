@@ -29,6 +29,7 @@ class AjaxHandler(tornado.web.RequestHandler, PyRegex):
         if self.request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             try:
                 value = json.loads(self.get_argument('json', None))
+                print(value)
                 self.write(self.doTheJob(value))
             except TypeError as e:
-                self.write(json.dumps({ 'success' : False, 'error' : e}))
+                self.write(json.dumps({'success': False, 'error': e}))

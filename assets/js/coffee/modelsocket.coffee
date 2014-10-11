@@ -1,7 +1,26 @@
 #_require basemodel
 
 class cModelSocket extends BaseModel
+    canDoWebSocket: (cb) ->
+        try
+            socket = new WebSocket('ws:/python-regex.com/ws/')
+#            socket = new WebSocket('ws:/localhost:888/ws/')
+            socket.onerror = (e) =>
+                console.log 'I cant do it'
+                cb false
+                return
+
+            socket.onopen = (e) =>
+                console.log "I can do it"
+                cb true
+                return
+        catch e
+            console.log "i can't do it"
+            cb false
+            return
+
     send: (data, successSignal, errorSignal) ->
+#        socket = new WebSocket('ws://localhost:8888/ws/')
         socket = new WebSocket('ws://python-regex.com/ws/')
 
         socket.onmessage = (e) =>
