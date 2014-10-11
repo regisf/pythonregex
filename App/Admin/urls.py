@@ -35,9 +35,9 @@ URLS = [
     (r'^/admin/logout/$', LogoutHandler),
 
     (r'^/admin/users/$', UsersHandler),
-    (r'^/admin/users/edit/(?P<name>\w+)/$', UsersEditHandler),
+    (r'^/admin/users/edit/(?P<name>.*?)/$', UsersEditHandler),
     (r'^/admin/users/add/$', UsersAddHandler),
-    (r'^/admin/users/delete/(?P<name>\w+)/$', UsersDeleteHandler),
+    (r'^/admin/users/delete/(?P<name>.*?)/$', UsersDeleteHandler),
 
     (r'^/admin/emails/pref/$', PreferenceHandler),
     (r'^/admin/emails/$', EmailsHandler),
