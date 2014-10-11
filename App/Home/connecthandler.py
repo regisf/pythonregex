@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 #
 # Python-regex.com : Regular expression as in Kodos3 but for the web
@@ -71,27 +72,35 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
     def get(self):
         redirect_uri = "http://python-regex.com/auth/google/"
         if self.get_argument('code', False):
+            config = Config()
+            if self._OAUTH_SETTINGS_KEY not in self.settings:
+                self.settings[self._OAUTH_SETTINGS_KEY] = {
+                    'key': config.get('google_consumer_key'),
+                    'secret': config.get('google_secret_key')
+                }
             user = yield self.get_authenticated_user(
                 redirect_uri=redirect_uri,
-                code=self.get_argument('code'))
-
+                code=self.get_argument('code')
+            )
+            
             access_token = str(user['access_token'])
             http_client = self.get_auth_http_client()
-            response =  yield http_client.fetch('https://www.googleapis.com/oauth2/v1/userinfo?access_token='+access_token)
+            response =  yield http_client.fetch('https://www.googleapis.com/oauth2/v1/userinfo?access_token={}'.format(access_token))
+
             if not response:
                 HTTPError(500, "Google authentication error")
                 return
-
-            user_json = json.loads(response.body)
-            # user = UserModel().create_social_user(user_json.get(''))
+            print(str(response.body))
+            user_json = json.loads(response.body.decode())
+            user = UserModel().create_social_user(user_json.get('name'), 'google')
             print(user_json)
-            # self.login(user)
+            self.login(user)
             self.redirect('/')
             return
         else:
             yield self.authorize_redirect(
                 redirect_uri=redirect_uri,
-                client_id=Config().get('google_secret_key'),
+                client_id=Config().get('google_consumer_key'),
                 scope=['profile', 'email'],
                 response_type='code',
                 extra_params={'approval_prompt': 'auto'})
