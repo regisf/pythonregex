@@ -5,7 +5,7 @@ class cMessageDialog
         $("#messagedialog").find('[data-content]').html msg
         $("#messagedialog").find('[data-title]').html title
 
-        new $.UIkit.modal("#messagedialog").show();
+        $.UIkit.modal("#messagedialog").show();
 
     on: (signal, func) ->
         return

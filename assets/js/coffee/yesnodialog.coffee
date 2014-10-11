@@ -8,7 +8,7 @@ class YesNoDialog
         dialog.querySelector('[data-title]').innerHTML = title
 
     show: () ->
-        new $.UIkit.modal("#yesnodialog").show()
+        $.UIkit.modal("#yesnodialog").show()
 
     hide: () ->
         $("#yesnodialog").hide()

@@ -336,17 +336,17 @@
       jqxhr.done(function(data) {
         var errorModal, okModal;
         if (!data.match(/^error/)) {
-          okModal = new $.UIkit.modal.Modal("#send-success");
+          okModal = new $.UIkit.Modal("#send-success");
           return okModal.show();
         } else {
-          errorModal = new $.UIkit.modal.Modal("#connection-error");
+          errorModal = $.UIkit.Modal("#connection-error");
           document.getElementById("connection-error-msg").innerHTML = data;
           return errorModal.show();
         }
       });
       jqxhr.fail(function(xhr) {
         var errorModal;
-        errorModal = new $.UIkit.modal.Modal("#connection-error");
+        errorModal = $.UIkit.Modal("#connection-error");
         document.getElementById("connection-error-msg").innerHTML = xhr.responseText;
         return errorModal.show();
       });
@@ -360,7 +360,7 @@
     function cMessageDialog(title, msg) {
       $("#messagedialog").find('[data-content]').html(msg);
       $("#messagedialog").find('[data-title]').html(title);
-      new $.UIkit.modal("#messagedialog").show();
+      $.UIkit.modal("#messagedialog").show();
     }
 
     cMessageDialog.prototype.on = function(signal, func) {};
@@ -810,7 +810,7 @@
     }
 
     YesNoDialog.prototype.show = function() {
-      return new $.UIkit.modal("#yesnodialog").show();
+      return $.UIkit.modal("#yesnodialog").show();
     };
 
     YesNoDialog.prototype.hide = function() {
