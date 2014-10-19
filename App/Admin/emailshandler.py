@@ -17,7 +17,7 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-from tornado.web import RequestHandler
+from tornadoext.requesthandler import RequestHandler, admin_auth_required
 from App.models.email import EmailModel
 from App.models.preference import PreferenceModel
 
@@ -49,6 +49,7 @@ def control_arguments(handler, edit=False):
 
 
 class EmailsHandler(RequestHandler):
+    @admin_auth_required
     def get(self):
         """
         Get all emails templates
@@ -65,9 +66,11 @@ class EmailsHandler(RequestHandler):
 
 
 class EmailsAddHandler(RequestHandler):
+    @admin_auth_required
     def get(self):
         self.render("admin/emails/add.html", errors={}, title='', content='', shortcut='')
 
+    @admin_auth_required
     def post(self, ):
         errors, title, content, shortcut = control_arguments(self)
 
@@ -86,6 +89,7 @@ class EmailsAddHandler(RequestHandler):
 
 
 class EmailEditHandler(RequestHandler):
+    @admin_auth_required
     def get(self, shortcut):
         """ Display edit form """
         email = EmailModel().find_by_shortcut(shortcut)
@@ -94,6 +98,7 @@ class EmailEditHandler(RequestHandler):
 
         self.render('admin/emails/edit.html', errors={}, email=email)
 
+    @admin_auth_required
     def post(self, shortcut):
         """
         Handle save
@@ -110,6 +115,7 @@ class EmailEditHandler(RequestHandler):
 
 
 class EmailsDeleteHandler(RequestHandler):
+    @admin_auth_required
     def get(self, name):
         EmailModel().delete(name)
         self.redirect('/admin/emails/')

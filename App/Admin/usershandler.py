@@ -17,12 +17,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-from tornado.web import RequestHandler
+from tornadoext.requesthandler import RequestHandler, admin_auth_required
 
 from App.models.user import UserModel
 
 
 class UsersHandler(RequestHandler):
+    @admin_auth_required
     def get(self):
         """
         Display all users
@@ -31,12 +32,14 @@ class UsersHandler(RequestHandler):
 
 
 class UsersEditHandler(RequestHandler):
+    @admin_auth_required
     def get(self, name):
         """
         Display the user information
         """
         self.render('admin/users/edit.html', user=UserModel().get_by_name(name))
 
+    @admin_auth_required
     def post(self, name):
         """
         Save the user modification
@@ -58,12 +61,14 @@ class UsersEditHandler(RequestHandler):
 
 
 class UsersDeleteHandler(RequestHandler):
+    @admin_auth_required
     def get(self, name):
         """
         Confirm page
         """
         self.render('admin/users/delete.html', username=name)
 
+    @admin_auth_required
     def post(self, name):
         """
         Execution page
@@ -77,9 +82,11 @@ class UsersAddHandler(RequestHandler):
     """
     Add a new user
     """
+    @admin_auth_required
     def get(self):
         self.render('admin/users/add.html', errors={})
 
+    @admin_auth_required
     def post(self):
         """
         The user is created

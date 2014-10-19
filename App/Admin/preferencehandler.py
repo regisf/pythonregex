@@ -17,12 +17,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-from tornado.web import RequestHandler
+from tornadoext.requesthandler import RequestHandler, admin_auth_required
 
 from App.models.preference import PreferenceModel
 
 
 class PreferenceHandler(RequestHandler):
+    @admin_auth_required
     def post(self):
         """
         Save preferences
