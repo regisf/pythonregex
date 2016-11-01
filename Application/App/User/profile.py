@@ -1,21 +1,19 @@
-
 __author__ = 'Régis FLORET'
 
 import hashlib
 import time
 
 from tornado.web import authenticated
-from tornadoext.requesthandler import RequestHandler
 
-from App.models.user import UserModel
+import private_settings
 from App.models.email import EmailModel
 from App.models.preference import PreferenceModel
-
+from App.models.user import UserModel
 from App.utils.email import is_email
 from App.utils.email import send_mail
 from App.utils.template import micro_template
+from tornadoext.requesthandler import RequestHandler
 
-import private_settings
 
 class AccountProfileHandler(RequestHandler):
     @authenticated
@@ -23,7 +21,7 @@ class AccountProfileHandler(RequestHandler):
         """
         Display the information page
         """
-        self.render("profile.html", fields= {})
+        self.render("profile.html", fields={})
 
     @authenticated
     def post(self, *args, **kwargs):
@@ -59,7 +57,7 @@ class AccountProfileHandler(RequestHandler):
                     raise AttributeError('Mail model "changing_mail_confirmation" is not created')
 
                 registration_key = hashlib.md5(email.encode('utf-8') + str(time.time()).encode('utf-8')).hexdigest()
-                #UserModel().create_temp_user(username, email, password, registration_key)
+                # UserModel().create_temp_user(username, email, password, registration_key)
                 keys = {
                     'website': private_settings.SITE_NAME,
                     'registration_key': registration_key

@@ -19,11 +19,12 @@
 
 import functools
 import pickle
+
 import tornado.web
 
-from App.utils.question import Question
 from App.models.preference import Config
 from App.models.user import UserModel
+from App.utils.question import Question
 
 
 def admin_auth_required(method):
@@ -35,8 +36,8 @@ def admin_auth_required(method):
             if profile['is_admin']:
                 return method(self, *args, **kwargs)
         return self.redirect('/admin/login/')
-    return wrapper
 
+    return wrapper
 
 
 class RequestHandler(tornado.web.RequestHandler):
@@ -44,6 +45,7 @@ class RequestHandler(tornado.web.RequestHandler):
     Extend the tornado requesthandler with few useful
     methods, mainly for authentication
     """
+
     def __init__(self, *args, **kwargs):
         super(RequestHandler, self).__init__(*args, **kwargs)
         self.current_user = self.get_user_profile()

@@ -17,9 +17,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-from tornadoext.requesthandler import RequestHandler, admin_auth_required
-
 from App.models.user import UserModel
+from tornadoext.requesthandler import RequestHandler, admin_auth_required
 
 
 class UsersHandler(RequestHandler):
@@ -73,7 +72,7 @@ class UsersDeleteHandler(RequestHandler):
         """
         Execution page
         """
-        #TODO: Test if the user to delete is not the user and not the last admin
+        # TODO: Test if the user to delete is not the user and not the last admin
         UserModel().delete(name)
         self.redirect('/admin/users/')
 
@@ -82,6 +81,7 @@ class UsersAddHandler(RequestHandler):
     """
     Add a new user
     """
+
     @admin_auth_required
     def get(self):
         self.render('admin/users/add.html', errors={})
@@ -92,12 +92,10 @@ class UsersAddHandler(RequestHandler):
         The user is created
         """
         errors = {}
-        user_model = UserModel()
 
         username = self.get_argument('username')
         email = self.get_argument('email')
         password = self.get_argument('password')
-        confirm = self.get_argument('confirm')
         is_admin = self.get_argument('is_admin', 'off') == 'on'
 
         if not email:
@@ -105,17 +103,9 @@ class UsersAddHandler(RequestHandler):
 
         if not username:
             errors['username'] = 'Username cannot be empty'
-        # elif user_model.exists(username):
-        #     errors['username'] = 'User name exists'
 
         if not password:
             errors['password'] = 'Password is empty'
-
-        # if password and (password != confirm):
-        #     errors['password'] = 'Password and its confirmation are different'
-
-        add_another = 'add_another' in self.request.arguments
-        continue_edit = 'continue_edit' in self.request.arguments
 
         if errors.keys():
             self.render('admin/users/add.html', errors=errors)

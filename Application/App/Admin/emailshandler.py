@@ -17,9 +17,9 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-from tornadoext.requesthandler import RequestHandler, admin_auth_required
 from App.models.email import EmailModel
 from App.models.preference import PreferenceModel
+from tornadoext.requesthandler import RequestHandler, admin_auth_required
 
 
 def control_arguments(handler, edit=False):

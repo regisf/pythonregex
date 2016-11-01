@@ -18,12 +18,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import datetime
+
 from bson.dbref import DBRef
 from bson.objectid import ObjectId
 
 from . import database
-
 from .user import UserModel
+
 
 class RegexModel(object):
     def __init__(self):
@@ -42,6 +43,7 @@ class RegexModel(object):
     def save_for_user(self, name, regex, user):
         """
         Save a regular expression for the user
+
         :raise AttributeError on user error
         :type name: str
         :param name: The username
@@ -77,12 +79,11 @@ class RegexModel(object):
     def find_by_name(self, name, user):
         return self.db.find_one({'name': name, 'user': DBRef(collection='user', id=user['_id'])})
 
-
     def delete(self, user, _id):
         """
         Delete a Regex
         :param user: A MongoDB user entry
-        :param id_:  The regex id_
+        :param _id:  The regex id_
         """
         self.db.remove({'_id': ObjectId(_id), 'user': DBRef(collection='user', id=user['_id'])})
 

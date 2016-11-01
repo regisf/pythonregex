@@ -17,15 +17,15 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-from tornadoext.requesthandler import RequestHandler, admin_auth_required
-
 from App.models.preference import Config
+from tornadoext.requesthandler import RequestHandler, admin_auth_required
 
 
 class CodesHandler(RequestHandler):
     """
     Handle all codes for analytics or twitter,
     """
+
     @admin_auth_required
     def get(self):
         config = Config()

@@ -17,11 +17,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import hashlib
 import datetime
+import hashlib
+
+from bson.objectid import ObjectId
 
 from . import database
-from bson.objectid import ObjectId
 from .preference import Config
 
 
@@ -29,13 +30,15 @@ class UserModel:
     """
     The UserModel is a wrapper to avoid direct database calls in the program
     """
+
     def __init__(self):
         """
         Ctor. Load the User collection
         """
         self.users = database.user
 
-    def _generate_password(self, password):
+    @classmethod
+    def _generate_password(cls, password):
         """
         Generate the hash password
         """
@@ -45,10 +48,15 @@ class UserModel:
     def is_email_exists(self, email):
         """
         Test if an email exists
+
+        :param email: The email to test
+        :type email: str
+        :return: True if the user is found False elsewhere
+        :rtype: bool
         """
         return self.users.find_one({'email': email}) is not None
 
-    def create_user(self, username, email, password, temp=True, is_admin=False):
+    def create_user(self, username, email, password, is_admin=False):
         """
         Create an user
         If temp is set to True, an hash is generated
@@ -89,9 +97,9 @@ class UserModel:
 
         return user
 
-    def create_temp_user(self, username, email, password, hash):
+    def create_temp_user(self, username, email, password, hashcode):
         """
-        Create an user not registred
+        Create an user not registered
         """
         return self.users.insert({
             'username': username,
@@ -99,7 +107,7 @@ class UserModel:
             'password': self._generate_password(password),
             'creation_date': datetime.datetime.now(),
             'is_admin': False,
-            'temp_hash': hash
+            'temp_hash': hashcode
         })
 
     def edit(self, username, creation_date, email, is_admin):
@@ -116,11 +124,11 @@ class UserModel:
             }}
         )
 
-    def find_by_hash(self, hash):
+    def find_by_hash(self, hashcode):
         """
         Find an user by its temp_hash.
         """
-        return self.users.find_one({'temp_hash': hash})
+        return self.users.find_one({'temp_hash': hashcode})
 
     def find_by_id(self, _id):
         return self.users.find_one({'_id': ObjectId(_id.decode('utf-8'))})
@@ -164,7 +172,7 @@ class UserModel:
     def get_by_name(self, name):
         """ Get a user by its username
         """
-        return self.users.find_one({'username':name})
+        return self.users.find_one({'username': name})
 
     def delete(self, name):
         """
@@ -191,4 +199,3 @@ class UserModel:
             'password': self._generate_password(password),
             'is_admin': is_admin
         })
-        

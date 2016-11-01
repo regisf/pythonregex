@@ -23,11 +23,11 @@ Define urls for the adminstration part
 
 __author__ = 'Regis FLORET'
 
-from App.Admin.mainhandler import AdminHandler, LoginHandler, LogoutHandler
-from App.Admin.usershandler import UsersHandler, UsersEditHandler, UsersDeleteHandler, UsersAddHandler
-from App.Admin.emailshandler import EmailsHandler, EmailsAddHandler, EmailsDeleteHandler, EmailEditHandler
-from App.Admin.preferencehandler import PreferenceHandler
 from App.Admin.codeshandler import CodesHandler
+from App.Admin.emailshandler import EmailsHandler, EmailsAddHandler, EmailsDeleteHandler, EmailEditHandler
+from App.Admin.mainhandler import AdminHandler, LoginHandler, LogoutHandler
+from App.Admin.preferencehandler import PreferenceHandler
+from App.Admin.usershandler import UsersHandler, UsersEditHandler, UsersDeleteHandler, UsersAddHandler
 
 URLS = [
     (r'^/admin/$', AdminHandler),
@@ -47,5 +47,3 @@ URLS = [
 
     (r'/admin/codes/$', CodesHandler),
 ]
-
-

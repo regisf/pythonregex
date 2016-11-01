@@ -46,7 +46,7 @@ class WebSocketHandler(tornado.websocket.WebSocketHandler):
             # Evaluate
             #
             if result_json['action'] == 'evaluate':
-                result = PyRegex().doTheJob(json.loads(message))
+                result = PyRegex().do_the_job(json.loads(message))
                 self.write_message(result)
                 return
 

@@ -21,6 +21,7 @@ import re
 
 from tornadoext.requesthandler import RequestHandler
 
+
 class HomeHandler(RequestHandler):
     def get(self):
         msie = re.findall(r'MSIE\s(\d+)', self.request.headers.get('user-agent'))

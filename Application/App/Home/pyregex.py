@@ -17,13 +17,12 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import json
-import re
 import html
+import re
 
 
 class PyRegex(object):
-    def doTheJob(self, value):
+    def do_the_job(self, value):
         regex = value['regex']
         content = value['content']
         method = value['method']
@@ -40,7 +39,7 @@ class PyRegex(object):
         if regex != '' or content != '':
             result = {}
             if method == 'search':
-                result = self._do_search(regex,content, flags, options)
+                result = self._do_search(regex, content, flags, options)
             elif method == 'match':
                 result = self._do_match(regex, content, flags, options)
             elif method == 'findall':
@@ -62,7 +61,6 @@ class PyRegex(object):
 
         else:
             return {'success': False}
-
 
     def _prepare_flags(self, flagsList):
         flags = 0
@@ -93,11 +91,11 @@ class PyRegex(object):
         Display the command line
         """
         return """>>> result = re.{command}(r'''{regex}''', '''{content}''', {flags})\n>>> result\n""".format(
-                command=command,
-                regex=regex,
-                content=content,
-                flags=flags[1],
-            )
+            command=command,
+            regex=regex,
+            content=content,
+            flags=flags[1],
+        )
 
     def _display_groups(self, result):
         """
@@ -105,7 +103,7 @@ class PyRegex(object):
         """
         r = ''
         if result is not None:
-            group = ["result.group({0}) = {1}".format(i, result.group(i)) for i in range(0, len(result.groups()) +1 )]
+            group = ["result.group({0}) = {1}".format(i, result.group(i)) for i in range(0, len(result.groups()) + 1)]
 
             r = """\n>>> result.groups()\n{groups}\n{group}""".format(
                 groups=result.groups() if result.groups() else '()',
@@ -113,12 +111,12 @@ class PyRegex(object):
             )
         return r
 
-    def _do_search(self,regex, content,  flags, options ):
+    def _do_search(self, regex, content, flags, options):
         """ Do a re.search """
         try:
             result = re.search(regex, content, flags[0])
         except re.error as e:
-            return {'success':False, 'error': str(e)}
+            return {'success': False, 'error': str(e)}
 
         r = ''
         if 'displaycommand' in options:
@@ -134,21 +132,21 @@ class PyRegex(object):
         try:
             result = re.match(regex, content, flags[0])
         except re.error as e:
-            return { 'success':False, 'error': str(e) }
+            return {'success': False, 'error': str(e)}
 
         r = ''
         if 'displaycommand' in options:
             r += self._display_command('match', result, regex, content, flags)
         r += "{result}".format(result=result)
         r += self._display_groups(result)
-        return {'success': True, 'content': r }
+        return {'success': True, 'content': r}
 
     def _do_findall(self, regex, content, flags, options):
         """ Do a re.findall """
         try:
             result = re.findall(regex, content, flags[0])
         except re.error as e:
-            return {'success':False, 'error': str(e)}
+            return {'success': False, 'error': str(e)}
 
         r = ''
         if 'displaycommand' in options:
@@ -158,9 +156,9 @@ class PyRegex(object):
                 regex=regex
             )
         r += """{result}\n""".format(result=result)
-        return {'success': True, 'content': r }
+        return {'success': True, 'content': r}
 
-    def _do_sub(self, regex, replace, content, flags,options):
+    def _do_sub(self, regex, replace, content, flags, options):
         """ Do a re.findall """
         if not replace:
             replace = ''
@@ -168,7 +166,7 @@ class PyRegex(object):
         try:
             result = re.sub(regex, replace, content, flags[0])
         except re.error as e:
-            return { 'success':False, 'error': str(e) }
+            return {'success': False, 'error': str(e)}
 
         r = ''
         if 'displaycommand' in options:
@@ -180,8 +178,7 @@ class PyRegex(object):
             )
         r += """{result}\n""".format(result=result)
 
-        return {'success': True, 'content': r }
-
+        return {'success': True, 'content': r}
 
     def _do_subn(self, regex, replace, content, count, flags, options):
         """ Do a re.findall """
@@ -191,7 +188,7 @@ class PyRegex(object):
         try:
             result = re.subn(regex, replace, content, count, flags[0])
         except re.error as e:
-            return { 'success':False, 'error': str(e) }
+            return {'success': False, 'error': str(e)}
 
         r = ''
         if 'displaycommand' in options:
@@ -203,14 +200,14 @@ class PyRegex(object):
                 count=count
             )
         r += """{result}\n""".format(result=result)
-        return {'success': True, 'content': r }
+        return {'success': True, 'content': r}
 
     def _do_split(self, regex, content, count, flags, options):
         """ Do a re.findall """
         try:
             result = re.split(regex, string=content, maxsplit=count, flags=flags[0])
         except re.error as e:
-            return { 'success':False, 'error': str(e) }
+            return {'success': False, 'error': str(e)}
 
         r = ''
         if 'displaycommand' in options:
@@ -221,4 +218,4 @@ class PyRegex(object):
                 count=count
             )
         r += """{result}\n""".format(result=result)
-        return {'success': True, 'content': r }
+        return {'success': True, 'content': r}

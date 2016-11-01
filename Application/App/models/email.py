@@ -71,5 +71,3 @@ class EmailModel:
             {'shortcut': previous_shortcut},
             {'$set': {'title': title, 'shortcut': shortcut, 'content': content}}
         )
-
-

@@ -17,9 +17,8 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-from tornadoext.requesthandler import RequestHandler, admin_auth_required
-
 from App.models.preference import PreferenceModel
+from tornadoext.requesthandler import RequestHandler, admin_auth_required
 
 
 class PreferenceHandler(RequestHandler):
@@ -35,4 +34,3 @@ class PreferenceHandler(RequestHandler):
         server_password = self.get_argument("serverpassword", "")
         PreferenceModel().save_mail_server(default_email, server_name, server_port, server_username, server_password)
         self.redirect("/admin/emails/")
-

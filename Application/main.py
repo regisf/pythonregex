@@ -20,17 +20,14 @@
 
 import os
 
-import tornado.web
-import tornado.ioloop
 import tornado.autoreload
+import tornado.ioloop
+import tornado.web
 
-from App.models.preference import Config
-
-import settings
 import filters
-
+import settings
+from App.models.preference import Config
 from urls import URLS
-from tornado.log import gen_log as logging
 
 
 def run_app():
@@ -68,6 +65,7 @@ def run_app():
     io = tornado.ioloop.IOLoop.instance()
     tornado.autoreload.start(io)
     io.start()
+
 
 if __name__ == "__main__":
     run_app()

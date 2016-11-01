@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 #
 # Python-regex.com : Regular expression as in Kodos3 but for the web
@@ -18,19 +17,18 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import json
 import binascii
+import json
 import os
 
-from tornado.web import authenticated, HTTPError
 from tornado.auth import GoogleOAuth2Mixin, TwitterMixin, FacebookGraphMixin
 from tornado.gen import coroutine
+from tornado.web import authenticated, HTTPError
 
-from tornadoext.requesthandler import RequestHandler
-from tornadoext.oauth import GithubMixin, LinkedInMixin
-
-from App.models.user import UserModel
 from App.models.preference import Config
+from App.models.user import UserModel
+from tornadoext.oauth import GithubMixin, LinkedInMixin
+from tornadoext.requesthandler import RequestHandler
 
 
 class LoginHandler(RequestHandler):
@@ -59,6 +57,7 @@ class LogoutHandler(RequestHandler):
     """
     Disconnect the user and go to the main page
     """
+
     @authenticated
     def get(self):
         self.add_flash_message(0, "You are now disconnected.")
@@ -70,6 +69,7 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
     """
     Connect with Google account
     """
+
     @coroutine
     def get(self, *args, **kwargs):
         redirect_uri = "%s://%s" % (self.request.protocol, "python-regex.com/auth/google/")
@@ -84,7 +84,7 @@ class GoogleOAuth2Handler(RequestHandler, GoogleOAuth2Mixin):
                 redirect_uri=redirect_uri,
                 code=self.get_argument('code')
             )
-            
+
             access_token = str(user['access_token'])
             http_client = self.get_auth_http_client()
             response = yield http_client.fetch('https://www.googleapis.com/oauth2/v1/userinfo?access_token={}'
@@ -118,6 +118,7 @@ class TwitterOAuth2Handler(RequestHandler, TwitterMixin):
     """
     Connect with Twitter account
     """
+
     @coroutine
     def get(self, *args, **kwargs):
         if self.get_argument("oauth_token", None):
@@ -157,10 +158,12 @@ class FacebookOAuth2Handler(RequestHandler, FacebookGraphMixin):
                 extra_params={"scope": "read_stream,offline_access"}
             )
 
+
 class LinkedInOAuth2Handler(RequestHandler, LinkedInMixin):
     """
     Connect with LinkedIn API
     """
+
     @coroutine
     def get(self, *args, **kwargs):
         config = Config()
@@ -203,11 +206,11 @@ class LinkedInOAuth2Handler(RequestHandler, LinkedInMixin):
         print(user_data)
 
 
-
 class GithubOAuth2Handler(RequestHandler, GithubMixin):
     """
     Connect with GitHub API
     """
+
     @coroutine
     def get(self, *args, **kwargs):
         redirect_uri = '/auth/github/'
@@ -232,4 +235,4 @@ class GithubOAuth2Handler(RequestHandler, GithubMixin):
         )
 
     def _on_login(self, user):
-       print(user)
+        print(user)

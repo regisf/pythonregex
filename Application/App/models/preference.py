@@ -24,6 +24,7 @@ class Config:
     """
     Class to handler server preferences
     """
+
     def __init__(self):
         self.__db = database.configuration
 
@@ -41,7 +42,7 @@ class Config:
 
 class PreferenceModel(object):
     @classmethod
-    def save_mail_server(self, sender, server_name, server_port, username, password):
+    def save_mail_server(cls, sender, server_name, server_port, username, password):
         """
         Save the default preferences
         """
@@ -56,7 +57,7 @@ class PreferenceModel(object):
         Config().set('smtp_server', preferences)
 
     @classmethod
-    def get_mail_server(self):
+    def get_mail_server(cls):
         """ Get the default preferences
         """
         pref = Config().get('smtp_server', {
@@ -69,17 +70,17 @@ class PreferenceModel(object):
         return pref
 
     @classmethod
-    def get_codes(self):
+    def get_codes(cls):
         """
         Get the codes for registering
         """
         return Config().get('codes', {
             'analytics': {'key': ''},
-            'facebook': {'app_id': '','secret_key': ''},
-            'twitter': {'app_id': '','secret_key': ''},
+            'facebook': {'app_id': '', 'secret_key': ''},
+            'twitter': {'app_id': '', 'secret_key': ''},
             'google': {'app_id': '', 'secret_key': ''},
-            'linkedin': {'app_id': '','secret_key': ''},
-            'github': {'app_id': '','secret_key': ''}
+            'linkedin': {'app_id': '', 'secret_key': ''},
+            'github': {'app_id': '', 'secret_key': ''}
         })
 
     def save_codes(self, **kwargs):
@@ -161,4 +162,3 @@ class PreferenceModel(object):
             self.db.insert(values)
         else:
             self.db.update(values, pref)
-

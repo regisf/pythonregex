@@ -17,21 +17,20 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+import hashlib
 import json
 import time
-import hashlib
 
-import tornado.web
-from tornadoext.requesthandler import RequestHandler
 import tornado.gen
 
-from App.models.user import UserModel
+import private_settings
 from App.models.email import EmailModel
 from App.models.preference import PreferenceModel
+from App.models.user import UserModel
 from App.utils.email import send_mail
 from App.utils.template import micro_template
+from tornadoext.requesthandler import RequestHandler
 
-import private_settings
 
 class RegisterHandler(RequestHandler):
     def get(self):
@@ -117,7 +116,7 @@ class CheckEmailHandler(tornado.web.RequestHandler):
         success = False
         exists = False
         if email is not None:
-            #yield tornado.gen.Task()
+            # yield tornado.gen.Task()
             self.add_header('Content-Type', 'application/json')
             exists = UserModel().is_email_exists(email)
 
@@ -142,4 +141,3 @@ class ConfirmHandler(RequestHandler):
                 "registration_confirm.html",
                 error=True
             )
-

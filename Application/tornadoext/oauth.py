@@ -19,14 +19,15 @@
 #
 # Exception: The following code is not a part of the project and belong the their respective owner
 
+import logging
 import urllib
+
+import tornado.auth
+import tornado.escape
+import tornado.httpclient
+import tornado.httputil
 import tornado.ioloop
 import tornado.web
-import tornado.auth
-import tornado.httpclient
-import tornado.escape
-import tornado.httputil
-import logging
 
 
 class GithubMixin(tornado.auth.OAuth2Mixin):
@@ -58,7 +59,7 @@ class GithubMixin(tornado.auth.OAuth2Mixin):
         )
 
     def _on_access_token(self, redirect_uri, client_id, client_secret,
-                        callback, fields, response):
+                         callback, fields, response):
         """ callback for authentication url, if successful get the user details """
         if response.error:
             logging.warning('Github auth error: %s' % str(response))
@@ -66,7 +67,7 @@ class GithubMixin(tornado.auth.OAuth2Mixin):
             return
 
         args = tornado.escape.parse_qs_bytes(
-                tornado.escape.native_str(response.body))
+            tornado.escape.native_str(response.body))
 
         if 'error' in args:
             logging.error('oauth error ' + args['error'][-1])
@@ -81,7 +82,7 @@ class GithubMixin(tornado.auth.OAuth2Mixin):
             callback=self.async_callback(
                 self._on_get_user_info, callback, session),
             access_token=session["access_token"],
-            )
+        )
 
     def _on_get_user_info(self, callback, session, user):
         """ callback for github request /user to create a user """
@@ -97,7 +98,7 @@ class GithubMixin(tornado.auth.OAuth2Mixin):
         })
 
     def github_request(self, path, callback, access_token=None,
-                method='GET', body=None, **args):
+                       method='GET', body=None, **args):
         """ Makes a github API request, hands callback the parsed data """
         args["access_token"] = access_token
         url = tornado.httputil.url_concat(self._API_URL + path, args)
@@ -105,9 +106,9 @@ class GithubMixin(tornado.auth.OAuth2Mixin):
         http = tornado.httpclient.AsyncHTTPClient()
         if body is not None:
             body = tornado.escape.json_encode(body)
-            logging.debug('body is' +  body)
+            logging.debug('body is' + body)
         http.fetch(url, callback=self.async_callback(
-                self._parse_response, callback), method=method, body=body)
+            self._parse_response, callback), method=method, body=body)
 
     def _parse_response(self, callback, response):
         """ Parse the JSON from the API """
@@ -201,7 +202,7 @@ class LinkedInMixin(tornado.auth.OAuth2Mixin):
             fields.update(extra_fields)
 
         http.fetch(self._oauth_request_token_url(**args), method="POST", body="",
-            callback=self.async_callback(self._on_access_token, redirect_uri, client_id, client_secret, callback, fields))
+                   callback=self.async_callback(self._on_access_token, redirect_uri, client_id, client_secret, callback, fields))
 
     def _on_access_token(self, redirect_uri, client_id, client_secret, future, fields, response):
         if response.error:
@@ -256,7 +257,7 @@ class LinkedInMixin(tornado.auth.OAuth2Mixin):
         http = tornado.httpclient.AsyncHTTPClient()
 
         # Ask linkedin to send us JSON on all API calls (not xml)
-        headers = tornado.httputil.HTTPHeaders({"x-li-format":"json"})
+        headers = tornado.httputil.HTTPHeaders({"x-li-format": "json"})
 
         http.fetch(url, method=method, headers=headers, body=body, callback=wrapped_callback)
 

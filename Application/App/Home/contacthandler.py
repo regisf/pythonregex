@@ -17,15 +17,13 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import re
-
 from tornado.web import RequestHandler
-from App.utils.email import send_mail
-from App.models.email import EmailModel
-from App.models.preference import PreferenceModel
-from App.utils.template import micro_template
 
 import private_settings
+from App.models.email import EmailModel
+from App.models.preference import PreferenceModel
+from App.utils.email import send_mail
+from App.utils.template import micro_template
 
 
 class ContactHandler(RequestHandler):
@@ -33,6 +31,7 @@ class ContactHandler(RequestHandler):
     Send an email via the contact form
     FIXME: This might be async
     """
+
     def post(self):
         """
         Manage post
@@ -65,5 +64,3 @@ class ContactHandler(RequestHandler):
                     self.write("ok")
             except Exception as e:
                 self.write("error: " + str(e))
-
-
