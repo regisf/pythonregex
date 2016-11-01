@@ -21,8 +21,11 @@ Settings file for Python-regex
 """
 
 import os
+from private_settings import *
 
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 ROOT_TEMPLATE_PATH = os.path.join(ROOT_PATH, "templates")
 STATIC_FILES = os.path.join(ROOT_PATH, "assets")
-DEBUG = True
+
+# Use --dev argement to set the app in dev mode
+DEBUG = False

@@ -20,6 +20,7 @@
 
 import os
 
+import sys
 import tornado.autoreload
 import tornado.ioloop
 import tornado.web
@@ -68,4 +69,6 @@ def run_app():
 
 
 if __name__ == "__main__":
+    if len(sys.argv) == 2 and sys.argv[1] == "--dev":
+        setattr(settings, "DEBUG", True)
     run_app()
