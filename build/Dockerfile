@@ -9,12 +9,10 @@ RUN apk add --no-cache python3 && \
     apk add --no-cache git&& \
     rm -r /usr/lib/python*/ensurepip && \
     pip3 install --upgrade pip setuptools && \
-    rm -r /root/.cache
-
-COPY requirement.txt /tmp
-
-RUN pip3 install -r /tmp/requirement.txt && \
-    git clone https://github.com/regisf/pythonregex.git
+    rm -r /root/.cache && \
+    git clone https://github.com/regisf/pythonregex.git && \
+    cd pythonregex && \
+    bin/install.sh --docker
 
 EXPOSE 3000
 WORKDIR pythonregex
