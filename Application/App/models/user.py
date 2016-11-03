@@ -60,6 +60,17 @@ class UserModel:
         """
         Create an user
         If temp is set to True, an hash is generated
+
+        :param username: The user name
+        :type username: str
+        :param email: The user email
+        :type email: str
+        :param password: The user password (will be encrypted)
+        :type password: str
+        :param is_admin: Is the user is administrator
+        :type is_admin: bool
+        :return: The database entry
+        :rtype:
         """
         return self.users.insert({
             'username': username,
@@ -72,6 +83,7 @@ class UserModel:
     def create_social_user(self, username, network, email='', avatar=''):
         """
         Create a user coming from a social network
+
         :param username: The given username
         :rtype username: str
         :param network: Which network does he/she comes from
@@ -189,9 +201,13 @@ class UserModel:
     def exists(self, username, password, is_admin=False):
         """
         Test if there's an entry
+
         :param username:  The User name
+        :type username: str
         :param password:  the user password
+        :type password: str
         :param is_admin:  is the user an admin
+        :type is_admin: bool
         :return: The user entry or None
         """
         return self.users.find_one({
