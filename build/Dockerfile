@@ -14,6 +14,6 @@ RUN apk add --no-cache python3 && \
     cd pythonregex && \
     bin/install.sh --docker
 
-EXPOSE 3000
+EXPOSE 8888
 WORKDIR pythonregex
 CMD bin/run.sh
