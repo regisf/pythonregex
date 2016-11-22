@@ -1,5 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
+USE_DOCKER=0
 # Install Python Virtual env only on non docker machine
 if [ "$1" != "--docker" ];
 then
@@ -7,6 +8,8 @@ then
     printf "Installing python 3 virtual environment\n"
     python3 -m venv env > /dev/null 2>&1
     source env/bin/activate
+else
+    USE_DOCKER=1
 fi
 
 printf "Update pip\n"
@@ -36,27 +39,35 @@ else
     SECRET=`mongo pythonregex --quiet --eval "db.configuration.find({key: 'secret_key'})[0].value"`
 fi
 
+# Use env instead of user entry
+
 # Register admin user
-printf "\nEnter the admin user name: "
-ADMIN_USER=
-while [[ ${ADMIN_USER} = "" ]];
-do
-    read ADMIN_USER
-done
+if [ "${USE_DOCKER}" = "0" ];
+then
+    printf "\nEnter the admin user name: "
+    ADMIN_USER=
+    while [[ ${ADMIN_USER} = "" ]];
+    do
+        read ADMIN_USER
+    done
 
-ADMIN_EMAIL=
-printf "Enter your email address (for normal connection): "
-while [[ ${ADMIN_EMAIL} = "" ]];
-do
-    read ADMIN_EMAIL
-done
+    ADMIN_EMAIL=
+    printf "Enter your email address (for normal connection): "
+    while [[ ${ADMIN_EMAIL} = "" ]];
+    do
+        read ADMIN_EMAIL
+    done
 
-printf "Enter the admin password:  "
-ADMIN_PASSWORD=
-while [[ ${ADMIN_PASSWORD} = "" ]];
-do
-    read ADMIN_PASSWORD
-done
+    printf "Enter the admin password:  "
+    ADMIN_PASSWORD=
+    while [[ ${ADMIN_PASSWORD} = "" ]];
+    do
+        read ADMIN_PASSWORD
+    done
+else
+    echo "Use docker"
+fi
+
 PASSWORD=`python -c "import hashlib;print(hashlib.sha256('${SECRET}'.encode() + '${ADMIN_PASSWORD}'.encode()).hexdigest())"`
 
 NOW=`date +%s`

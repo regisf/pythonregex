@@ -5,12 +5,13 @@ Using the test suite in a shell or console:
     python tests/test.py
 """
 
-__author__ = 'Régis FLORET'
-
 import unittest
 
 
-class TestEmailModel(unittest):
+__author__ = 'Régis FLORET'
+
+
+class TestEmailModel(unittest.TestCase):
     def test_get_template(self):
         self.assertTrue(True)
 

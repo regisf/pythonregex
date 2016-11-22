@@ -3,4 +3,4 @@
 . ./bin/tests.sh
 
 cd build
-docker build -t pythonregex .
+docker build -t pythonregex:101 .

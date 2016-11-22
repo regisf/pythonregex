@@ -13,7 +13,7 @@ source env/bin/activate
 python tests/test.py
 
 # Quit with the same error code
-if [ $? ! 0 ];
+if [ $? != 0 ];
 then
     exit $?
 fi
