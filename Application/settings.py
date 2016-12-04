@@ -21,7 +21,7 @@ Settings file for Python-regex
 """
 
 import os
-from private_settings import *
+from .private_settings import *
 
 ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 ROOT_TEMPLATE_PATH = os.path.join(ROOT_PATH, "templates")

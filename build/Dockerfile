@@ -22,4 +22,4 @@ RUN apt-get update && \
 
 EXPOSE 8888
 WORKDIR pythonregex
-CMD bin/run.sh
+CMD bin/start.sh
