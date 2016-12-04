@@ -8,7 +8,7 @@ Using the test suite in a shell or console:
 import unittest
 
 
-__author__ = 'Régis FLORET'
+__author__ = u'Régis FLORET'
 
 
 class TestEmailModel(unittest.TestCase):

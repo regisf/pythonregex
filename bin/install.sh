@@ -18,6 +18,20 @@ pip install --upgrade pip > /dev/null 2>&1
 printf "Installing requirements\n"
 pip install -r requirements.txt > /dev/null 2>&1
 
+printf "Create private_settings file"
+if [ ! -f "Application/private_settings.py" ];
+then
+cat <<EOT >> Application/private_settings.py
+#
+# This file contains data that may not be versionned
+#
+DB_NAME = "pythonregex"
+CONTACT_EMAIL = ""
+SITE_NAME = ""
+DEFAULT_EMAIL = ""
+EOT
+fi
+
 # Use environment variables instead of user entry
 # MongoDB should exists
 if [ "${USE_DOCKER}" = "0" ];
@@ -68,7 +82,7 @@ else
     echo "Use docker"
 fi
 
-PASSWORD=`python -c "import hashlib;print(hashlib.sha256('${SECRET}'.encode() + '${ADMIN_PASSWORD}'.encode()).hexdigest())"`
+PASSWORD=`python3 -c "import hashlib;print(hashlib.sha256('${SECRET}'.encode() + '${ADMIN_PASSWORD}'.encode()).hexdigest())"`
 
 NOW=`date +%s`
 
