@@ -3,4 +3,4 @@
 . ./bin/tests.sh
 
 cd build
-docker build -t pythonregex .
+docker build $1 -t pythonregex .
