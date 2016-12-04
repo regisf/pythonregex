@@ -21,8 +21,8 @@ Create the connection for all models
 
 """
 from pymongo import MongoClient
-import private_settings
+import settings
 
 _client = MongoClient('localhost')
-database = _client[private_settings.DB_NAME]
+database = _client[settings.DB_NAME]
 

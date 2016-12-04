@@ -26,5 +26,7 @@ ROOT_PATH = os.path.dirname(os.path.abspath(__file__))
 ROOT_TEMPLATE_PATH = os.path.join(ROOT_PATH, "templates")
 STATIC_FILES = os.path.join(ROOT_PATH, "assets")
 
+DB_NAME = "pythonregex"
+
 # Use --dev argement to set the app in dev mode
 DEBUG = False
