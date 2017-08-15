@@ -20,9 +20,10 @@
 Create the connection for all models
 
 """
+import os
 from pymongo import MongoClient
+
 import private_settings
 
-_client = MongoClient('localhost')
+_client = MongoClient(os.environ.get('PYTHONREGEX_DATABASE'))
 database = _client[private_settings.DB_NAME]
-

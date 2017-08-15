@@ -1,6 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 . ./bin/tests.sh
 
-cd build
 docker build $1 -t pythonregex/web .

@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  pythonregex:
+    build: .
+    container_name: pythonregex
+    image: pythonregex/web
+
+    ports:
+      - '8888:8888'
+
+    environment:
+      - PYTHONREGEX_DATABASE=db
+
+  db:
+   image: 'mongo:3.5'
+   hostname: 'db'
+

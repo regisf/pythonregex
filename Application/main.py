@@ -41,7 +41,7 @@ def run_app():
         URLS,
         debug=settings.DEBUG,
         template_path=settings.ROOT_TEMPLATE_PATH,
-        cookie_secret=config.get('secret_key'),
+        cookie_secret=config.get('secret_key', os.environ.get('PYTHONREGEX_SECRET_COOKIE')),
 
         # Set keys for OAuth transaction
         twitter_consumer_key=config.get('twitter_consumer_key'),
